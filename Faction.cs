@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace Heroes5_ArmyCalc
 {
-    class Faction
+    public class Faction
     {
         public string Name { get; set; }
-        //dict or array for units?
+        public Unit[] Units = new Unit[8];
+
+        public Faction(string factionName)
+        {
+            Name = factionName;
+        }
     }
 }

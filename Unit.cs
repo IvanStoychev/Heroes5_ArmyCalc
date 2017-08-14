@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Heroes5_ArmyCalc
 {
-    class Unit
+    public class Unit
     {
         public string Name { get; set; }
         public byte[] ImgBytes { get; set; }

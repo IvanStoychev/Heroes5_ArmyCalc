@@ -12,7 +12,7 @@ namespace Heroes5_ArmyCalc
 {
     public partial class Form1 : Form
     {
-        public int Dwelling_Tier_A, Dwelling_Tier_B, Faction;       //The "Dwelling Tier" variables hold the tier of the
+        public int Dwelling_Tier_A, Dwelling_Tier_B;//, Faction;       //The "Dwelling Tier" variables hold the tier of the
                                                                     //creature the selected faction's bonus dwelling is for
         /*
          * Introduction:
@@ -32,7 +32,7 @@ namespace Heroes5_ArmyCalc
         public Label[] Total_Tier = new Label[8];                   //Array to hold all the 'creature total gold cost' labels of the form
         public NumericUpDown[] UpDown_Tier = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
         public bool[] Upg = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
-
+        
         #region Data
         //The arrays represent the gold cost or population value for each tier of creatures of each faction.
         //This program is quite simple and small, that is why all the values are hardcoded.
@@ -89,6 +89,9 @@ namespace Heroes5_ArmyCalc
 
         //The purpose of this dictionary is to ease the access of information for each faction
         Dictionary<string, int> Town = new Dictionary<string, int>() {{"Academy", 0}, {"Dungeon", 1}, {"Fortress", 2}, {"Haven", 3}, {"Inferno", 4}, {"Necropolis", 5}, {"Stronghold", 6}, {"Sylvan", 7}};
+
+        //A list of all the factions in the game
+        List<string> FactionList = new List<string> { "Academy", "Dungeon", "Fortress", "Haven", "Inferno", "Necropolis", "Stronghold", "Sylvan" };
 
         public Form1()
         {
@@ -647,6 +650,14 @@ namespace Heroes5_ArmyCalc
             }
 
             UI_Update();
+        }
+
+        public void InitFactions()
+        {
+            foreach (var factionName in FactionList)
+            {
+                Faction faction = new Faction(factionName);
+            }
         }
     }
 }
