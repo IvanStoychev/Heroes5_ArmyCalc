@@ -32,7 +32,7 @@ namespace Heroes5_ArmyCalc
         public Label[] Total_Tier = new Label[8];                   //Array to hold all the 'creature total gold cost' labels of the form
         public NumericUpDown[] UpDown_Tier = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
         public bool[] Upg = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
-        
+
         #region Data
         //The arrays represent the gold cost or population value for each tier of creatures of each faction.
         //This program is quite simple and small, that is why all the values are hardcoded.
@@ -40,6 +40,10 @@ namespace Heroes5_ArmyCalc
         //For ease of handling the arrays are size 8, so that it can be convenient to call on
         //array member [3] for the value for the tier 3 creture, for that purpose member [0] is padded with a zero.
         //Factions in order: "Academy", "Dungeon", "Fortress", "Haven", "Inferno", "Necropolis", "Stronghold" and "Sylvan"
+
+        //IN PROGRESS: Replacing all the arrays with three Dictionaries<string, int[base, upg, pop]>
+        public Dictionary<string, int[,,]> FactionData = new Dictionary<string, int[,,]>();
+
         public int[] Academy_Base_Gold_Tier = {0, 22, 45, 90, 250, 480, 1400, 3500};
         public int[] Academy_Upg_Gold_Tier = {0, 35, 70, 130, 340, 700, 1770, 4700};
         public int[] Academy_Pop_Tier = {0, 20, 14, 9, 5, 3, 2, 1};
@@ -95,6 +99,71 @@ namespace Heroes5_ArmyCalc
 
         public Form1()
         {
+            FactionData.Add("Academy", new int[0, 0, 0]);
+            FactionData.Add("Academy", new int[22, 35, 20]);
+            FactionData.Add("Academy", new int[45, 70, 14]);
+            FactionData.Add("Academy", new int[90, 130, 9]);
+            FactionData.Add("Academy", new int[250, 340, 5]);
+            FactionData.Add("Academy", new int[480, 700, 3]);
+            FactionData.Add("Academy", new int[1400, 1770, 2]);
+            FactionData.Add("Academy", new int[3500, 4700, 1]);
+            FactionData.Add("Dungeon", new int[0, 0, 0]);
+            FactionData.Add("Dungeon", new int[60, 100, 7]);
+            FactionData.Add("Dungeon", new int[125, 175, 5]);
+            FactionData.Add("Dungeon", new int[140, 200, 6]);
+            FactionData.Add("Dungeon", new int[300, 450, 4]);
+            FactionData.Add("Dungeon", new int[550, 800, 3]);
+            FactionData.Add("Dungeon", new int[1400, 1700, 2]);
+            FactionData.Add("Dungeon", new int[3000, 3700, 1]);
+            FactionData.Add("Fortress", new int[0, 0, 0]);
+            FactionData.Add("Fortress", new int[24, 40, 18]);
+            FactionData.Add("Fortress", new int[45, 65, 14]);
+            FactionData.Add("Fortress", new int[130, 185, 7]);
+            FactionData.Add("Fortress", new int[160, 220, 6]);
+            FactionData.Add("Fortress", new int[470, 700, 3]);
+            FactionData.Add("Fortress", new int[1300, 1700, 2]);
+            FactionData.Add("Fortress", new int[2700, 3400, 1]);
+            FactionData.Add("Haven", new int[0, 0, 0]);
+            FactionData.Add("Haven", new int[15, 25, 22]);
+            FactionData.Add("Haven", new int[50, 80, 12]);
+            FactionData.Add("Haven", new int[85, 130, 10]);
+            FactionData.Add("Haven", new int[250, 370, 5]);
+            FactionData.Add("Haven", new int[600, 850, 3]);
+            FactionData.Add("Haven", new int[1300, 1700, 2]);
+            FactionData.Add("Haven", new int[2800, 3500, 1]);
+            FactionData.Add("Inferno", new int[0, 0, 0]);
+            FactionData.Add("Inferno", new int[25, 45, 16]);
+            FactionData.Add("Inferno", new int[40, 60, 15]);
+            FactionData.Add("Inferno", new int[110, 160, 8]);
+            FactionData.Add("Inferno", new int[240, 350, 5]);
+            FactionData.Add("Inferno", new int[550, 780, 3]);
+            FactionData.Add("Inferno", new int[1400, 1666, 2]);
+            FactionData.Add("Inferno", new int[2666, 3666, 1]);
+            FactionData.Add("Necropolis", new int[0, 0, 0]);
+            FactionData.Add("Necropolis", new int[19, 30, 20]);
+            FactionData.Add("Necropolis", new int[40, 60, 15]);
+            FactionData.Add("Necropolis", new int[100, 140, 9]);
+            FactionData.Add("Necropolis", new int[250, 380, 5]);
+            FactionData.Add("Necropolis", new int[620, 850, 3]);
+            FactionData.Add("Necropolis", new int[1400, 1700, 2]);
+            FactionData.Add("Necropolis", new int[1600, 1900, 1]);
+            FactionData.Add("Stronghold", new int[0, 0, 0]);
+            FactionData.Add("Stronghold", new int[10, 20, 25]);
+            FactionData.Add("Stronghold", new int[50, 70, 14]);
+            FactionData.Add("Stronghold", new int[80, 120, 11]);
+            FactionData.Add("Stronghold", new int[260, 360, 5]);
+            FactionData.Add("Stronghold", new int[350, 500, 5]);
+            FactionData.Add("Stronghold", new int[1250, 1600, 2]);
+            FactionData.Add("Stronghold", new int[2900, 3450, 1]);
+            FactionData.Add("Sylvan", new int[0, 0, 0]);
+            FactionData.Add("Sylvan", new int[35, 55, 10]);
+            FactionData.Add("Sylvan", new int[70, 120, 9]);
+            FactionData.Add("Sylvan", new int[120, 190, 7]);
+            FactionData.Add("Sylvan", new int[320, 440, 4]);
+            FactionData.Add("Sylvan", new int[630, 900, 3]);
+            FactionData.Add("Sylvan", new int[1100, 1400, 2]);
+            FactionData.Add("Sylvan", new int[2500, 3400, 1]);
+
             InitializeComponent();
             //We bind the labels showing each creature's cost, it's weekly population and the total cost of the chosen
             //amount and the numeric updowns to an array, so we can access them easily.
