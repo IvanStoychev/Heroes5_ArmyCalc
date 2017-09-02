@@ -23,7 +23,7 @@ namespace Heroes5_ArmyCalc
          * - Each tier of creatures has three variations: one basic and two upgraded ones.
          * - All creatures have a weekly growth that is the same for all variations of a faction's tier.
          * - Each creature costs gold to purchase. The upgraded variations cost the same, the basic one - less.
-         */
+        */
 		public int[,] Town_Tier_Base_Gold = new int[8,8];           //The gold cost of each basic creature of each faction
 		public int[,] Town_Tier_Upg_Gold = new int[8,8];            //The gold cost of upgraded creatures of each faction
         public int[,] Town_Tier_Pop = new int[8,8];                 //The weekly population of each tier of creatures of each faction
@@ -33,49 +33,10 @@ namespace Heroes5_ArmyCalc
         public NumericUpDown[] UpDown_Tier = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
         public bool[] Upg = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
 
-        #region Data
-        //The arrays represent the gold cost or population value for each tier of creatures of each faction.
-        //This program is quite simple and small, that is why all the values are hardcoded.
-        //The data is initialized in this inefficient way, to be more convenient to change, if needed.
-        //For ease of handling the arrays are size 8, so that it can be convenient to call on
-        //array member [3] for the value for the tier 3 creture, for that purpose member [0] is padded with a zero.
-        //Factions in order: "Academy", "Dungeon", "Fortress", "Haven", "Inferno", "Necropolis", "Stronghold" and "Sylvan"
-
-        //IN PROGRESS: Replacing all the arrays with three Dictionaries<string, int[base, upg, pop]>
+        //This Dictionary<string, int[,,]> holds all the values for the gold cost of a faction's units
+        //The format is the following: Dictionary<FactionName, [Base Unit Gold cost, Upgraded Unit Gold cost, Unit Population]>
+        //For ease of use the array is padded with zero values at index 0 (so that Tier 3's data is at index 3, for example)
         public Dictionary<string, int[,,]> FactionData = new Dictionary<string, int[,,]>();
-
-        public int[] Academy_Base_Gold_Tier = {0, 22, 45, 90, 250, 480, 1400, 3500};
-        public int[] Academy_Upg_Gold_Tier = {0, 35, 70, 130, 340, 700, 1770, 4700};
-        public int[] Academy_Pop_Tier = {0, 20, 14, 9, 5, 3, 2, 1};
-
-        public int[] Dungeon_Base_Gold_Tier = {0, 60, 125, 140, 300, 550, 1400, 3000};
-        public int[] Dungeon_Upg_Gold_Tier = {0, 100, 175, 200, 450, 800, 1700, 3700};
-        public int[] Dungeon_Pop_Tier = {0, 7, 5, 6, 4, 3, 2, 1};
-
-        public int[] Fortress_Base_Gold_Tier = {0, 24, 45, 130, 160, 470, 1300, 2700};
-        public int[] Fortress_Upg_Gold_Tier = {0, 40, 65, 185, 220, 700, 1700, 3400};
-        public int[] Fortress_Pop_Tier = {0, 18, 14, 7, 6, 3, 2, 1};
-
-        public int[] Haven_Base_Gold_Tier = {0, 15, 50, 85, 250, 600, 1300, 2800};
-        public int[] Haven_Upg_Gold_Tier = {0, 25, 80, 130, 370, 850, 1700, 3500};
-        public int[] Haven_Pop_Tier = {0, 22, 12, 10, 5, 3, 2, 1};
-
-        public int[] Inferno_Base_Gold_Tier = {0, 25, 40, 110, 240, 550, 1400, 2666};
-        public int[] Inferno_Upg_Gold_Tier = {0, 45, 60, 160, 350, 780, 1666, 3666};
-        public int[] Inferno_Pop_Tier = {0, 16, 15, 8, 5, 3, 2, 1};
-
-        public int[] Necropolis_Base_Gold_Tier = {0, 19, 40, 100, 250, 620, 1400, 1600};
-        public int[] Necropolis_Upg_Gold_Tier = {0, 30, 60, 140, 380, 850, 1700, 1900};
-        public int[] Necropolis_Pop_Tier = {0, 20, 15, 9, 5, 3, 2, 1};
-
-        public int[] Stronghold_Base_Gold_Tier = {0, 10, 50, 80, 260, 350, 1250, 2900};
-        public int[] Stronghold_Upg_Gold_Tier = {0, 20, 70, 120, 360, 500, 1600, 3450};
-        public int[] Stronghold_Pop_Tier = {0, 25, 14, 11, 5, 5, 2, 1};
-
-        public int[] Sylvan_Base_Gold_Tier = {0, 35, 70, 120, 320, 630, 1100, 2500};
-        public int[] Sylvan_Upg_Gold_Tier = {0, 55, 120, 190, 440, 900, 1400, 3400};
-        public int[] Sylvan_Pop_Tier = {0, 10, 9, 7, 4, 3, 2, 1};
-        #endregion
 
         //This array holds  each faction's population increase dwelling, it is two-dimentional, since some factions have two such dwellings.
         //Array padded with zero for ease of handling and for usage in case Dwelling checkbox is not checked.
