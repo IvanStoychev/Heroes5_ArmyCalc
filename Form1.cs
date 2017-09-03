@@ -33,11 +33,13 @@ namespace Heroes5_ArmyCalc
         public NumericUpDown[] UpDown_Tier = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
         public bool[] Upg = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
 
-        //This Dictionary<string, int[,,]> holds all the values for the gold cost of a faction's units
-        //The format is the following: Dictionary<FactionName, [Base Unit Gold cost, Upgraded Unit Gold cost, Unit Population]>
+        //These Dictionary<string, int[]> hold the values for the base and upgraded gold cost of a faction's units
+        //and their population.
         //For ease of use the array is padded with zero values at index 0 (so that Tier 3's data is at index 3, for example)
-        public Dictionary<string, int[,,]> FactionData = new Dictionary<string, int[,,]>();
-
+        public Dictionary<string, int[]> FactionBaseCost = new Dictionary<string, int[]>();
+        public Dictionary<string, int[]> FactionUpgCost = new Dictionary<string, int[]>();
+        public Dictionary<string, int[]> FactionPopulation = new Dictionary<string, int[]>();
+        
         //This array holds  each faction's population increase dwelling, it is two-dimentional, since some factions have two such dwellings.
         //Array padded with zero for ease of handling and for usage in case Dwelling checkbox is not checked.
         //-------------------------------
@@ -60,70 +62,48 @@ namespace Heroes5_ArmyCalc
 
         public Form1()
         {
-            FactionData.Add("Academy", new int[0, 0, 0]);
-            FactionData.Add("Academy", new int[22, 35, 20]);
-            FactionData.Add("Academy", new int[45, 70, 14]);
-            FactionData.Add("Academy", new int[90, 130, 9]);
-            FactionData.Add("Academy", new int[250, 340, 5]);
-            FactionData.Add("Academy", new int[480, 700, 3]);
-            FactionData.Add("Academy", new int[1400, 1770, 2]);
-            FactionData.Add("Academy", new int[3500, 4700, 1]);
-            FactionData.Add("Dungeon", new int[0, 0, 0]);
-            FactionData.Add("Dungeon", new int[60, 100, 7]);
-            FactionData.Add("Dungeon", new int[125, 175, 5]);
-            FactionData.Add("Dungeon", new int[140, 200, 6]);
-            FactionData.Add("Dungeon", new int[300, 450, 4]);
-            FactionData.Add("Dungeon", new int[550, 800, 3]);
-            FactionData.Add("Dungeon", new int[1400, 1700, 2]);
-            FactionData.Add("Dungeon", new int[3000, 3700, 1]);
-            FactionData.Add("Fortress", new int[0, 0, 0]);
-            FactionData.Add("Fortress", new int[24, 40, 18]);
-            FactionData.Add("Fortress", new int[45, 65, 14]);
-            FactionData.Add("Fortress", new int[130, 185, 7]);
-            FactionData.Add("Fortress", new int[160, 220, 6]);
-            FactionData.Add("Fortress", new int[470, 700, 3]);
-            FactionData.Add("Fortress", new int[1300, 1700, 2]);
-            FactionData.Add("Fortress", new int[2700, 3400, 1]);
-            FactionData.Add("Haven", new int[0, 0, 0]);
-            FactionData.Add("Haven", new int[15, 25, 22]);
-            FactionData.Add("Haven", new int[50, 80, 12]);
-            FactionData.Add("Haven", new int[85, 130, 10]);
-            FactionData.Add("Haven", new int[250, 370, 5]);
-            FactionData.Add("Haven", new int[600, 850, 3]);
-            FactionData.Add("Haven", new int[1300, 1700, 2]);
-            FactionData.Add("Haven", new int[2800, 3500, 1]);
-            FactionData.Add("Inferno", new int[0, 0, 0]);
-            FactionData.Add("Inferno", new int[25, 45, 16]);
-            FactionData.Add("Inferno", new int[40, 60, 15]);
-            FactionData.Add("Inferno", new int[110, 160, 8]);
-            FactionData.Add("Inferno", new int[240, 350, 5]);
-            FactionData.Add("Inferno", new int[550, 780, 3]);
-            FactionData.Add("Inferno", new int[1400, 1666, 2]);
-            FactionData.Add("Inferno", new int[2666, 3666, 1]);
-            FactionData.Add("Necropolis", new int[0, 0, 0]);
-            FactionData.Add("Necropolis", new int[19, 30, 20]);
-            FactionData.Add("Necropolis", new int[40, 60, 15]);
-            FactionData.Add("Necropolis", new int[100, 140, 9]);
-            FactionData.Add("Necropolis", new int[250, 380, 5]);
-            FactionData.Add("Necropolis", new int[620, 850, 3]);
-            FactionData.Add("Necropolis", new int[1400, 1700, 2]);
-            FactionData.Add("Necropolis", new int[1600, 1900, 1]);
-            FactionData.Add("Stronghold", new int[0, 0, 0]);
-            FactionData.Add("Stronghold", new int[10, 20, 25]);
-            FactionData.Add("Stronghold", new int[50, 70, 14]);
-            FactionData.Add("Stronghold", new int[80, 120, 11]);
-            FactionData.Add("Stronghold", new int[260, 360, 5]);
-            FactionData.Add("Stronghold", new int[350, 500, 5]);
-            FactionData.Add("Stronghold", new int[1250, 1600, 2]);
-            FactionData.Add("Stronghold", new int[2900, 3450, 1]);
-            FactionData.Add("Sylvan", new int[0, 0, 0]);
-            FactionData.Add("Sylvan", new int[35, 55, 10]);
-            FactionData.Add("Sylvan", new int[70, 120, 9]);
-            FactionData.Add("Sylvan", new int[120, 190, 7]);
-            FactionData.Add("Sylvan", new int[320, 440, 4]);
-            FactionData.Add("Sylvan", new int[630, 900, 3]);
-            FactionData.Add("Sylvan", new int[1100, 1400, 2]);
-            FactionData.Add("Sylvan", new int[2500, 3400, 1]);
+            FactionBaseCost.Add("Academy", new int[] { 0, 22, 45, 90, 250, 480, 1400, 3500 });
+            FactionUpgCost.Add("Academy", new int[] { 0, 35, 70, 130, 340, 700, 1770, 4700 });
+            FactionPopulation.Add("Academy", new int[] { 0, 20, 14, 9, 5, 3, 2, 1 });
+
+            FactionBaseCost.Add("Dungeon", new int[] { 0, 60, 125, 140, 300, 550, 1400, 3000 });
+            FactionUpgCost.Add("Dungeon", new int[] { 0, 100, 175, 200, 450, 800, 1700, 3700 });
+            FactionPopulation.Add("Dungeon", new int[] { 0, 7, 5, 6, 4, 3, 2, 1 });
+
+            FactionBaseCost.Add("Fortress", new int[] { 0, 24, 45, 130, 160, 470, 1300, 2700 });
+            FactionUpgCost.Add("Fortress", new int[] { 0, 40, 65, 185, 220, 700, 1700, 3400 });
+            FactionPopulation.Add("Fortress", new int[] { 0, 18, 14, 7, 6, 3, 2, 1 });
+
+            FactionBaseCost.Add("Haven", new int[] { 0, 15, 50, 85, 250, 600, 1300, 2800 });
+            FactionUpgCost.Add("Haven", new int[] { 0, 25, 80, 130, 370, 850, 1700, 3500 });
+            FactionPopulation.Add("Haven", new int[] { 0, 22, 12, 10, 5, 3, 2, 1 });
+
+            FactionBaseCost.Add("Inferno", new int[] { 0, 25, 40, 110, 240, 550, 1400, 2666 });
+            FactionUpgCost.Add("Inferno", new int[] { 0, 45, 60, 160, 350, 780, 1666, 3666 });
+            FactionPopulation.Add("Inferno", new int[] { 0, 16, 15, 8, 5, 3, 2, 1 });
+
+            FactionBaseCost.Add("Necropolis", new int[] { 0, 19, 40, 100, 250, 620, 1400, 1600 });
+            FactionUpgCost.Add("Necropolis", new int[] { 0, 30, 60, 140, 380, 850, 1700, 1900 });
+            FactionPopulation.Add("Necropolis", new int[] { 0, 20, 15, 9, 5, 3, 2, 1 });
+
+            FactionBaseCost.Add("Stronghold", new int[] { 0, 10, 50, 80, 260, 350, 1250, 2900 });
+            FactionUpgCost.Add("Stronghold", new int[] { 0, 20, 70, 120, 360, 500, 1600, 3450 });
+            FactionPopulation.Add("Stronghold", new int[] { 0, 25, 14, 11, 5, 5, 2, 1 });
+
+            FactionBaseCost.Add("Sylvan", new int[] { 0, 35, 70, 120, 320, 630, 1100, 2500 });
+            FactionUpgCost.Add("Sylvan", new int[] { 0, 55, 120, 190, 440, 900, 1400, 3400 });
+            FactionPopulation.Add("Sylvan", new int[] { 0, 10, 9, 7, 4, 3, 2, 1 });
+
+            foreach (var faction in FactionList)
+            {
+                Faction fac = new Faction(faction);
+                for (int i = 1; i < 8; i++)
+                {
+                    fac.Units[i].BaseGoldCost = FactionBaseCost[faction][i];
+                    fac.Units[i].UpgGoldCost = FactionUpgCost[faction][i];
+                    fac.Units[i].Population = FactionPopulation[faction][i];
+                }
+            }
 
             InitializeComponent();
             //We bind the labels showing each creature's cost, it's weekly population and the total cost of the chosen
@@ -141,40 +121,40 @@ namespace Heroes5_ArmyCalc
             }
 
             //We assign data for all the factions to the array we will be working with.
-            for (int i = 0; i < 8; i++)
-            {
-                Town_Tier_Base_Gold[0, i] = Academy_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[0, i] = Academy_Upg_Gold_Tier[i];
-                Town_Tier_Pop[0, i] = Academy_Pop_Tier[i];
+            ////for (int i = 0; i < 8; i++)
+            //{
+            //    Town_Tier_Base_Gold[0, i] = Academy_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[0, i] = Academy_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[0, i] = Academy_Pop_Tier[i];
 
-                Town_Tier_Base_Gold[1, i] = Dungeon_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[1, i] = Dungeon_Upg_Gold_Tier[i];
-                Town_Tier_Pop[1, i] = Dungeon_Pop_Tier[i];
+            //    Town_Tier_Base_Gold[1, i] = Dungeon_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[1, i] = Dungeon_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[1, i] = Dungeon_Pop_Tier[i];
 
-                Town_Tier_Base_Gold[2, i] = Fortress_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[2, i] = Fortress_Upg_Gold_Tier[i];
-                Town_Tier_Pop[2, i] = Fortress_Pop_Tier[i];
+            //    Town_Tier_Base_Gold[2, i] = Fortress_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[2, i] = Fortress_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[2, i] = Fortress_Pop_Tier[i];
 
-                Town_Tier_Base_Gold[3, i] = Haven_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[3, i] = Haven_Upg_Gold_Tier[i];
-                Town_Tier_Pop[3, i] = Haven_Pop_Tier[i];
+            //    Town_Tier_Base_Gold[3, i] = Haven_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[3, i] = Haven_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[3, i] = Haven_Pop_Tier[i];
 
-                Town_Tier_Base_Gold[4, i] = Inferno_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[4, i] = Inferno_Upg_Gold_Tier[i];
-                Town_Tier_Pop[4, i] = Inferno_Pop_Tier[i];
+            //    Town_Tier_Base_Gold[4, i] = Inferno_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[4, i] = Inferno_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[4, i] = Inferno_Pop_Tier[i];
 
-                Town_Tier_Base_Gold[5, i] = Necropolis_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[5, i] = Necropolis_Upg_Gold_Tier[i];
-                Town_Tier_Pop[5, i] = Necropolis_Pop_Tier[i];
+            //    Town_Tier_Base_Gold[5, i] = Necropolis_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[5, i] = Necropolis_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[5, i] = Necropolis_Pop_Tier[i];
 
-                Town_Tier_Base_Gold[6, i] = Stronghold_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[6, i] = Stronghold_Upg_Gold_Tier[i];
-                Town_Tier_Pop[6, i] = Stronghold_Pop_Tier[i];
+            //    Town_Tier_Base_Gold[6, i] = Stronghold_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[6, i] = Stronghold_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[6, i] = Stronghold_Pop_Tier[i];
 
-                Town_Tier_Base_Gold[7, i] = Sylvan_Base_Gold_Tier[i];
-                Town_Tier_Upg_Gold[7, i] = Sylvan_Upg_Gold_Tier[i];
-                Town_Tier_Pop[7, i] = Sylvan_Pop_Tier[i];
-            }
+            //    Town_Tier_Base_Gold[7, i] = Sylvan_Base_Gold_Tier[i];
+            //    Town_Tier_Upg_Gold[7, i] = Sylvan_Upg_Gold_Tier[i];
+            //    Town_Tier_Pop[7, i] = Sylvan_Pop_Tier[i];
+            //}
             Factions.SelectedItem = "Academy";
             UI_Update();
         }
@@ -203,6 +183,8 @@ namespace Heroes5_ArmyCalc
             //Sets label texts and images to the currently selected faction
             //================================================================================
             //First determine which faction is selected and from that access the appropriate index/values in the data array
+
+            string FactionName = (string)Factions.SelectedItem;
             int Faction_Index = Town[(string)Factions.SelectedItem];
             int Gold_Total = 0;
 
@@ -214,11 +196,11 @@ namespace Heroes5_ArmyCalc
                 //this "if" checkes whether "Upg" is true and changes the gold cost of the creature appropriately
                 if (Upg[i] == true)
                 {
-                    Gold_Tier[i].Text = Convert.ToString(Town_Tier_Upg_Gold[Faction_Index, i]);
+                    Gold_Tier[i].Text = FactionUpgCost[FactionName][i].ToString();
                 }
                 else
                 {
-                    Gold_Tier[i].Text = Convert.ToString(Town_Tier_Base_Gold[Faction_Index, i]);
+                    Gold_Tier[i].Text = FactionBaseCost[FactionName][i].ToString();
                 }
 
                 //This "if" sets the creature populations and UpDown controls' maximums in accordance
@@ -247,9 +229,9 @@ namespace Heroes5_ArmyCalc
             }
 
 
-            Dwelling_Checked();
-            if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) Pop_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)UpDown_WeekLimit.Value));
-            if (Dwelling_Tier_B != 0 && (Dwelling_CheckBox2.Checked == true || (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true))) Pop_Tier[Dwelling_Tier_B].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_B].Text) + (Dwelling[Faction, 1] * (int)UpDown_WeekLimit.Value));
+            //Dwelling_Checked();
+            //if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) Pop_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)UpDown_WeekLimit.Value));
+            //if (Dwelling_Tier_B != 0 && (Dwelling_CheckBox2.Checked == true || (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true))) Pop_Tier[Dwelling_Tier_B].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_B].Text) + (Dwelling[Faction, 1] * (int)UpDown_WeekLimit.Value));
             
             //The Total Gold text label is updated with the appropriate value and the check for the gold constraint is performed
             Label_GoldTotal.Text = Convert.ToString(Gold_Total);
@@ -259,61 +241,61 @@ namespace Heroes5_ArmyCalc
         }
 
         //This method sets which creature tiers should benefit from extra population, should the bonus dwelling be checked
-        public void Dwelling_Checked()
-        {
-            switch (Convert.ToString(Factions.SelectedItem))
-            {
-                case "Academy":
-                    Dwelling_Tier_A = 5;
-                    Dwelling_Tier_B = 0;
-                    Faction = 1;
-                    break;
-                case "Dungeon":
-                    Dwelling_Tier_A = 2;
-                    Dwelling_Tier_B = 3;
-                    Faction = 2;
-                    if (Dwelling_CheckBox1.Checked == false)
-                    {
-                        Dungeon_Ritual_UpDown1.Value = 0;
-                        Dungeon_Ritual_UpDown2.Value = 0;
-                    }
-                    Dwelling[Faction, 0] = (int)Dungeon_Ritual_UpDown1.Value;
-                    Dwelling[Faction, 1] = (int)Dungeon_Ritual_UpDown2.Value;
-                    break;
-                case "Fortress":
-                    Dwelling_Tier_A = 4;
-                    Dwelling_Tier_B = 5;
-                    Faction = 3;
-                    break;
-                case "Haven":
-                    Dwelling_Tier_A = 1;
-                    Dwelling_Tier_B = 0;
-                    Faction = 4;
-                    break;
-                case "Inferno":
-                    Dwelling_Tier_A = 2;
-                    Dwelling_Tier_B = 5;
-                    Faction = 5;
-                    break;
-                case "Necropolis":
-                    Dwelling_Tier_A = 1;
-                    Dwelling_Tier_B = 7;
-                    Faction = 6;
-                    break;
-                case "Stronghold":
-                    Dwelling_Tier_A = 1;
-                    Dwelling_Tier_B = 0;
-                    Faction = 7;
-                    break;
-                case "Sylvan":
-                    Dwelling_Tier_A = 1;
-                    Dwelling_Tier_B = 6;
-                    Faction = 8;
-                    break;
-                default:
-                    break;
-            }
-        }
+        //public void Dwelling_Checked()
+        //{
+        //    switch (Convert.ToString(Factions.SelectedItem))
+        //    {
+        //        case "Academy":
+        //            Dwelling_Tier_A = 5;
+        //            Dwelling_Tier_B = 0;
+        //            Faction = 1;
+        //            break;
+        //        case "Dungeon":
+        //            Dwelling_Tier_A = 2;
+        //            Dwelling_Tier_B = 3;
+        //            Faction = 2;
+        //            if (Dwelling_CheckBox1.Checked == false)
+        //            {
+        //                Dungeon_Ritual_UpDown1.Value = 0;
+        //                Dungeon_Ritual_UpDown2.Value = 0;
+        //            }
+        //            Dwelling[Faction, 0] = (int)Dungeon_Ritual_UpDown1.Value;
+        //            Dwelling[Faction, 1] = (int)Dungeon_Ritual_UpDown2.Value;
+        //            break;
+        //        case "Fortress":
+        //            Dwelling_Tier_A = 4;
+        //            Dwelling_Tier_B = 5;
+        //            Faction = 3;
+        //            break;
+        //        case "Haven":
+        //            Dwelling_Tier_A = 1;
+        //            Dwelling_Tier_B = 0;
+        //            Faction = 4;
+        //            break;
+        //        case "Inferno":
+        //            Dwelling_Tier_A = 2;
+        //            Dwelling_Tier_B = 5;
+        //            Faction = 5;
+        //            break;
+        //        case "Necropolis":
+        //            Dwelling_Tier_A = 1;
+        //            Dwelling_Tier_B = 7;
+        //            Faction = 6;
+        //            break;
+        //        case "Stronghold":
+        //            Dwelling_Tier_A = 1;
+        //            Dwelling_Tier_B = 0;
+        //            Faction = 7;
+        //            break;
+        //        case "Sylvan":
+        //            Dwelling_Tier_A = 1;
+        //            Dwelling_Tier_B = 6;
+        //            Faction = 8;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         //This method checks whether the set maximum of gold has been exceeded.
         public void Gold_Maximum()

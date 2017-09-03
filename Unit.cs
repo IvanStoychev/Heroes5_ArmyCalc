@@ -14,5 +14,10 @@ namespace Heroes5_ArmyCalc
         public int BaseGoldCost { get; set; }
         public int UpgGoldCost { get; set; }
         public int Population { get; set; }
+
+        public Unit()
+        {
+            Name = "";
+        }
     }
 }
