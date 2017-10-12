@@ -13,20 +13,22 @@ namespace Heroes5_ArmyCalc
     public partial class Form1 : Form
     {
         public int Dwelling_Tier_A, Dwelling_Tier_B;//, Faction;       //The "Dwelling Tier" variables hold the tier of the
-                                                                    //creature the selected faction's bonus dwelling is for
-        /*
-         * Introduction:
-         * =============
-         * In the game for which this calculator is made, Heroes of Might and Magic 5, there are a number of factions,
-         * each capable of buying different creatures. The creatures of each faction are unique, but they all share the
-         * same ranking system, being divided into "tiers" that range from 1 to 7.
-         * - Each tier of creatures has three variations: one basic and two upgraded ones.
-         * - All creatures have a weekly growth that is the same for all variations of a faction's tier.
-         * - Each creature costs gold to purchase. The upgraded variations cost the same, the basic one - less.
-        */
-		public int[,] Town_Tier_Base_Gold = new int[8,8];           //The gold cost of each basic creature of each faction
-		public int[,] Town_Tier_Upg_Gold = new int[8,8];            //The gold cost of upgraded creatures of each faction
-        public int[,] Town_Tier_Pop = new int[8,8];                 //The weekly population of each tier of creatures of each faction
+                                                    //creature the selected faction's bonus dwelling is for
+                                                    /*
+                                                     * Introduction:
+                                                     * =============
+                                                     * In the game for which this calculator is made, Heroes of Might and Magic 5, there are a number of factions,
+                                                     * each capable of buying different creatures. The creatures of each faction are unique, but they all share the
+                                                     * same ranking system, being divided into "tiers" that range from 1 to 7.
+                                                     * - Each tier of creatures has three variations: one basic and two upgraded ones.
+                                                     * - All creatures have a weekly growth that is the same for all variations of a faction's tier.
+                                                     * - Each creature costs gold to purchase. The upgraded variations cost the same, the basic one - less.
+                                                    */
+        #region to be deleted
+        //public int[,] Town_Tier_Base_Gold = new int[8,8];           //The gold cost of each basic creature of each faction
+        //public int[,] Town_Tier_Upg_Gold = new int[8,8];            //The gold cost of upgraded creatures of each faction
+        //      public int[,] Town_Tier_Pop = new int[8,8];                 //The weekly population of each tier of creatures of each faction
+        #endregion to be deleted
         public Label[] Gold_Tier = new Label[8];                    //Array to hold all the 'creature gold cost' labels of the form
         public Label[] Pop_Tier = new Label[8];                     //Array to hold all the 'creature population' labels of the form
         public Label[] Total_Tier = new Label[8];                   //Array to hold all the 'creature total gold cost' labels of the form
@@ -39,7 +41,8 @@ namespace Heroes5_ArmyCalc
         public Dictionary<string, int[]> FactionBaseCost = new Dictionary<string, int[]>();
         public Dictionary<string, int[]> FactionUpgCost = new Dictionary<string, int[]>();
         public Dictionary<string, int[]> FactionPopulation = new Dictionary<string, int[]>();
-        
+
+        #region to be deleted
         //This array holds  each faction's population increase dwelling, it is two-dimentional, since some factions have two such dwellings.
         //Array padded with zero for ease of handling and for usage in case Dwelling checkbox is not checked.
         //-------------------------------
@@ -52,8 +55,9 @@ namespace Heroes5_ArmyCalc
         //Necropolis - Unearthed Graves (Skeleton) / Dragon Tombstone (Bone Dragon)
         //Stronghold - Garbage Pile (Goblin)
         //Sylvan - Blooming Grove (Pixie) / Treant Saplings (Treant)
-        public int[,] Dwelling = { { 0, 0 }, { 2, 0 }, { 0, 0 }, { 4, 1 }, { 5, 0 }, { 2, 1 }, { 6, 1 }, { 6, 0 }, { 4, 1 } };
-
+        //public int[,] Dwelling = { { 0, 0 }, { 2, 0 }, { 0, 0 }, { 4, 1 }, { 5, 0 }, { 2, 1 }, { 6, 1 }, { 6, 0 }, { 4, 1 } };
+        #endregion to be deleted
+        
         //The purpose of this dictionary is to ease the access of information for each faction
         Dictionary<string, int> Town = new Dictionary<string, int>() {{"Academy", 0}, {"Dungeon", 1}, {"Fortress", 2}, {"Haven", 3}, {"Inferno", 4}, {"Necropolis", 5}, {"Stronghold", 6}, {"Sylvan", 7}};
 
@@ -96,7 +100,6 @@ namespace Heroes5_ArmyCalc
 
             foreach (var faction in FactionList)
             {
-                Faction fac = new Faction(faction);
                 for (int i = 1; i < 8; i++)
                 {
                     fac.Units[i].BaseGoldCost = FactionBaseCost[faction][i];
@@ -107,7 +110,7 @@ namespace Heroes5_ArmyCalc
 
             InitializeComponent();
             //We bind the labels showing each creature's cost, it's weekly population and the total cost of the chosen
-            //amount and the numeric updowns to an array, so we can access them easily.
+            //amount and the numeric updowns to arrays, so we can access them easily.
             Pop_Tier[0] = null;
             Gold_Tier[0] = null;
             Total_Tier[0] = null;
@@ -120,6 +123,7 @@ namespace Heroes5_ArmyCalc
                 UpDown_Tier[i] = (NumericUpDown)Controls.Find("UpDown_Tier" + i, true).FirstOrDefault();
             }
 
+            #region to be deleted
             //We assign data for all the factions to the array we will be working with.
             ////for (int i = 0; i < 8; i++)
             //{
@@ -155,6 +159,7 @@ namespace Heroes5_ArmyCalc
             //    Town_Tier_Upg_Gold[7, i] = Sylvan_Upg_Gold_Tier[i];
             //    Town_Tier_Pop[7, i] = Sylvan_Pop_Tier[i];
             //}
+            #endregion to be deleted
             Factions.SelectedItem = "Academy";
             UI_Update();
         }

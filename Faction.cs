@@ -21,5 +21,7 @@ namespace Heroes5_ArmyCalc
             }
             Units[0] = null;
         }
+
+        public //create a method to load all the Faction data and add a public property that is a faction array with all faction data
     }
 }
