@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Heroes5_ArmyCalc
 {
@@ -10,14 +6,19 @@ namespace Heroes5_ArmyCalc
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public byte[] ImgBytes { get; set; }
+        public Image Image { get; set; }
         public int BaseGoldCost { get; set; }
         public int UpgGoldCost { get; set; }
-        public int Population { get; set; }
+        public int PopulationWeekly { get; set; }
 
-        public Unit()
+        public Unit(string name, string description, Image image, int baseGoldCost, int upgGoldCost, int populationWeekly)
         {
-            Name = "";
+            Name = name;
+            Description = description;
+            Image = image;
+            BaseGoldCost = baseGoldCost;
+            UpgGoldCost = upgGoldCost;
+            PopulationWeekly = populationWeekly;
         }
     }
 }
