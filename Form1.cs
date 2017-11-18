@@ -24,42 +24,11 @@ namespace Heroes5_ArmyCalc
                                                      * - All creatures have a weekly growth that is the same for all variations of a faction's tier.
                                                      * - Each creature costs gold to purchase. The upgraded variations cost the same, the basic one - less.
                                                     */
-        #region to be deleted
-        //public int[,] Town_Tier_Base_Gold = new int[8,8];           //The gold cost of each basic creature of each faction
-        //public int[,] Town_Tier_Upg_Gold = new int[8,8];            //The gold cost of upgraded creatures of each faction
-        //      public int[,] Town_Tier_Pop = new int[8,8];                 //The weekly population of each tier of creatures of each faction
-        #endregion to be deleted
-        public Label[] Gold_Tier = new Label[8];                    //Array to hold all the 'creature gold cost' labels of the form
-        public Label[] Pop_Tier = new Label[8];                     //Array to hold all the 'creature population' labels of the form
-        public Label[] Total_Tier = new Label[8];                   //Array to hold all the 'creature total gold cost' labels of the form
-        public NumericUpDown[] UpDown_Tier = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
-        public bool[] Upg = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
-
-        //These Dictionary<string, int[]> hold the values for the base and upgraded gold cost of a faction's units
-        //and their population.
-        //For ease of use the array is padded with zero values at index 0 (so that Tier 3's data is at index 3, for example)
-        public Dictionary<string, int[]> FactionBaseCost = new Dictionary<string, int[]>();
-        public Dictionary<string, int[]> FactionUpgCost = new Dictionary<string, int[]>();
-        public Dictionary<string, int[]> FactionPopulation = new Dictionary<string, int[]>();
-
-        #region to be deleted
-        //This array holds  each faction's population increase dwelling, it is two-dimentional, since some factions have two such dwellings.
-        //Array padded with zero for ease of handling and for usage in case Dwelling checkbox is not checked.
-        //-------------------------------
-        //The dwellings are as follows:
-        //Academy - Treasure Cave (Djinn)
-        //Dungeon - Ritual Pit (Custom)
-        //Fortress - Wrestler's Arena (Brawler) / Runic Sanctuary (Rune Priest)
-        //Haven - Farms (Peasant)
-        //Inferno - Spawn of Chaos (Horned Deamon) / Halls of Horror (Hell Charger)
-        //Necropolis - Unearthed Graves (Skeleton) / Dragon Tombstone (Bone Dragon)
-        //Stronghold - Garbage Pile (Goblin)
-        //Sylvan - Blooming Grove (Pixie) / Treant Saplings (Treant)
-        //public int[,] Dwelling = { { 0, 0 }, { 2, 0 }, { 0, 0 }, { 4, 1 }, { 5, 0 }, { 2, 1 }, { 6, 1 }, { 6, 0 }, { 4, 1 } };
-        #endregion to be deleted
-        
-        //The purpose of this dictionary is to ease the access of information for each faction
-        Dictionary<string, int> Town = new Dictionary<string, int>() {{"Academy", 0}, {"Dungeon", 1}, {"Fortress", 2}, {"Haven", 3}, {"Inferno", 4}, {"Necropolis", 5}, {"Stronghold", 6}, {"Sylvan", 7}};
+        public Label[] LabelsGold = new Label[8];                    //Array to hold all the 'creature gold cost' labels of the form
+        public Label[] LabelsPopulation = new Label[8];                     //Array to hold all the 'creature population' labels of the form
+        public Label[] LabelsTotal = new Label[8];                   //Array to hold all the 'creature total gold cost' labels of the form
+        public NumericUpDown[] NumericUpDowns = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
+        public bool[] IsUpgraded = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
 
         //A list of all the factions in the game
         List<string> FactionList = new List<string> { "Academy", "Dungeon", "Fortress", "Haven", "Inferno", "Necropolis", "Stronghold", "Sylvan" };
@@ -111,16 +80,16 @@ namespace Heroes5_ArmyCalc
             InitializeComponent();
             //We bind the labels showing each creature's cost, it's weekly population and the total cost of the chosen
             //amount and the numeric updowns to arrays, so we can access them easily.
-            Pop_Tier[0] = null;
-            Gold_Tier[0] = null;
-            Total_Tier[0] = null;
-            UpDown_Tier[0] = null;
+            LabelsPopulation[0] = null;
+            LabelsGold[0] = null;
+            LabelsTotal[0] = null;
+            NumericUpDowns[0] = null;
             for (int i = 1; i < 8; i++)
             {
-                Pop_Tier[i] = (Label)Controls.Find("Pop_Tier" + i, true).FirstOrDefault();
-                Gold_Tier[i] = (Label)Controls.Find("Gold_Tier" + i, true).FirstOrDefault();
-                Total_Tier[i] = (Label)Controls.Find("Total_Tier" + i, true).FirstOrDefault();
-                UpDown_Tier[i] = (NumericUpDown)Controls.Find("UpDown_Tier" + i, true).FirstOrDefault();
+                LabelsPopulation[i] = (Label)Controls.Find("Pop_Tier" + i, true).FirstOrDefault();
+                LabelsGold[i] = (Label)Controls.Find("Gold_Tier" + i, true).FirstOrDefault();
+                LabelsTotal[i] = (Label)Controls.Find("Total_Tier" + i, true).FirstOrDefault();
+                NumericUpDowns[i] = (NumericUpDown)Controls.Find("UpDown_Tier" + i, true).FirstOrDefault();
             }
 
             #region to be deleted
@@ -199,38 +168,38 @@ namespace Heroes5_ArmyCalc
             {
                 //Whenever the image of an upgraded creature is clicked, the boolean variable "Upg" is set to "true"
                 //this "if" checkes whether "Upg" is true and changes the gold cost of the creature appropriately
-                if (Upg[i] == true)
+                if (IsUpgraded[i] == true)
                 {
-                    Gold_Tier[i].Text = FactionUpgCost[FactionName][i].ToString();
+                    LabelsGold[i].Text = FactionUpgCost[FactionName][i].ToString();
                 }
                 else
                 {
-                    Gold_Tier[i].Text = FactionBaseCost[FactionName][i].ToString();
+                    LabelsGold[i].Text = FactionBaseCost[FactionName][i].ToString();
                 }
 
                 //This "if" sets the creature populations and UpDown controls' maximums in accordance
                 //to a checked Castle or Citadel
 				if (Check_Castle.Checked == true)
 				{
-					Pop_Tier[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value * 2);
+					LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value * 2);
 				}
 				else
 				{
 					if (Check_Citadel.Checked == true)
 					{
-						Pop_Tier[i].Text = Convert.ToString(Math.Truncate(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value * (decimal)1.5));
+						LabelsPopulation[i].Text = Convert.ToString(Math.Truncate(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value * (decimal)1.5));
 					}
 					else
 					{
-						Pop_Tier[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value);
+						LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value);
 					}
 				}
 
                 //The following two lines set the label text for the total Gold cost of every creature tier and
                 //the Total Gold amount stored in the "Gold_Total" variable
-                Total_Tier[i].Text = Convert.ToString(Convert.ToInt32(Gold_Tier[i].Text) * UpDown_Tier[i].Value);
-                Gold_Total = Gold_Total + Convert.ToInt32(Total_Tier[i].Text);
-                if (Check_WeekLimit.Checked == true) UpDown_Tier[i].Maximum = Convert.ToInt32(Pop_Tier[i].Text);
+                LabelsTotal[i].Text = Convert.ToString(Convert.ToInt32(LabelsGold[i].Text) * NumericUpDowns[i].Value);
+                Gold_Total = Gold_Total + Convert.ToInt32(LabelsTotal[i].Text);
+                if (Check_WeekLimit.Checked == true) NumericUpDowns[i].Maximum = Convert.ToInt32(LabelsPopulation[i].Text);
             }
 
 
@@ -659,11 +628,11 @@ namespace Heroes5_ArmyCalc
             //or "true" if not.
             if (Control_Order == 1)
             {
-                Upg[Control_Tier] = false;
+                IsUpgraded[Control_Tier] = false;
             }
             else
             {
-                Upg[Control_Tier] = true;
+                IsUpgraded[Control_Tier] = true;
             }
 
             UI_Update();
