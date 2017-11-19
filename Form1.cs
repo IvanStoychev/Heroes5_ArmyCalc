@@ -133,6 +133,12 @@ namespace Heroes5_ArmyCalc
             UI_Update();
         }
 
+        //This method initialises objects with the hardcoded data
+        private void DataLoad()
+        {
+
+        }
+
         //This method updates all UI elements
         public void UI_Update()
         {
