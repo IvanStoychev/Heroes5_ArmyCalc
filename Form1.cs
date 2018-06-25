@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Heroes5_ArmyCalc
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         public int Dwelling_Tier_A, Dwelling_Tier_B;//, Faction;       //The "Dwelling Tier" variables hold the tier of the
                                                     //creature the selected faction's bonus dwelling is for
                                                     /*
                                                      * Introduction:
                                                      * =============
-                                                     * In the game for which this calculator is made, Heroes of Might and Magic 5, there are a number of factions,
+                                                     * In the game for which this calculator is made, "Heroes of Might and Magic 5", there are a number of factions,
                                                      * each capable of buying different creatures. The creatures of each faction are unique, but they all share the
                                                      * same ranking system, being divided into "tiers" that range from 1 to 7.
                                                      * - Each tier of creatures has three variations: one basic and two upgraded ones.
@@ -30,10 +30,10 @@ namespace Heroes5_ArmyCalc
         public NumericUpDown[] NumericUpDowns = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
         public bool[] IsUpgraded = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
 
-        //A list of all the factions in the game
+        //A list of the names of all the factions in the game.
         List<string> FactionList = new List<string> { "Academy", "Dungeon", "Fortress", "Haven", "Inferno", "Necropolis", "Stronghold", "Sylvan" };
 
-        public Form1()
+        public FormMain()
         {
             FactionBaseCost.Add("Academy", new int[] { 0, 22, 45, 90, 250, 480, 1400, 3500 });
             FactionUpgCost.Add("Academy", new int[] { 0, 35, 70, 130, 340, 700, 1770, 4700 });
@@ -88,8 +88,8 @@ namespace Heroes5_ArmyCalc
             {
                 LabelsPopulation[i] = (Label)Controls.Find("Pop_Tier" + i, true).FirstOrDefault();
                 LabelsGold[i] = (Label)Controls.Find("Gold_Tier" + i, true).FirstOrDefault();
-                LabelsTotal[i] = (Label)Controls.Find("Total_Tier" + i, true).FirstOrDefault();
-                NumericUpDowns[i] = (NumericUpDown)Controls.Find("UpDown_Tier" + i, true).FirstOrDefault();
+                LabelsTotal[i] = (Label)Controls.Find("lblCreaturesTotal_Tier" + i, true).FirstOrDefault();
+                NumericUpDowns[i] = (NumericUpDown)Controls.Find("udCreatures_Tier" + i, true).FirstOrDefault();
             }
 
             #region to be deleted
@@ -129,7 +129,7 @@ namespace Heroes5_ArmyCalc
             //    Town_Tier_Pop[7, i] = Sylvan_Pop_Tier[i];
             //}
             #endregion to be deleted
-            Factions.SelectedItem = "Academy";
+            cbFactionsList.SelectedItem = "Academy";
             UI_Update();
         }
 
@@ -145,27 +145,27 @@ namespace Heroes5_ArmyCalc
             //Since the "Dungeon" faction has a set of specific controls we check if that is the selected faction
             //and if the corresponding checkbox is checked. If one of these conditions is not satisfied
             //the controls are not visible.
-            if (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true)
+            if (Convert.ToString(cbFactionsList.SelectedItem) == "Dungeon" && cbDwelling1.Checked == true)
             {
-                Dungeon_Ritual_UpDown1.Visible = true;
-                Dungeon_Ritual_UpDown2.Visible = true;
-                Dungeon_Label_Blood.Visible = true;
-                Dungeon_Label_Minotaur.Visible = true;
+                udExtraBloodMaiden.Visible = true;
+                udExtraMinotaur.Visible = true;
+                lblExtraBloodMaiden.Visible = true;
+                lblExtraMinotaur.Visible = true;
             }
             else
             {
-                Dungeon_Ritual_UpDown1.Visible = false;
-                Dungeon_Ritual_UpDown2.Visible = false;
-                Dungeon_Label_Blood.Visible = false;
-                Dungeon_Label_Minotaur.Visible = false;
+                udExtraBloodMaiden.Visible = false;
+                udExtraMinotaur.Visible = false;
+                lblExtraBloodMaiden.Visible = false;
+                lblExtraMinotaur.Visible = false;
             }
 
             //Sets label texts and images to the currently selected faction
             //================================================================================
             //First determine which faction is selected and from that access the appropriate index/values in the data array
 
-            string FactionName = (string)Factions.SelectedItem;
-            int Faction_Index = Town[(string)Factions.SelectedItem];
+            string FactionName = (string)cbFactionsList.SelectedItem;
+            int Faction_Index = Town[(string)cbFactionsList.SelectedItem];
             int Gold_Total = 0;
 
             //This loop sets the labels for Creature Gold cost, Creature Population,
@@ -185,19 +185,19 @@ namespace Heroes5_ArmyCalc
 
                 //This "if" sets the creature populations and UpDown controls' maximums in accordance
                 //to a checked Castle or Citadel
-				if (Check_Castle.Checked == true)
+				if (chkCastle.Checked == true)
 				{
-					LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value * 2);
+					LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)udLimitPopulation.Value * 2);
 				}
 				else
 				{
-					if (Check_Citadel.Checked == true)
+					if (chkCitadel.Checked == true)
 					{
-						LabelsPopulation[i].Text = Convert.ToString(Math.Truncate(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value * (decimal)1.5));
+						LabelsPopulation[i].Text = Convert.ToString(Math.Truncate(Town_Tier_Pop[Faction_Index, i] * (int)udLimitPopulation.Value * (decimal)1.5));
 					}
 					else
 					{
-						LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)UpDown_WeekLimit.Value);
+						LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)udLimitPopulation.Value);
 					}
 				}
 
@@ -205,13 +205,13 @@ namespace Heroes5_ArmyCalc
                 //the Total Gold amount stored in the "Gold_Total" variable
                 LabelsTotal[i].Text = Convert.ToString(Convert.ToInt32(LabelsGold[i].Text) * NumericUpDowns[i].Value);
                 Gold_Total = Gold_Total + Convert.ToInt32(LabelsTotal[i].Text);
-                if (Check_WeekLimit.Checked == true) NumericUpDowns[i].Maximum = Convert.ToInt32(LabelsPopulation[i].Text);
+                if (chkLimitPopulation.Checked == true) NumericUpDowns[i].Maximum = Convert.ToInt32(LabelsPopulation[i].Text);
             }
 
 
             //Dwelling_Checked();
-            //if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) Pop_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)UpDown_WeekLimit.Value));
-            //if (Dwelling_Tier_B != 0 && (Dwelling_CheckBox2.Checked == true || (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true))) Pop_Tier[Dwelling_Tier_B].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_B].Text) + (Dwelling[Faction, 1] * (int)UpDown_WeekLimit.Value));
+            //if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) Pop_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)udCreatures_WeekLimit.Value));
+            //if (Dwelling_Tier_B != 0 && (Dwelling_CheckBox2.Checked == true || (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true))) Pop_Tier[Dwelling_Tier_B].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_B].Text) + (Dwelling[Faction, 1] * (int)udCreatures_WeekLimit.Value));
             
             //The Total Gold text label is updated with the appropriate value and the check for the gold constraint is performed
             Label_GoldTotal.Text = Convert.ToString(Gold_Total);
@@ -280,13 +280,13 @@ namespace Heroes5_ArmyCalc
         //This method checks whether the set maximum of gold has been exceeded.
         public void Gold_Maximum()
         {
-            if ((Convert.ToInt32(Label_GoldTotal.Text) > UpDown_GoldLimit.Value) && (Check_GoldLimit.Checked == true))
+            if ((Convert.ToInt32(Label_GoldTotal.Text) > udLimitGold.Value) && (chkLimitGold.Checked == true))
             {
-                Label_GoldLimitExceeded.Visible = true;
+                lblLimitGoldExceeded.Visible = true;
             }
             else
             {
-                Label_GoldLimitExceeded.Visible = false;
+                lblLimitGoldExceeded.Visible = false;
             }
         }
 
@@ -294,227 +294,227 @@ namespace Heroes5_ArmyCalc
         //These methods change the creature pictures and bonus dwelling text for each faction
         public void Current_Academy()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Academy_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Academy_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Academy_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Academy_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Academy_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Academy_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Academy_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Academy_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Academy_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Academy_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Academy_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Academy_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Academy_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Academy_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Academy_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Academy_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Academy_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Academy_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Academy_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Academy_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Academy_Tier7_03;
-            Dwelling_CheckBox1.Text = "Treasure Cave";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "";
-            Dwelling_CheckBox2.Visible = false;
+            pbTier1_01.Image = Properties.Resources.Academy_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Academy_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Academy_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Academy_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Academy_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Academy_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Academy_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Academy_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Academy_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Academy_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Academy_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Academy_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Academy_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Academy_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Academy_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Academy_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Academy_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Academy_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Academy_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Academy_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Academy_Tier7_03;
+            cbDwelling1.Text = "Treasure Cave";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "";
+            cbDwelling2.Visible = false;
         }
         public void Current_Dungeon()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Dungeon_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Dungeon_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Dungeon_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Dungeon_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Dungeon_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Dungeon_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Dungeon_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Dungeon_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Dungeon_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Dungeon_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Dungeon_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Dungeon_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Dungeon_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Dungeon_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Dungeon_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Dungeon_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Dungeon_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Dungeon_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Dungeon_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Dungeon_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Dungeon_Tier7_03;
-            Dwelling_CheckBox1.Text = "Ritual Pit";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "";
-            Dwelling_CheckBox2.Visible = false;
+            pbTier1_01.Image = Properties.Resources.Dungeon_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Dungeon_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Dungeon_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Dungeon_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Dungeon_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Dungeon_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Dungeon_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Dungeon_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Dungeon_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Dungeon_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Dungeon_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Dungeon_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Dungeon_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Dungeon_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Dungeon_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Dungeon_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Dungeon_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Dungeon_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Dungeon_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Dungeon_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Dungeon_Tier7_03;
+            cbDwelling1.Text = "Ritual Pit";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "";
+            cbDwelling2.Visible = false;
         }
         public void Current_Fortress()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Fortress_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Fortress_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Fortress_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Fortress_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Fortress_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Fortress_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Fortress_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Fortress_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Fortress_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Fortress_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Fortress_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Fortress_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Fortress_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Fortress_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Fortress_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Fortress_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Fortress_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Fortress_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Fortress_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Fortress_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Fortress_Tier7_03;
-            Dwelling_CheckBox1.Text = "Wrestler's Arena";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "Runic Sanctuary";
-            Dwelling_CheckBox2.Visible = true;
+            pbTier1_01.Image = Properties.Resources.Fortress_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Fortress_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Fortress_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Fortress_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Fortress_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Fortress_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Fortress_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Fortress_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Fortress_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Fortress_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Fortress_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Fortress_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Fortress_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Fortress_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Fortress_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Fortress_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Fortress_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Fortress_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Fortress_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Fortress_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Fortress_Tier7_03;
+            cbDwelling1.Text = "Wrestler's Arena";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "Runic Sanctuary";
+            cbDwelling2.Visible = true;
         }
         public void Current_Haven()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Haven_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Haven_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Haven_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Haven_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Haven_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Haven_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Haven_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Haven_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Haven_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Haven_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Haven_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Haven_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Haven_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Haven_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Haven_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Haven_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Haven_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Haven_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Haven_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Haven_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Haven_Tier7_03;
-            Dwelling_CheckBox1.Text = "Farms";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "";
-            Dwelling_CheckBox2.Visible = false;
+            pbTier1_01.Image = Properties.Resources.Haven_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Haven_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Haven_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Haven_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Haven_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Haven_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Haven_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Haven_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Haven_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Haven_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Haven_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Haven_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Haven_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Haven_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Haven_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Haven_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Haven_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Haven_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Haven_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Haven_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Haven_Tier7_03;
+            cbDwelling1.Text = "Farms";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "";
+            cbDwelling2.Visible = false;
         }
         public void Current_Inferno()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Inferno_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Inferno_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Inferno_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Inferno_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Inferno_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Inferno_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Inferno_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Inferno_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Inferno_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Inferno_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Inferno_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Inferno_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Inferno_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Inferno_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Inferno_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Inferno_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Inferno_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Inferno_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Inferno_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Inferno_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Inferno_Tier7_03;
-            Dwelling_CheckBox1.Text = "Spawn of Chaos";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "Halls of Horror";
-            Dwelling_CheckBox2.Visible = true;
+            pbTier1_01.Image = Properties.Resources.Inferno_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Inferno_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Inferno_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Inferno_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Inferno_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Inferno_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Inferno_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Inferno_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Inferno_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Inferno_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Inferno_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Inferno_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Inferno_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Inferno_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Inferno_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Inferno_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Inferno_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Inferno_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Inferno_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Inferno_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Inferno_Tier7_03;
+            cbDwelling1.Text = "Spawn of Chaos";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "Halls of Horror";
+            cbDwelling2.Visible = true;
         }
         public void Current_Necropolis()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Necropolis_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Necropolis_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Necropolis_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Necropolis_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Necropolis_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Necropolis_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Necropolis_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Necropolis_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Necropolis_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Necropolis_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Necropolis_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Necropolis_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Necropolis_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Necropolis_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Necropolis_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Necropolis_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Necropolis_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Necropolis_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Necropolis_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Necropolis_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Necropolis_Tier7_03;
-            Dwelling_CheckBox1.Text = "Unearthed Graves";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "Dragon Tombstone";
-            Dwelling_CheckBox2.Visible = true;
+            pbTier1_01.Image = Properties.Resources.Necropolis_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Necropolis_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Necropolis_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Necropolis_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Necropolis_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Necropolis_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Necropolis_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Necropolis_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Necropolis_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Necropolis_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Necropolis_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Necropolis_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Necropolis_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Necropolis_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Necropolis_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Necropolis_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Necropolis_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Necropolis_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Necropolis_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Necropolis_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Necropolis_Tier7_03;
+            cbDwelling1.Text = "Unearthed Graves";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "Dragon Tombstone";
+            cbDwelling2.Visible = true;
         }
         public void Current_Stronghold()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Stronghold_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Stronghold_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Stronghold_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Stronghold_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Stronghold_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Stronghold_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Stronghold_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Stronghold_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Stronghold_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Stronghold_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Stronghold_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Stronghold_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Stronghold_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Stronghold_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Stronghold_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Stronghold_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Stronghold_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Stronghold_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Stronghold_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Stronghold_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Stronghold_Tier7_03;
-            Dwelling_CheckBox1.Text = "Garbage Pile";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "";
-            Dwelling_CheckBox2.Visible = false;
+            pbTier1_01.Image = Properties.Resources.Stronghold_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Stronghold_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Stronghold_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Stronghold_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Stronghold_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Stronghold_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Stronghold_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Stronghold_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Stronghold_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Stronghold_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Stronghold_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Stronghold_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Stronghold_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Stronghold_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Stronghold_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Stronghold_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Stronghold_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Stronghold_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Stronghold_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Stronghold_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Stronghold_Tier7_03;
+            cbDwelling1.Text = "Garbage Pile";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "";
+            cbDwelling2.Visible = false;
         }
         public void Current_Sylvan()
         {
-            Picture_Tier1_01.Image = Properties.Resources.Sylvan_Tier1_01;
-            Picture_Tier1_02.Image = Properties.Resources.Sylvan_Tier1_02;
-            Picture_Tier1_03.Image = Properties.Resources.Sylvan_Tier1_03;
-            Picture_Tier2_01.Image = Properties.Resources.Sylvan_Tier2_01;
-            Picture_Tier2_02.Image = Properties.Resources.Sylvan_Tier2_02;
-            Picture_Tier2_03.Image = Properties.Resources.Sylvan_Tier2_03;
-            Picture_Tier3_01.Image = Properties.Resources.Sylvan_Tier3_01;
-            Picture_Tier3_02.Image = Properties.Resources.Sylvan_Tier3_02;
-            Picture_Tier3_03.Image = Properties.Resources.Sylvan_Tier3_03;
-            Picture_Tier4_01.Image = Properties.Resources.Sylvan_Tier4_01;
-            Picture_Tier4_02.Image = Properties.Resources.Sylvan_Tier4_02;
-            Picture_Tier4_03.Image = Properties.Resources.Sylvan_Tier4_03;
-            Picture_Tier5_01.Image = Properties.Resources.Sylvan_Tier5_01;
-            Picture_Tier5_02.Image = Properties.Resources.Sylvan_Tier5_02;
-            Picture_Tier5_03.Image = Properties.Resources.Sylvan_Tier5_03;
-            Picture_Tier6_01.Image = Properties.Resources.Sylvan_Tier6_01;
-            Picture_Tier6_02.Image = Properties.Resources.Sylvan_Tier6_02;
-            Picture_Tier6_03.Image = Properties.Resources.Sylvan_Tier6_03;
-            Picture_Tier7_01.Image = Properties.Resources.Sylvan_Tier7_01;
-            Picture_Tier7_02.Image = Properties.Resources.Sylvan_Tier7_02;
-            Picture_Tier7_03.Image = Properties.Resources.Sylvan_Tier7_03;
-            Dwelling_CheckBox1.Text = "Blooming Grove";
-            Dwelling_CheckBox1.Visible = true;
-            Dwelling_CheckBox2.Text = "Treant Saplings";
-            Dwelling_CheckBox2.Visible = true;
+            pbTier1_01.Image = Properties.Resources.Sylvan_Tier1_01;
+            pbTier1_02.Image = Properties.Resources.Sylvan_Tier1_02;
+            pbTier1_03.Image = Properties.Resources.Sylvan_Tier1_03;
+            pbTier2_01.Image = Properties.Resources.Sylvan_Tier2_01;
+            pbTier2_02.Image = Properties.Resources.Sylvan_Tier2_02;
+            pbTier2_03.Image = Properties.Resources.Sylvan_Tier2_03;
+            pbTier3_01.Image = Properties.Resources.Sylvan_Tier3_01;
+            pbTier3_02.Image = Properties.Resources.Sylvan_Tier3_02;
+            pbTier3_03.Image = Properties.Resources.Sylvan_Tier3_03;
+            pbTier4_01.Image = Properties.Resources.Sylvan_Tier4_01;
+            pbTier4_02.Image = Properties.Resources.Sylvan_Tier4_02;
+            pbTier4_03.Image = Properties.Resources.Sylvan_Tier4_03;
+            pbTier5_01.Image = Properties.Resources.Sylvan_Tier5_01;
+            pbTier5_02.Image = Properties.Resources.Sylvan_Tier5_02;
+            pbTier5_03.Image = Properties.Resources.Sylvan_Tier5_03;
+            pbTier6_01.Image = Properties.Resources.Sylvan_Tier6_01;
+            pbTier6_02.Image = Properties.Resources.Sylvan_Tier6_02;
+            pbTier6_03.Image = Properties.Resources.Sylvan_Tier6_03;
+            pbTier7_01.Image = Properties.Resources.Sylvan_Tier7_01;
+            pbTier7_02.Image = Properties.Resources.Sylvan_Tier7_02;
+            pbTier7_03.Image = Properties.Resources.Sylvan_Tier7_03;
+            cbDwelling1.Text = "Blooming Grove";
+            cbDwelling1.Visible = true;
+            cbDwelling2.Text = "Treant Saplings";
+            cbDwelling2.Visible = true;
         }
         #endregion
 
@@ -524,17 +524,17 @@ namespace Heroes5_ArmyCalc
         }
         private void Citadel_Check_Change(object sender, EventArgs e)
         {
-            if (Check_Castle.Checked == true && Check_Citadel.Checked == false)
+            if (chkCastle.Checked == true && chkCitadel.Checked == false)
             {
-                Check_Castle.Checked = false;
+                chkCastle.Checked = false;
             }
             UI_Update();
         }
         private void Castle_Check_Change(object sender, EventArgs e)
         {
-            if (Check_Castle.Checked == true && Check_Citadel.Checked == false)
+            if (chkCastle.Checked == true && chkCitadel.Checked == false)
             {
-                Check_Citadel.Checked = true;
+                chkCitadel.Checked = true;
             }
             UI_Update();
         }
@@ -542,8 +542,8 @@ namespace Heroes5_ArmyCalc
         {
             UI_Update();
             ComboBox Clicked = (ComboBox)sender;
-            Dwelling_CheckBox1.Checked = false;
-            Dwelling_CheckBox2.Checked = false;
+            cbDwelling1.Checked = false;
+            cbDwelling2.Checked = false;
             switch (Convert.ToString(Clicked.SelectedItem))
             {
                 case "Haven":
@@ -576,31 +576,31 @@ namespace Heroes5_ArmyCalc
         }
         private void Check_WeekLimit_CheckedChanged(object sender, EventArgs e)
         {
-            if (Check_WeekLimit.Checked == true)
+            if (chkLimitPopulation.Checked == true)
             {
-                UpDown_WeekLimit.Enabled = true;
+                udLimitPopulation.Enabled = true;
             }
             else
             {
-                UpDown_WeekLimit.Enabled = false;
-                UpDown_WeekLimit.Value = 1;
+                udLimitPopulation.Enabled = false;
+                udLimitPopulation.Value = 1;
             }
             UI_Update();
         }
         private void Check_GoldLimit_CheckedChanged(object sender, EventArgs e)
         {
-            if (Check_GoldLimit.Checked == true)
+            if (chkLimitGold.Checked == true)
             {
-                UpDown_GoldLimit.Enabled = true;
+                udLimitGold.Enabled = true;
                 Gold_Maximum();
             }
             else
             {
-                UpDown_GoldLimit.Enabled = false;
-                Label_GoldLimitExceeded.Visible = false;
+                udLimitGold.Enabled = false;
+                lblLimitGoldExceeded.Visible = false;
             }
         }
-        private void UpDown_GoldLimit_ValueChanged(object sender, EventArgs e)
+        private void udCreatures_GoldLimit_ValueChanged(object sender, EventArgs e)
         {
             Gold_Maximum();
         }
@@ -617,7 +617,7 @@ namespace Heroes5_ArmyCalc
             string Control_Name = Clicked.Name;
 
             //We locate the string index of the word "Tier" in order to get the number of its tier and order,
-            //since all PictureBoxes are named in the fashion "Picture_TierX_0Y", where X is the corresponding
+            //since all PictureBoxes are named in the fashion "pbTierX_0Y", where X is the corresponding
             //creature's tier and Y is the order of that PictureBox, either 1, 2 or 3, with 2 and 3 being
             //upgraded versions of 1.
             int String_Tier_Index = Control_Name.IndexOf("Tier") + 4;
