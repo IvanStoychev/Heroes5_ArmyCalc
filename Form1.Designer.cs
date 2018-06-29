@@ -125,8 +125,8 @@
             this.pbTier4_01 = new System.Windows.Forms.PictureBox();
             this.pbTier1_02 = new System.Windows.Forms.PictureBox();
             this.pbTier1_01 = new System.Windows.Forms.PictureBox();
-            this.cbDwelling1 = new System.Windows.Forms.CheckBox();
-            this.cbDwelling2 = new System.Windows.Forms.CheckBox();
+            this.chkDwelling1 = new System.Windows.Forms.CheckBox();
+            this.chkDwelling2 = new System.Windows.Forms.CheckBox();
             this.udExtraMinotaur = new System.Windows.Forms.NumericUpDown();
             this.udExtraBloodMaiden = new System.Windows.Forms.NumericUpDown();
             this.lblExtraBloodMaiden = new System.Windows.Forms.Label();
@@ -714,7 +714,7 @@
             this.udLimitGold.Name = "udLimitGold";
             this.udLimitGold.Size = new System.Drawing.Size(74, 20);
             this.udLimitGold.TabIndex = 13;
-            this.udLimitGold.ValueChanged += new System.EventHandler(this.UpDown_GoldLimit_ValueChanged);
+            this.udLimitGold.ValueChanged += new System.EventHandler(this.udCreatures_GoldLimit_ValueChanged);
             // 
             // lblLimitGold
             // 
@@ -879,7 +879,6 @@
             // 
             // GoldIco_Tier7
             // 
-            this.GoldIco_Tier7.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier7.Image")));
             this.GoldIco_Tier7.Location = new System.Drawing.Point(406, 596);
             this.GoldIco_Tier7.Name = "GoldIco_Tier7";
             this.GoldIco_Tier7.Size = new System.Drawing.Size(16, 15);
@@ -889,7 +888,6 @@
             // 
             // GoldIco_Tier6
             // 
-            this.GoldIco_Tier6.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier6.Image")));
             this.GoldIco_Tier6.Location = new System.Drawing.Point(406, 512);
             this.GoldIco_Tier6.Name = "GoldIco_Tier6";
             this.GoldIco_Tier6.Size = new System.Drawing.Size(16, 15);
@@ -899,7 +897,6 @@
             // 
             // GoldIco_Tier5
             // 
-            this.GoldIco_Tier5.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier5.Image")));
             this.GoldIco_Tier5.Location = new System.Drawing.Point(406, 437);
             this.GoldIco_Tier5.Name = "GoldIco_Tier5";
             this.GoldIco_Tier5.Size = new System.Drawing.Size(16, 15);
@@ -909,7 +906,6 @@
             // 
             // GoldIco_Tier4
             // 
-            this.GoldIco_Tier4.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier4.Image")));
             this.GoldIco_Tier4.Location = new System.Drawing.Point(406, 358);
             this.GoldIco_Tier4.Name = "GoldIco_Tier4";
             this.GoldIco_Tier4.Size = new System.Drawing.Size(16, 15);
@@ -919,7 +915,6 @@
             // 
             // GoldIco_Tier3
             // 
-            this.GoldIco_Tier3.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier3.Image")));
             this.GoldIco_Tier3.Location = new System.Drawing.Point(406, 280);
             this.GoldIco_Tier3.Name = "GoldIco_Tier3";
             this.GoldIco_Tier3.Size = new System.Drawing.Size(16, 15);
@@ -929,7 +924,6 @@
             // 
             // GoldIco_Tier2
             // 
-            this.GoldIco_Tier2.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier2.Image")));
             this.GoldIco_Tier2.Location = new System.Drawing.Point(406, 201);
             this.GoldIco_Tier2.Name = "GoldIco_Tier2";
             this.GoldIco_Tier2.Size = new System.Drawing.Size(16, 15);
@@ -939,7 +933,6 @@
             // 
             // GoldIco_Tier1
             // 
-            this.GoldIco_Tier1.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier1.Image")));
             this.GoldIco_Tier1.Location = new System.Drawing.Point(406, 123);
             this.GoldIco_Tier1.Name = "GoldIco_Tier1";
             this.GoldIco_Tier1.Size = new System.Drawing.Size(16, 15);
@@ -1178,29 +1171,29 @@
             this.pbTier1_01.TabStop = false;
             this.pbTier1_01.Click += new System.EventHandler(this.Picture_Click);
             // 
-            // cbDwelling1
+            // chkDwelling1
             // 
-            this.cbDwelling1.AutoSize = true;
-            this.cbDwelling1.Location = new System.Drawing.Point(12, 64);
-            this.cbDwelling1.Name = "cbDwelling1";
-            this.cbDwelling1.Size = new System.Drawing.Size(80, 17);
-            this.cbDwelling1.TabIndex = 16;
-            this.cbDwelling1.Text = "checkBox1";
-            this.cbDwelling1.UseVisualStyleBackColor = true;
-            this.cbDwelling1.Visible = false;
-            this.cbDwelling1.CheckedChanged += new System.EventHandler(this.UpDown);
+            this.chkDwelling1.AutoSize = true;
+            this.chkDwelling1.Location = new System.Drawing.Point(12, 64);
+            this.chkDwelling1.Name = "chkDwelling1";
+            this.chkDwelling1.Size = new System.Drawing.Size(80, 17);
+            this.chkDwelling1.TabIndex = 16;
+            this.chkDwelling1.Text = "checkBox1";
+            this.chkDwelling1.UseVisualStyleBackColor = true;
+            this.chkDwelling1.Visible = false;
+            this.chkDwelling1.CheckedChanged += new System.EventHandler(this.UpDown);
             // 
-            // cbDwelling2
+            // chkDwelling2
             // 
-            this.cbDwelling2.AutoSize = true;
-            this.cbDwelling2.Location = new System.Drawing.Point(12, 86);
-            this.cbDwelling2.Name = "cbDwelling2";
-            this.cbDwelling2.Size = new System.Drawing.Size(80, 17);
-            this.cbDwelling2.TabIndex = 16;
-            this.cbDwelling2.Text = "checkBox2";
-            this.cbDwelling2.UseVisualStyleBackColor = true;
-            this.cbDwelling2.Visible = false;
-            this.cbDwelling2.CheckedChanged += new System.EventHandler(this.UpDown);
+            this.chkDwelling2.AutoSize = true;
+            this.chkDwelling2.Location = new System.Drawing.Point(12, 86);
+            this.chkDwelling2.Name = "chkDwelling2";
+            this.chkDwelling2.Size = new System.Drawing.Size(80, 17);
+            this.chkDwelling2.TabIndex = 16;
+            this.chkDwelling2.Text = "checkBox2";
+            this.chkDwelling2.UseVisualStyleBackColor = true;
+            this.chkDwelling2.Visible = false;
+            this.chkDwelling2.CheckedChanged += new System.EventHandler(this.UpDown);
             // 
             // udExtraMinotaur
             // 
@@ -1260,8 +1253,8 @@
             this.Controls.Add(this.lblExtraBloodMaiden);
             this.Controls.Add(this.udExtraBloodMaiden);
             this.Controls.Add(this.udExtraMinotaur);
-            this.Controls.Add(this.cbDwelling2);
-            this.Controls.Add(this.cbDwelling1);
+            this.Controls.Add(this.chkDwelling2);
+            this.Controls.Add(this.chkDwelling1);
             this.Controls.Add(this.lblLimitGoldExceeded);
             this.Controls.Add(this.lblLimitGold);
             this.Controls.Add(this.udLimitGold);
@@ -1517,8 +1510,8 @@
         private System.Windows.Forms.NumericUpDown udLimitGold;
         private System.Windows.Forms.Label lblLimitGold;
         private System.Windows.Forms.Label lblLimitGoldExceeded;
-        private System.Windows.Forms.CheckBox cbDwelling1;
-        private System.Windows.Forms.CheckBox cbDwelling2;
+        private System.Windows.Forms.CheckBox chkDwelling1;
+        private System.Windows.Forms.CheckBox chkDwelling2;
         private System.Windows.Forms.NumericUpDown udExtraMinotaur;
         private System.Windows.Forms.NumericUpDown udExtraBloodMaiden;
         private System.Windows.Forms.Label lblExtraBloodMaiden;

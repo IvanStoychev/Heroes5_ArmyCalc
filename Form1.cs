@@ -12,72 +12,66 @@ namespace Heroes5_ArmyCalc
 {
     public partial class FormMain : Form
     {
-        public int Dwelling_Tier_A, Dwelling_Tier_B;//, Faction;       //The "Dwelling Tier" variables hold the tier of the
-                                                    //creature the selected faction's bonus dwelling is for
-                                                    /*
-                                                     * Introduction:
-                                                     * =============
-                                                     * In the game for which this calculator is made, "Heroes of Might and Magic 5", there are a number of factions,
-                                                     * each capable of buying different creatures. The creatures of each faction are unique, but they all share the
-                                                     * same ranking system, being divided into "tiers" that range from 1 to 7.
-                                                     * - Each tier of creatures has three variations: one basic and two upgraded ones.
-                                                     * - All creatures have a weekly growth that is the same for all variations of a faction's tier.
-                                                     * - Each creature costs gold to purchase. The upgraded variations cost the same, the basic one - less.
-                                                    */
-        public Label[] LabelsGold = new Label[8];                    //Array to hold all the 'creature gold cost' labels of the form
-        public Label[] LabelsPopulation = new Label[8];                     //Array to hold all the 'creature population' labels of the form
-        public Label[] LabelsTotal = new Label[8];                   //Array to hold all the 'creature total gold cost' labels of the form
-        public NumericUpDown[] NumericUpDowns = new NumericUpDown[8];  //Array to hold all the form's NumericUpDowns
-        public bool[] IsUpgraded = new bool[8];                            //Array of booleans that designate if an upgraded variant is selected or not for each creature tier
+        /*
+         * Introduction:
+         * =============
+         * In the game, for which this calculator is made - "Heroes of Might and Magic 5", there are a number of factions,
+         * each capable of buying different creatures. The creatures of each faction are unique, but they all share the
+         * same ranking system, being divided into "tiers" that range from 1 to 7.
+         * - Each tier of creatures has three variations: one basic and two upgraded ones.
+         * - All creatures have a weekly growth that is the same for the entire tier of each faction.
+         * - Each creature costs gold to purchase. The upgraded variations cost the same, the basic one - less.
+        */
 
-        //A list of the names of all the factions in the game.
+        /// <summary>
+        /// Holds the tier of the bonus dwelling for the selected faction.
+        /// </summary>
+        public int BonusDwellingTier1, BonusDwellingTier2;
+        /// <summary>
+        /// Array holding references to all the 'creature gold cost' labels of the form.
+        /// Padded with an empty zero index for ease of use.
+        /// </summary>
+        public Label[] LabelsGold = new Label[8];
+        /// <summary>
+        /// Array holding references to all the 'creature population' labels of the form.
+        /// Padded with an empty zero index for ease of use.
+        /// </summary>
+        public Label[] LabelsPopulation = new Label[8];
+        /// <summary>
+        /// Array holding references to all the 'creature total gold cost' labels of the form.
+        /// Padded with an empty zero index for ease of use.
+        /// </summary>
+        public Label[] LabelsTotal = new Label[8];
+        /// <summary>
+        /// Array holding references to all the form's NumericUpDowns.
+        /// Padded with an empty zero index for ease of use.
+        /// </summary>
+        public NumericUpDown[] NumericUpDowns = new NumericUpDown[8];
+        /// <summary>
+        /// Array of booleans that designate if an upgraded variant is selected or not for each creature tier
+        /// </summary>
+        public bool[] IsUpgraded = new bool[8];
+        /// <summary>
+        /// A list of the names of all the factions in the game.
+        /// </summary>
         List<string> FactionList = new List<string> { "Academy", "Dungeon", "Fortress", "Haven", "Inferno", "Necropolis", "Stronghold", "Sylvan" };
+        /// <summary>
+        /// Holds all the data about the gold cost and population of each faction's units.
+        /// </summary>
+        DataTable Data = new DataTable();
+        DataColumn Faction = new DataColumn("Faction", typeof(string));
+        DataColumn Tier = new DataColumn("Tier", typeof(int));
+        DataColumn CostBase = new DataColumn("CostBase", typeof(string));
+        DataColumn CostUpg = new DataColumn("CostUpg", typeof(string));
+        DataColumn Population = new DataColumn("Population", typeof(string));
+        Dictionary<string, List<int>> CostBaseDictionary;
+        Dictionary<string, List<int>> CostUpgDictionary;
+        Dictionary<string, List<int>> PopulationDictionary;
 
         public FormMain()
         {
-            FactionBaseCost.Add("Academy", new int[] { 0, 22, 45, 90, 250, 480, 1400, 3500 });
-            FactionUpgCost.Add("Academy", new int[] { 0, 35, 70, 130, 340, 700, 1770, 4700 });
-            FactionPopulation.Add("Academy", new int[] { 0, 20, 14, 9, 5, 3, 2, 1 });
-
-            FactionBaseCost.Add("Dungeon", new int[] { 0, 60, 125, 140, 300, 550, 1400, 3000 });
-            FactionUpgCost.Add("Dungeon", new int[] { 0, 100, 175, 200, 450, 800, 1700, 3700 });
-            FactionPopulation.Add("Dungeon", new int[] { 0, 7, 5, 6, 4, 3, 2, 1 });
-
-            FactionBaseCost.Add("Fortress", new int[] { 0, 24, 45, 130, 160, 470, 1300, 2700 });
-            FactionUpgCost.Add("Fortress", new int[] { 0, 40, 65, 185, 220, 700, 1700, 3400 });
-            FactionPopulation.Add("Fortress", new int[] { 0, 18, 14, 7, 6, 3, 2, 1 });
-
-            FactionBaseCost.Add("Haven", new int[] { 0, 15, 50, 85, 250, 600, 1300, 2800 });
-            FactionUpgCost.Add("Haven", new int[] { 0, 25, 80, 130, 370, 850, 1700, 3500 });
-            FactionPopulation.Add("Haven", new int[] { 0, 22, 12, 10, 5, 3, 2, 1 });
-
-            FactionBaseCost.Add("Inferno", new int[] { 0, 25, 40, 110, 240, 550, 1400, 2666 });
-            FactionUpgCost.Add("Inferno", new int[] { 0, 45, 60, 160, 350, 780, 1666, 3666 });
-            FactionPopulation.Add("Inferno", new int[] { 0, 16, 15, 8, 5, 3, 2, 1 });
-
-            FactionBaseCost.Add("Necropolis", new int[] { 0, 19, 40, 100, 250, 620, 1400, 1600 });
-            FactionUpgCost.Add("Necropolis", new int[] { 0, 30, 60, 140, 380, 850, 1700, 1900 });
-            FactionPopulation.Add("Necropolis", new int[] { 0, 20, 15, 9, 5, 3, 2, 1 });
-
-            FactionBaseCost.Add("Stronghold", new int[] { 0, 10, 50, 80, 260, 350, 1250, 2900 });
-            FactionUpgCost.Add("Stronghold", new int[] { 0, 20, 70, 120, 360, 500, 1600, 3450 });
-            FactionPopulation.Add("Stronghold", new int[] { 0, 25, 14, 11, 5, 5, 2, 1 });
-
-            FactionBaseCost.Add("Sylvan", new int[] { 0, 35, 70, 120, 320, 630, 1100, 2500 });
-            FactionUpgCost.Add("Sylvan", new int[] { 0, 55, 120, 190, 440, 900, 1400, 3400 });
-            FactionPopulation.Add("Sylvan", new int[] { 0, 10, 9, 7, 4, 3, 2, 1 });
-
-            foreach (var faction in FactionList)
-            {
-                for (int i = 1; i < 8; i++)
-                {
-                    fac.Units[i].BaseGoldCost = FactionBaseCost[faction][i];
-                    fac.Units[i].UpgGoldCost = FactionUpgCost[faction][i];
-                    fac.Units[i].Population = FactionPopulation[faction][i];
-                }
-            }
-
             InitializeComponent();
+            LoadData();
             //We bind the labels showing each creature's cost, it's weekly population and the total cost of the chosen
             //amount and the numeric updowns to arrays, so we can access them easily.
             LabelsPopulation[0] = null;
@@ -133,19 +127,113 @@ namespace Heroes5_ArmyCalc
             UI_Update();
         }
 
-        //This method initialises objects with the hardcoded data
-        private void DataLoad()
+        /// <summary>
+        /// Initialises objects with hardcoded data.
+        /// This method is a preparation for the migration to SQLite.
+        /// </summary>
+        private void LoadData()
         {
+            // Load all the columns in the DataTable.
+            Data.Columns.Add(Faction);
+            Data.Columns.Add(Tier);
+            Data.Columns.Add(CostBase);
+            Data.Columns.Add(CostUpg);
+            Data.Columns.Add(Population);
 
+            // All these lists are padded with a zero as a first item for ease of use.
+            // That way the population of an Academy tier 4 creature would be the 4th item of AcademyPopulation.
+            List<int> AcademyCostBase = new List<int>(){ 0, 22, 45, 90, 250, 480, 1400, 3500 };
+            List<int> AcademyCostUpg = new List<int>() { 0, 35, 70, 130, 340, 700, 1770, 4700 };
+            List<int> AcademyPopulation = new List<int>() { 0, 20, 14, 9, 5, 3, 2, 1 };
+
+            List<int> DungeonCostBase = new List<int>(){ 0, 60, 125, 140, 300, 550, 1400, 3000 };
+            List<int> DungeonCostUpg = new List<int>(){ 0, 100, 175, 200, 450, 800, 1700, 3700 };
+            List<int> DungeonPopulation = new List<int>(){ 0, 7, 5, 6, 4, 3, 2, 1 };
+
+            List<int> FortressCostBase = new List<int>(){ 0, 24, 45, 130, 160, 470, 1300, 2700 };
+            List<int> FortressCostUpg = new List<int>(){ 0, 40, 65, 185, 220, 700, 1700, 3400 };
+            List<int> FortressPopulation = new List<int>(){ 0, 18, 14, 7, 6, 3, 2, 1 };
+
+            List<int> HavenCostBase = new List<int>(){ 0, 15, 50, 85, 250, 600, 1300, 2800 };
+            List<int> HavenCostUpg = new List<int>(){ 0, 25, 80, 130, 370, 850, 1700, 3500 };
+            List<int> HavenPopulation = new List<int>(){ 0, 22, 12, 10, 5, 3, 2, 1 };
+
+            List<int> InfernoCostBase = new List<int>(){ 0, 25, 40, 110, 240, 550, 1400, 2666 };
+            List<int> InfernoCostUpg = new List<int>(){ 0, 45, 60, 160, 350, 780, 1666, 3666 };
+            List<int> InfernoPopulation = new List<int>(){ 0, 16, 15, 8, 5, 3, 2, 1 };
+
+            List<int> NecropolisCostBase = new List<int>(){ 0, 19, 40, 100, 250, 620, 1400, 1600 };
+            List<int> NecropolisCostUpg = new List<int>(){ 0, 30, 60, 140, 380, 850, 1700, 1900 };
+            List<int> NecropolisPopulation = new List<int>(){ 0, 20, 15, 9, 5, 3, 2, 1 };
+
+            List<int> StrongholdCostBase = new List<int>(){ 0, 10, 50, 80, 260, 350, 1250, 2900 };
+            List<int> StrongholdCostUpg = new List<int>(){ 0, 20, 70, 120, 360, 500, 1600, 3450 };
+            List<int> StrongholdPopulation = new List<int>(){ 0, 25, 14, 11, 5, 5, 2, 1 };
+
+            List<int> SylvanCostBase = new List<int>(){ 0, 35, 70, 120, 320, 630, 1100, 2500 };
+            List<int> SylvanCostUpg = new List<int>(){ 0, 55, 120, 190, 440, 900, 1400, 3400 };
+            List<int> SylvanPopulation = new List<int>(){ 0, 10, 9, 7, 4, 3, 2, 1 };
+
+            // These Dictionaries allow foreach iteration and loading of data in the subsequent loop.
+            CostBaseDictionary = new Dictionary<string, List<int>>()
+            {
+                { "Academy", AcademyCostBase },
+                { "Dungeon", DungeonCostBase },
+                { "Fortress", FortressCostBase },
+                { "Haven", HavenCostBase },
+                { "Inferno", InfernoCostBase },
+                { "Necropolis", NecropolisCostBase },
+                { "Stronghold", StrongholdCostBase },
+                { "Sylvan", SylvanCostBase }
+            };
+            CostUpgDictionary = new Dictionary<string, List<int>>()
+            {
+                { "Academy", AcademyCostUpg },
+                { "Dungeon", DungeonCostUpg },
+                { "Fortress", FortressCostUpg },
+                { "Haven", HavenCostUpg },
+                { "Inferno", InfernoCostUpg },
+                { "Necropolis", NecropolisCostUpg },
+                { "Stronghold", StrongholdCostUpg },
+                { "Sylvan", SylvanCostUpg }
+            };
+            PopulationDictionary = new Dictionary<string, List<int>>()
+            {
+                { "Academy", AcademyPopulation },
+                { "Dungeon", DungeonPopulation },
+                { "Fortress", FortressPopulation },
+                { "Haven", HavenPopulation },
+                { "Inferno", InfernoPopulation },
+                { "Necropolis", NecropolisPopulation },
+                { "Stronghold", StrongholdPopulation },
+                { "Sylvan", SylvanPopulation }
+            };
+
+            // Load the hardcoded values.
+            foreach (var faction in FactionList)
+            {
+                for (int i = 1; i <= 7; i++)
+                {
+                    DataRow dr = Data.NewRow();
+                    dr[Faction] = faction;
+                    dr[Tier] = i;
+                    dr[CostBase] = CostBaseDictionary[faction][i];
+                    dr[CostUpg] = CostUpgDictionary[faction][i];
+                    dr[Population] = PopulationDictionary[faction][i];
+                    Data.Rows.Add(dr);
+                }
+            }
         }
 
-        //This method updates all UI elements
+        /// <summary>
+        /// Updates the UI controls to the appropriate faction's.
+        /// </summary>
         public void UI_Update()
         {
             //Since the "Dungeon" faction has a set of specific controls we check if that is the selected faction
             //and if the corresponding checkbox is checked. If one of these conditions is not satisfied
             //the controls are not visible.
-            if (Convert.ToString(cbFactionsList.SelectedItem) == "Dungeon" && cbDwelling1.Checked == true)
+            if (Convert.ToString(cbFactionsList.SelectedItem) == "Dungeon" && chkDwelling1.Checked == true)
             {
                 udExtraBloodMaiden.Visible = true;
                 udExtraMinotaur.Visible = true;
@@ -165,39 +253,38 @@ namespace Heroes5_ArmyCalc
             //First determine which faction is selected and from that access the appropriate index/values in the data array
 
             string FactionName = (string)cbFactionsList.SelectedItem;
-            int Faction_Index = Town[(string)cbFactionsList.SelectedItem];
             int Gold_Total = 0;
 
             //This loop sets the labels for Creature Gold cost, Creature Population,
             //Cost of selected creatures and Total Gold.
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 //Whenever the image of an upgraded creature is clicked, the boolean variable "Upg" is set to "true"
                 //this "if" checkes whether "Upg" is true and changes the gold cost of the creature appropriately
                 if (IsUpgraded[i] == true)
                 {
-                    LabelsGold[i].Text = FactionUpgCost[FactionName][i].ToString();
+                    LabelsGold[i].Text = CostUpgDictionary[FactionName][i].ToString();
                 }
                 else
                 {
-                    LabelsGold[i].Text = FactionBaseCost[FactionName][i].ToString();
+                    LabelsGold[i].Text = CostBaseDictionary[FactionName][i].ToString();
                 }
 
                 //This "if" sets the creature populations and UpDown controls' maximums in accordance
                 //to a checked Castle or Citadel
 				if (chkCastle.Checked == true)
 				{
-					LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)udLimitPopulation.Value * 2);
+					LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * 2);
 				}
 				else
 				{
 					if (chkCitadel.Checked == true)
 					{
-						LabelsPopulation[i].Text = Convert.ToString(Math.Truncate(Town_Tier_Pop[Faction_Index, i] * (int)udLimitPopulation.Value * (decimal)1.5));
+						LabelsPopulation[i].Text = Convert.ToString(Math.Truncate(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * (decimal)1.5));
 					}
 					else
 					{
-						LabelsPopulation[i].Text = Convert.ToString(Town_Tier_Pop[Faction_Index, i] * (int)udLimitPopulation.Value);
+						LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value);
 					}
 				}
 
@@ -216,8 +303,8 @@ namespace Heroes5_ArmyCalc
             //The Total Gold text label is updated with the appropriate value and the check for the gold constraint is performed
             Label_GoldTotal.Text = Convert.ToString(Gold_Total);
 			Gold_Maximum();
-            Dwelling_Tier_A = 0;
-            Dwelling_Tier_B = 0;
+            BonusDwellingTier1 = 0;
+            BonusDwellingTier2 = 0;
         }
 
         //This method sets which creature tiers should benefit from extra population, should the bonus dwelling be checked
@@ -315,10 +402,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Academy_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Academy_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Academy_Tier7_03;
-            cbDwelling1.Text = "Treasure Cave";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "";
-            cbDwelling2.Visible = false;
+            chkDwelling1.Text = "Treasure Cave";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "";
+            chkDwelling2.Visible = false;
         }
         public void Current_Dungeon()
         {
@@ -343,10 +430,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Dungeon_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Dungeon_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Dungeon_Tier7_03;
-            cbDwelling1.Text = "Ritual Pit";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "";
-            cbDwelling2.Visible = false;
+            chkDwelling1.Text = "Ritual Pit";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "";
+            chkDwelling2.Visible = false;
         }
         public void Current_Fortress()
         {
@@ -371,10 +458,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Fortress_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Fortress_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Fortress_Tier7_03;
-            cbDwelling1.Text = "Wrestler's Arena";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "Runic Sanctuary";
-            cbDwelling2.Visible = true;
+            chkDwelling1.Text = "Wrestler's Arena";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "Runic Sanctuary";
+            chkDwelling2.Visible = true;
         }
         public void Current_Haven()
         {
@@ -399,10 +486,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Haven_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Haven_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Haven_Tier7_03;
-            cbDwelling1.Text = "Farms";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "";
-            cbDwelling2.Visible = false;
+            chkDwelling1.Text = "Farms";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "";
+            chkDwelling2.Visible = false;
         }
         public void Current_Inferno()
         {
@@ -427,10 +514,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Inferno_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Inferno_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Inferno_Tier7_03;
-            cbDwelling1.Text = "Spawn of Chaos";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "Halls of Horror";
-            cbDwelling2.Visible = true;
+            chkDwelling1.Text = "Spawn of Chaos";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "Halls of Horror";
+            chkDwelling2.Visible = true;
         }
         public void Current_Necropolis()
         {
@@ -455,10 +542,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Necropolis_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Necropolis_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Necropolis_Tier7_03;
-            cbDwelling1.Text = "Unearthed Graves";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "Dragon Tombstone";
-            cbDwelling2.Visible = true;
+            chkDwelling1.Text = "Unearthed Graves";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "Dragon Tombstone";
+            chkDwelling2.Visible = true;
         }
         public void Current_Stronghold()
         {
@@ -483,10 +570,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Stronghold_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Stronghold_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Stronghold_Tier7_03;
-            cbDwelling1.Text = "Garbage Pile";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "";
-            cbDwelling2.Visible = false;
+            chkDwelling1.Text = "Garbage Pile";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "";
+            chkDwelling2.Visible = false;
         }
         public void Current_Sylvan()
         {
@@ -511,10 +598,10 @@ namespace Heroes5_ArmyCalc
             pbTier7_01.Image = Properties.Resources.Sylvan_Tier7_01;
             pbTier7_02.Image = Properties.Resources.Sylvan_Tier7_02;
             pbTier7_03.Image = Properties.Resources.Sylvan_Tier7_03;
-            cbDwelling1.Text = "Blooming Grove";
-            cbDwelling1.Visible = true;
-            cbDwelling2.Text = "Treant Saplings";
-            cbDwelling2.Visible = true;
+            chkDwelling1.Text = "Blooming Grove";
+            chkDwelling1.Visible = true;
+            chkDwelling2.Text = "Treant Saplings";
+            chkDwelling2.Visible = true;
         }
         #endregion
 
@@ -542,8 +629,8 @@ namespace Heroes5_ArmyCalc
         {
             UI_Update();
             ComboBox Clicked = (ComboBox)sender;
-            cbDwelling1.Checked = false;
-            cbDwelling2.Checked = false;
+            chkDwelling1.Checked = false;
+            chkDwelling2.Checked = false;
             switch (Convert.ToString(Clicked.SelectedItem))
             {
                 case "Haven":
@@ -642,14 +729,6 @@ namespace Heroes5_ArmyCalc
             }
 
             UI_Update();
-        }
-
-        public void InitFactions()
-        {
-            foreach (var factionName in FactionList)
-            {
-                Faction faction = new Faction(factionName);
-            }
         }
     }
 }
