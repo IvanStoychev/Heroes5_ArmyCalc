@@ -71,56 +71,43 @@ namespace Heroes5_ArmyCalc
         public FormMain()
         {
             InitializeComponent();
-            LoadData();
-            //We bind the labels showing each creature's cost, it's weekly population and the total cost of the chosen
-            //amount and the numeric updowns to arrays, so we can access them easily.
-            LabelsPopulation[0] = null;
-            LabelsGold[0] = null;
-            LabelsTotal[0] = null;
-            NumericUpDowns[0] = null;
-            for (int i = 1; i < 8; i++)
-            {
-                LabelsPopulation[i] = (Label)Controls.Find("Pop_Tier" + i, true).FirstOrDefault();
-                LabelsGold[i] = (Label)Controls.Find("Gold_Tier" + i, true).FirstOrDefault();
-                LabelsTotal[i] = (Label)Controls.Find("lblCreaturesTotal_Tier" + i, true).FirstOrDefault();
-                NumericUpDowns[i] = (NumericUpDown)Controls.Find("udCreatures_Tier" + i, true).FirstOrDefault();
-            }
-
+            LoadHardcodedData();
+            AssignArrays();
             #region to be deleted
             //We assign data for all the factions to the array we will be working with.
             ////for (int i = 0; i < 8; i++)
             //{
             //    Town_Tier_Base_Gold[0, i] = Academy_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[0, i] = Academy_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[0, i] = Academy_Pop_Tier[i];
+            //    Town_Tier_Pop[0, i] = Academy_lblPopulation_Tier[i];
 
             //    Town_Tier_Base_Gold[1, i] = Dungeon_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[1, i] = Dungeon_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[1, i] = Dungeon_Pop_Tier[i];
+            //    Town_Tier_Pop[1, i] = Dungeon_lblPopulation_Tier[i];
 
             //    Town_Tier_Base_Gold[2, i] = Fortress_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[2, i] = Fortress_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[2, i] = Fortress_Pop_Tier[i];
+            //    Town_Tier_Pop[2, i] = Fortress_lblPopulation_Tier[i];
 
             //    Town_Tier_Base_Gold[3, i] = Haven_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[3, i] = Haven_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[3, i] = Haven_Pop_Tier[i];
+            //    Town_Tier_Pop[3, i] = Haven_lblPopulation_Tier[i];
 
             //    Town_Tier_Base_Gold[4, i] = Inferno_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[4, i] = Inferno_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[4, i] = Inferno_Pop_Tier[i];
+            //    Town_Tier_Pop[4, i] = Inferno_lblPopulation_Tier[i];
 
             //    Town_Tier_Base_Gold[5, i] = Necropolis_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[5, i] = Necropolis_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[5, i] = Necropolis_Pop_Tier[i];
+            //    Town_Tier_Pop[5, i] = Necropolis_lblPopulation_Tier[i];
 
             //    Town_Tier_Base_Gold[6, i] = Stronghold_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[6, i] = Stronghold_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[6, i] = Stronghold_Pop_Tier[i];
+            //    Town_Tier_Pop[6, i] = Stronghold_lblPopulation_Tier[i];
 
             //    Town_Tier_Base_Gold[7, i] = Sylvan_Base_Gold_Tier[i];
             //    Town_Tier_Upg_Gold[7, i] = Sylvan_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[7, i] = Sylvan_Pop_Tier[i];
+            //    Town_Tier_Pop[7, i] = Sylvan_lblPopulation_Tier[i];
             //}
             #endregion to be deleted
             cbFactionsList.SelectedItem = "Academy";
@@ -131,7 +118,7 @@ namespace Heroes5_ArmyCalc
         /// Initialises objects with hardcoded data.
         /// This method is a preparation for the migration to SQLite.
         /// </summary>
-        private void LoadData()
+        void LoadHardcodedData()
         {
             // Load all the columns in the DataTable.
             Data.Columns.Add(Faction);
@@ -226,7 +213,25 @@ namespace Heroes5_ArmyCalc
         }
 
         /// <summary>
-        /// Updates the UI controls to the appropriate faction's.
+        /// Assigns form controls to members of arrays for ease of access.
+        /// </summary>
+        void AssignArrays()
+        {
+            LabelsPopulation[0] = null;
+            LabelsGold[0] = null;
+            LabelsTotal[0] = null;
+            NumericUpDowns[0] = null;
+            for (int i = 1; i < 8; i++)
+            {
+                LabelsPopulation[i] = (Label)Controls.Find("lblPopulation_Tier" + i, true).FirstOrDefault();
+                LabelsGold[i] = (Label)Controls.Find("lblGoldPrice_Tier" + i, true).FirstOrDefault();
+                LabelsTotal[i] = (Label)Controls.Find("lblTotal_Tier" + i, true).FirstOrDefault();
+                NumericUpDowns[i] = (NumericUpDown)Controls.Find("udTier" + i, true).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// Updates the UI to the appropriate faction's.
         /// </summary>
         public void UI_Update()
         {
@@ -297,8 +302,8 @@ namespace Heroes5_ArmyCalc
 
 
             //Dwelling_Checked();
-            //if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) Pop_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)udCreatures_WeekLimit.Value));
-            //if (Dwelling_Tier_B != 0 && (Dwelling_CheckBox2.Checked == true || (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true))) Pop_Tier[Dwelling_Tier_B].Text = Convert.ToString(Convert.ToInt32(Pop_Tier[Dwelling_Tier_B].Text) + (Dwelling[Faction, 1] * (int)udCreatures_WeekLimit.Value));
+            //if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) lblPopulation_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(lblPopulation_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)udCreatures_WeekLimit.Value));
+            //if (Dwelling_Tier_B != 0 && (Dwelling_CheckBox2.Checked == true || (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true))) lblPopulation_Tier[Dwelling_Tier_B].Text = Convert.ToString(Convert.ToInt32(lblPopulation_Tier[Dwelling_Tier_B].Text) + (Dwelling[Faction, 1] * (int)udCreatures_WeekLimit.Value));
             
             //The Total Gold text label is updated with the appropriate value and the check for the gold constraint is performed
             Label_GoldTotal.Text = Convert.ToString(Gold_Total);

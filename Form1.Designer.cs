@@ -29,34 +29,34 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.UpDown_Tier1 = new System.Windows.Forms.NumericUpDown();
-            this.Total_Tier1 = new System.Windows.Forms.Label();
-            this.Pop_Tier1 = new System.Windows.Forms.Label();
-            this.Gold_Tier1 = new System.Windows.Forms.Label();
-            this.UpDown_Tier2 = new System.Windows.Forms.NumericUpDown();
-            this.Total_Tier2 = new System.Windows.Forms.Label();
-            this.Pop_Tier2 = new System.Windows.Forms.Label();
-            this.Gold_Tier2 = new System.Windows.Forms.Label();
-            this.UpDown_Tier3 = new System.Windows.Forms.NumericUpDown();
-            this.Total_Tier3 = new System.Windows.Forms.Label();
-            this.Pop_Tier3 = new System.Windows.Forms.Label();
-            this.Gold_Tier3 = new System.Windows.Forms.Label();
-            this.UpDown_Tier4 = new System.Windows.Forms.NumericUpDown();
-            this.Total_Tier4 = new System.Windows.Forms.Label();
-            this.Pop_Tier4 = new System.Windows.Forms.Label();
-            this.Gold_Tier4 = new System.Windows.Forms.Label();
-            this.UpDown_Tier5 = new System.Windows.Forms.NumericUpDown();
-            this.Total_Tier5 = new System.Windows.Forms.Label();
-            this.Pop_Tier5 = new System.Windows.Forms.Label();
-            this.Gold_Tier5 = new System.Windows.Forms.Label();
-            this.UpDown_Tier6 = new System.Windows.Forms.NumericUpDown();
-            this.Total_Tier6 = new System.Windows.Forms.Label();
-            this.Pop_Tier6 = new System.Windows.Forms.Label();
-            this.Gold_Tier6 = new System.Windows.Forms.Label();
-            this.UpDown_Tier7 = new System.Windows.Forms.NumericUpDown();
-            this.Total_Tier7 = new System.Windows.Forms.Label();
-            this.Pop_Tier7 = new System.Windows.Forms.Label();
-            this.Gold_Tier7 = new System.Windows.Forms.Label();
+            this.udTier1 = new System.Windows.Forms.NumericUpDown();
+            this.lblTotal_Tier1 = new System.Windows.Forms.Label();
+            this.lblPopulation_Tier1 = new System.Windows.Forms.Label();
+            this.lblGoldPrice_Tier1 = new System.Windows.Forms.Label();
+            this.udTier2 = new System.Windows.Forms.NumericUpDown();
+            this.lblTotal_Tier2 = new System.Windows.Forms.Label();
+            this.lblPopulation_Tier2 = new System.Windows.Forms.Label();
+            this.lblGoldPrice_Tier2 = new System.Windows.Forms.Label();
+            this.udTier3 = new System.Windows.Forms.NumericUpDown();
+            this.lblTotal_Tier3 = new System.Windows.Forms.Label();
+            this.lblPopulation_Tier3 = new System.Windows.Forms.Label();
+            this.lblGoldPrice_Tier3 = new System.Windows.Forms.Label();
+            this.udTier4 = new System.Windows.Forms.NumericUpDown();
+            this.lblTotal_Tier4 = new System.Windows.Forms.Label();
+            this.lblPopulation_Tier4 = new System.Windows.Forms.Label();
+            this.lblGoldPrice_Tier4 = new System.Windows.Forms.Label();
+            this.udTier5 = new System.Windows.Forms.NumericUpDown();
+            this.lblTotal_Tier5 = new System.Windows.Forms.Label();
+            this.lblPopulation_Tier5 = new System.Windows.Forms.Label();
+            this.lblGoldPrice_Tier5 = new System.Windows.Forms.Label();
+            this.udTier6 = new System.Windows.Forms.NumericUpDown();
+            this.lblTotal_Tier6 = new System.Windows.Forms.Label();
+            this.lblPopulation_Tier6 = new System.Windows.Forms.Label();
+            this.lblGoldPrice_Tier6 = new System.Windows.Forms.Label();
+            this.udTier7 = new System.Windows.Forms.NumericUpDown();
+            this.lblTotal_Tier7 = new System.Windows.Forms.Label();
+            this.lblPopulation_Tier7 = new System.Windows.Forms.Label();
+            this.lblGoldPrice_Tier7 = new System.Windows.Forms.Label();
             this.lblGoldCost_Tier1 = new System.Windows.Forms.Label();
             this.lblCreatures_Tier1 = new System.Windows.Forms.Label();
             this.lblGoldCost_Tier2 = new System.Windows.Forms.Label();
@@ -131,13 +131,13 @@
             this.udExtraBloodMaiden = new System.Windows.Forms.NumericUpDown();
             this.lblExtraBloodMaiden = new System.Windows.Forms.Label();
             this.lblExtraMinotaur = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLimitPopulation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLimitGold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrameTier7)).BeginInit();
@@ -186,278 +186,292 @@
             ((System.ComponentModel.ISupportInitialize)(this.udExtraBloodMaiden)).BeginInit();
             this.SuspendLayout();
             // 
-            // UpDown_Tier1
+            // udTier1
             // 
-            this.UpDown_Tier1.Location = new System.Drawing.Point(350, 121);
-            this.UpDown_Tier1.Maximum = new decimal(new int[] {
+            this.udTier1.Location = new System.Drawing.Point(350, 121);
+            this.udTier1.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
-            this.UpDown_Tier1.Name = "UpDown_Tier1";
-            this.UpDown_Tier1.Size = new System.Drawing.Size(50, 20);
-            this.UpDown_Tier1.TabIndex = 2;
-            this.UpDown_Tier1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.UpDown_Tier1.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udTier1.Name = "udTier1";
+            this.udTier1.Size = new System.Drawing.Size(50, 20);
+            this.udTier1.TabIndex = 2;
+            this.udTier1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udTier1.ValueChanged += new System.EventHandler(this.UpDown);
             // 
-            // Total_Tier1
+            // lblTotal_Tier1
             // 
-            this.Total_Tier1.Location = new System.Drawing.Point(350, 149);
-            this.Total_Tier1.Name = "Total_Tier1";
-            this.Total_Tier1.Size = new System.Drawing.Size(50, 20);
-            this.Total_Tier1.TabIndex = 4;
-            this.Total_Tier1.Text = "0";
-            this.Total_Tier1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal_Tier1.Location = new System.Drawing.Point(350, 149);
+            this.lblTotal_Tier1.Name = "lblTotal_Tier1";
+            this.lblTotal_Tier1.Size = new System.Drawing.Size(50, 20);
+            this.lblTotal_Tier1.TabIndex = 4;
+            this.lblTotal_Tier1.Text = "0";
+            this.lblTotal_Tier1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Pop_Tier1
+            // lblPopulation_Tier1
             // 
-            this.Pop_Tier1.AutoSize = true;
-            this.Pop_Tier1.Location = new System.Drawing.Point(429, 149);
-            this.Pop_Tier1.Name = "Pop_Tier1";
-            this.Pop_Tier1.Size = new System.Drawing.Size(0, 13);
-            this.Pop_Tier1.TabIndex = 5;
+            this.lblPopulation_Tier1.AutoSize = true;
+            this.lblPopulation_Tier1.Location = new System.Drawing.Point(429, 153);
+            this.lblPopulation_Tier1.Name = "lblPopulation_Tier1";
+            this.lblPopulation_Tier1.Size = new System.Drawing.Size(97, 13);
+            this.lblPopulation_Tier1.TabIndex = 5;
+            this.lblPopulation_Tier1.Text = "lblPopulation_Tier1";
             // 
-            // Gold_Tier1
+            // lblGoldPrice_Tier1
             // 
-            this.Gold_Tier1.AutoSize = true;
-            this.Gold_Tier1.Location = new System.Drawing.Point(429, 119);
-            this.Gold_Tier1.Name = "Gold_Tier1";
-            this.Gold_Tier1.Size = new System.Drawing.Size(0, 13);
-            this.Gold_Tier1.TabIndex = 5;
+            this.lblGoldPrice_Tier1.AutoSize = true;
+            this.lblGoldPrice_Tier1.Location = new System.Drawing.Point(429, 125);
+            this.lblGoldPrice_Tier1.Name = "lblGoldPrice_Tier1";
+            this.lblGoldPrice_Tier1.Size = new System.Drawing.Size(93, 13);
+            this.lblGoldPrice_Tier1.TabIndex = 5;
+            this.lblGoldPrice_Tier1.Text = "lblGoldPrice_Tier1";
             // 
-            // UpDown_Tier2
+            // udTier2
             // 
-            this.UpDown_Tier2.Location = new System.Drawing.Point(350, 199);
-            this.UpDown_Tier2.Maximum = new decimal(new int[] {
+            this.udTier2.Location = new System.Drawing.Point(350, 199);
+            this.udTier2.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
-            this.UpDown_Tier2.Name = "UpDown_Tier2";
-            this.UpDown_Tier2.Size = new System.Drawing.Size(50, 20);
-            this.UpDown_Tier2.TabIndex = 2;
-            this.UpDown_Tier2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.UpDown_Tier2.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udTier2.Name = "udTier2";
+            this.udTier2.Size = new System.Drawing.Size(50, 20);
+            this.udTier2.TabIndex = 2;
+            this.udTier2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udTier2.ValueChanged += new System.EventHandler(this.UpDown);
             // 
-            // Total_Tier2
+            // lblTotal_Tier2
             // 
-            this.Total_Tier2.Location = new System.Drawing.Point(350, 227);
-            this.Total_Tier2.Name = "Total_Tier2";
-            this.Total_Tier2.Size = new System.Drawing.Size(50, 20);
-            this.Total_Tier2.TabIndex = 4;
-            this.Total_Tier2.Text = "0";
-            this.Total_Tier2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal_Tier2.Location = new System.Drawing.Point(350, 227);
+            this.lblTotal_Tier2.Name = "lblTotal_Tier2";
+            this.lblTotal_Tier2.Size = new System.Drawing.Size(50, 20);
+            this.lblTotal_Tier2.TabIndex = 4;
+            this.lblTotal_Tier2.Text = "0";
+            this.lblTotal_Tier2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Pop_Tier2
+            // lblPopulation_Tier2
             // 
-            this.Pop_Tier2.AutoSize = true;
-            this.Pop_Tier2.Location = new System.Drawing.Point(429, 227);
-            this.Pop_Tier2.Name = "Pop_Tier2";
-            this.Pop_Tier2.Size = new System.Drawing.Size(0, 13);
-            this.Pop_Tier2.TabIndex = 5;
+            this.lblPopulation_Tier2.AutoSize = true;
+            this.lblPopulation_Tier2.Location = new System.Drawing.Point(429, 231);
+            this.lblPopulation_Tier2.Name = "lblPopulation_Tier2";
+            this.lblPopulation_Tier2.Size = new System.Drawing.Size(97, 13);
+            this.lblPopulation_Tier2.TabIndex = 5;
+            this.lblPopulation_Tier2.Text = "lblPopulation_Tier2";
             // 
-            // Gold_Tier2
+            // lblGoldPrice_Tier2
             // 
-            this.Gold_Tier2.AutoSize = true;
-            this.Gold_Tier2.Location = new System.Drawing.Point(429, 197);
-            this.Gold_Tier2.Name = "Gold_Tier2";
-            this.Gold_Tier2.Size = new System.Drawing.Size(0, 13);
-            this.Gold_Tier2.TabIndex = 5;
+            this.lblGoldPrice_Tier2.AutoSize = true;
+            this.lblGoldPrice_Tier2.Location = new System.Drawing.Point(429, 202);
+            this.lblGoldPrice_Tier2.Name = "lblGoldPrice_Tier2";
+            this.lblGoldPrice_Tier2.Size = new System.Drawing.Size(93, 13);
+            this.lblGoldPrice_Tier2.TabIndex = 5;
+            this.lblGoldPrice_Tier2.Text = "lblGoldPrice_Tier2";
             // 
-            // UpDown_Tier3
+            // udTier3
             // 
-            this.UpDown_Tier3.Location = new System.Drawing.Point(350, 278);
-            this.UpDown_Tier3.Maximum = new decimal(new int[] {
+            this.udTier3.Location = new System.Drawing.Point(350, 278);
+            this.udTier3.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
-            this.UpDown_Tier3.Name = "UpDown_Tier3";
-            this.UpDown_Tier3.Size = new System.Drawing.Size(50, 20);
-            this.UpDown_Tier3.TabIndex = 2;
-            this.UpDown_Tier3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.UpDown_Tier3.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udTier3.Name = "udTier3";
+            this.udTier3.Size = new System.Drawing.Size(50, 20);
+            this.udTier3.TabIndex = 2;
+            this.udTier3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udTier3.ValueChanged += new System.EventHandler(this.UpDown);
             // 
-            // Total_Tier3
+            // lblTotal_Tier3
             // 
-            this.Total_Tier3.Location = new System.Drawing.Point(350, 306);
-            this.Total_Tier3.Name = "Total_Tier3";
-            this.Total_Tier3.Size = new System.Drawing.Size(50, 20);
-            this.Total_Tier3.TabIndex = 4;
-            this.Total_Tier3.Text = "0";
-            this.Total_Tier3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal_Tier3.Location = new System.Drawing.Point(350, 306);
+            this.lblTotal_Tier3.Name = "lblTotal_Tier3";
+            this.lblTotal_Tier3.Size = new System.Drawing.Size(50, 20);
+            this.lblTotal_Tier3.TabIndex = 4;
+            this.lblTotal_Tier3.Text = "0";
+            this.lblTotal_Tier3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Pop_Tier3
+            // lblPopulation_Tier3
             // 
-            this.Pop_Tier3.AutoSize = true;
-            this.Pop_Tier3.Location = new System.Drawing.Point(429, 306);
-            this.Pop_Tier3.Name = "Pop_Tier3";
-            this.Pop_Tier3.Size = new System.Drawing.Size(0, 13);
-            this.Pop_Tier3.TabIndex = 5;
+            this.lblPopulation_Tier3.AutoSize = true;
+            this.lblPopulation_Tier3.Location = new System.Drawing.Point(429, 310);
+            this.lblPopulation_Tier3.Name = "lblPopulation_Tier3";
+            this.lblPopulation_Tier3.Size = new System.Drawing.Size(97, 13);
+            this.lblPopulation_Tier3.TabIndex = 5;
+            this.lblPopulation_Tier3.Text = "lblPopulation_Tier3";
             // 
-            // Gold_Tier3
+            // lblGoldPrice_Tier3
             // 
-            this.Gold_Tier3.AutoSize = true;
-            this.Gold_Tier3.Location = new System.Drawing.Point(429, 276);
-            this.Gold_Tier3.Name = "Gold_Tier3";
-            this.Gold_Tier3.Size = new System.Drawing.Size(0, 13);
-            this.Gold_Tier3.TabIndex = 5;
+            this.lblGoldPrice_Tier3.AutoSize = true;
+            this.lblGoldPrice_Tier3.Location = new System.Drawing.Point(429, 281);
+            this.lblGoldPrice_Tier3.Name = "lblGoldPrice_Tier3";
+            this.lblGoldPrice_Tier3.Size = new System.Drawing.Size(93, 13);
+            this.lblGoldPrice_Tier3.TabIndex = 5;
+            this.lblGoldPrice_Tier3.Text = "lblGoldPrice_Tier3";
             // 
-            // UpDown_Tier4
+            // udTier4
             // 
-            this.UpDown_Tier4.Location = new System.Drawing.Point(350, 357);
-            this.UpDown_Tier4.Maximum = new decimal(new int[] {
+            this.udTier4.Location = new System.Drawing.Point(350, 357);
+            this.udTier4.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
-            this.UpDown_Tier4.Name = "UpDown_Tier4";
-            this.UpDown_Tier4.Size = new System.Drawing.Size(50, 20);
-            this.UpDown_Tier4.TabIndex = 2;
-            this.UpDown_Tier4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.UpDown_Tier4.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udTier4.Name = "udTier4";
+            this.udTier4.Size = new System.Drawing.Size(50, 20);
+            this.udTier4.TabIndex = 2;
+            this.udTier4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udTier4.ValueChanged += new System.EventHandler(this.UpDown);
             // 
-            // Total_Tier4
+            // lblTotal_Tier4
             // 
-            this.Total_Tier4.Location = new System.Drawing.Point(350, 385);
-            this.Total_Tier4.Name = "Total_Tier4";
-            this.Total_Tier4.Size = new System.Drawing.Size(50, 20);
-            this.Total_Tier4.TabIndex = 4;
-            this.Total_Tier4.Text = "0";
-            this.Total_Tier4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal_Tier4.Location = new System.Drawing.Point(350, 385);
+            this.lblTotal_Tier4.Name = "lblTotal_Tier4";
+            this.lblTotal_Tier4.Size = new System.Drawing.Size(50, 20);
+            this.lblTotal_Tier4.TabIndex = 4;
+            this.lblTotal_Tier4.Text = "0";
+            this.lblTotal_Tier4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Pop_Tier4
+            // lblPopulation_Tier4
             // 
-            this.Pop_Tier4.AutoSize = true;
-            this.Pop_Tier4.Location = new System.Drawing.Point(429, 385);
-            this.Pop_Tier4.Name = "Pop_Tier4";
-            this.Pop_Tier4.Size = new System.Drawing.Size(0, 13);
-            this.Pop_Tier4.TabIndex = 5;
+            this.lblPopulation_Tier4.AutoSize = true;
+            this.lblPopulation_Tier4.Location = new System.Drawing.Point(429, 389);
+            this.lblPopulation_Tier4.Name = "lblPopulation_Tier4";
+            this.lblPopulation_Tier4.Size = new System.Drawing.Size(97, 13);
+            this.lblPopulation_Tier4.TabIndex = 5;
+            this.lblPopulation_Tier4.Text = "lblPopulation_Tier4";
             // 
-            // Gold_Tier4
+            // lblGoldPrice_Tier4
             // 
-            this.Gold_Tier4.AutoSize = true;
-            this.Gold_Tier4.Location = new System.Drawing.Point(429, 355);
-            this.Gold_Tier4.Name = "Gold_Tier4";
-            this.Gold_Tier4.Size = new System.Drawing.Size(0, 13);
-            this.Gold_Tier4.TabIndex = 5;
+            this.lblGoldPrice_Tier4.AutoSize = true;
+            this.lblGoldPrice_Tier4.Location = new System.Drawing.Point(429, 359);
+            this.lblGoldPrice_Tier4.Name = "lblGoldPrice_Tier4";
+            this.lblGoldPrice_Tier4.Size = new System.Drawing.Size(93, 13);
+            this.lblGoldPrice_Tier4.TabIndex = 5;
+            this.lblGoldPrice_Tier4.Text = "lblGoldPrice_Tier4";
             // 
-            // UpDown_Tier5
+            // udTier5
             // 
-            this.UpDown_Tier5.Location = new System.Drawing.Point(350, 436);
-            this.UpDown_Tier5.Maximum = new decimal(new int[] {
+            this.udTier5.Location = new System.Drawing.Point(350, 436);
+            this.udTier5.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
-            this.UpDown_Tier5.Name = "UpDown_Tier5";
-            this.UpDown_Tier5.Size = new System.Drawing.Size(50, 20);
-            this.UpDown_Tier5.TabIndex = 2;
-            this.UpDown_Tier5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.UpDown_Tier5.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udTier5.Name = "udTier5";
+            this.udTier5.Size = new System.Drawing.Size(50, 20);
+            this.udTier5.TabIndex = 2;
+            this.udTier5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udTier5.ValueChanged += new System.EventHandler(this.UpDown);
             // 
-            // Total_Tier5
+            // lblTotal_Tier5
             // 
-            this.Total_Tier5.Location = new System.Drawing.Point(350, 464);
-            this.Total_Tier5.Name = "Total_Tier5";
-            this.Total_Tier5.Size = new System.Drawing.Size(50, 20);
-            this.Total_Tier5.TabIndex = 4;
-            this.Total_Tier5.Text = "0";
-            this.Total_Tier5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal_Tier5.Location = new System.Drawing.Point(350, 464);
+            this.lblTotal_Tier5.Name = "lblTotal_Tier5";
+            this.lblTotal_Tier5.Size = new System.Drawing.Size(50, 20);
+            this.lblTotal_Tier5.TabIndex = 4;
+            this.lblTotal_Tier5.Text = "0";
+            this.lblTotal_Tier5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Pop_Tier5
+            // lblPopulation_Tier5
             // 
-            this.Pop_Tier5.AutoSize = true;
-            this.Pop_Tier5.Location = new System.Drawing.Point(429, 464);
-            this.Pop_Tier5.Name = "Pop_Tier5";
-            this.Pop_Tier5.Size = new System.Drawing.Size(0, 13);
-            this.Pop_Tier5.TabIndex = 5;
+            this.lblPopulation_Tier5.AutoSize = true;
+            this.lblPopulation_Tier5.Location = new System.Drawing.Point(429, 468);
+            this.lblPopulation_Tier5.Name = "lblPopulation_Tier5";
+            this.lblPopulation_Tier5.Size = new System.Drawing.Size(97, 13);
+            this.lblPopulation_Tier5.TabIndex = 5;
+            this.lblPopulation_Tier5.Text = "lblPopulation_Tier5";
             // 
-            // Gold_Tier5
+            // lblGoldPrice_Tier5
             // 
-            this.Gold_Tier5.AutoSize = true;
-            this.Gold_Tier5.Location = new System.Drawing.Point(429, 434);
-            this.Gold_Tier5.Name = "Gold_Tier5";
-            this.Gold_Tier5.Size = new System.Drawing.Size(0, 13);
-            this.Gold_Tier5.TabIndex = 5;
+            this.lblGoldPrice_Tier5.AutoSize = true;
+            this.lblGoldPrice_Tier5.Location = new System.Drawing.Point(429, 438);
+            this.lblGoldPrice_Tier5.Name = "lblGoldPrice_Tier5";
+            this.lblGoldPrice_Tier5.Size = new System.Drawing.Size(93, 13);
+            this.lblGoldPrice_Tier5.TabIndex = 5;
+            this.lblGoldPrice_Tier5.Text = "lblGoldPrice_Tier5";
             // 
-            // UpDown_Tier6
+            // udTier6
             // 
-            this.UpDown_Tier6.Location = new System.Drawing.Point(349, 510);
-            this.UpDown_Tier6.Maximum = new decimal(new int[] {
+            this.udTier6.Location = new System.Drawing.Point(349, 510);
+            this.udTier6.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
-            this.UpDown_Tier6.Name = "UpDown_Tier6";
-            this.UpDown_Tier6.Size = new System.Drawing.Size(50, 20);
-            this.UpDown_Tier6.TabIndex = 2;
-            this.UpDown_Tier6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.UpDown_Tier6.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udTier6.Name = "udTier6";
+            this.udTier6.Size = new System.Drawing.Size(50, 20);
+            this.udTier6.TabIndex = 2;
+            this.udTier6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udTier6.ValueChanged += new System.EventHandler(this.UpDown);
             // 
-            // Total_Tier6
+            // lblTotal_Tier6
             // 
-            this.Total_Tier6.Location = new System.Drawing.Point(350, 543);
-            this.Total_Tier6.Name = "Total_Tier6";
-            this.Total_Tier6.Size = new System.Drawing.Size(50, 20);
-            this.Total_Tier6.TabIndex = 4;
-            this.Total_Tier6.Text = "0";
-            this.Total_Tier6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal_Tier6.Location = new System.Drawing.Point(350, 543);
+            this.lblTotal_Tier6.Name = "lblTotal_Tier6";
+            this.lblTotal_Tier6.Size = new System.Drawing.Size(50, 20);
+            this.lblTotal_Tier6.TabIndex = 4;
+            this.lblTotal_Tier6.Text = "0";
+            this.lblTotal_Tier6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Pop_Tier6
+            // lblPopulation_Tier6
             // 
-            this.Pop_Tier6.AutoSize = true;
-            this.Pop_Tier6.Location = new System.Drawing.Point(429, 543);
-            this.Pop_Tier6.Name = "Pop_Tier6";
-            this.Pop_Tier6.Size = new System.Drawing.Size(0, 13);
-            this.Pop_Tier6.TabIndex = 5;
+            this.lblPopulation_Tier6.AutoSize = true;
+            this.lblPopulation_Tier6.Location = new System.Drawing.Point(429, 548);
+            this.lblPopulation_Tier6.Name = "lblPopulation_Tier6";
+            this.lblPopulation_Tier6.Size = new System.Drawing.Size(97, 13);
+            this.lblPopulation_Tier6.TabIndex = 5;
+            this.lblPopulation_Tier6.Text = "lblPopulation_Tier6";
             // 
-            // Gold_Tier6
+            // lblGoldPrice_Tier6
             // 
-            this.Gold_Tier6.AutoSize = true;
-            this.Gold_Tier6.Location = new System.Drawing.Point(429, 507);
-            this.Gold_Tier6.Name = "Gold_Tier6";
-            this.Gold_Tier6.Size = new System.Drawing.Size(0, 13);
-            this.Gold_Tier6.TabIndex = 5;
+            this.lblGoldPrice_Tier6.AutoSize = true;
+            this.lblGoldPrice_Tier6.Location = new System.Drawing.Point(429, 513);
+            this.lblGoldPrice_Tier6.Name = "lblGoldPrice_Tier6";
+            this.lblGoldPrice_Tier6.Size = new System.Drawing.Size(93, 13);
+            this.lblGoldPrice_Tier6.TabIndex = 5;
+            this.lblGoldPrice_Tier6.Text = "lblGoldPrice_Tier6";
             // 
-            // UpDown_Tier7
+            // udTier7
             // 
-            this.UpDown_Tier7.Location = new System.Drawing.Point(350, 594);
-            this.UpDown_Tier7.Maximum = new decimal(new int[] {
+            this.udTier7.Location = new System.Drawing.Point(350, 594);
+            this.udTier7.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
-            this.UpDown_Tier7.Name = "UpDown_Tier7";
-            this.UpDown_Tier7.Size = new System.Drawing.Size(50, 20);
-            this.UpDown_Tier7.TabIndex = 2;
-            this.UpDown_Tier7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.UpDown_Tier7.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udTier7.Name = "udTier7";
+            this.udTier7.Size = new System.Drawing.Size(50, 20);
+            this.udTier7.TabIndex = 2;
+            this.udTier7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udTier7.ValueChanged += new System.EventHandler(this.UpDown);
             // 
-            // Total_Tier7
+            // lblTotal_Tier7
             // 
-            this.Total_Tier7.Location = new System.Drawing.Point(350, 622);
-            this.Total_Tier7.Name = "Total_Tier7";
-            this.Total_Tier7.Size = new System.Drawing.Size(50, 20);
-            this.Total_Tier7.TabIndex = 4;
-            this.Total_Tier7.Text = "0";
-            this.Total_Tier7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal_Tier7.Location = new System.Drawing.Point(350, 622);
+            this.lblTotal_Tier7.Name = "lblTotal_Tier7";
+            this.lblTotal_Tier7.Size = new System.Drawing.Size(50, 20);
+            this.lblTotal_Tier7.TabIndex = 4;
+            this.lblTotal_Tier7.Text = "0";
+            this.lblTotal_Tier7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Pop_Tier7
+            // lblPopulation_Tier7
             // 
-            this.Pop_Tier7.AutoSize = true;
-            this.Pop_Tier7.Location = new System.Drawing.Point(429, 622);
-            this.Pop_Tier7.Name = "Pop_Tier7";
-            this.Pop_Tier7.Size = new System.Drawing.Size(0, 13);
-            this.Pop_Tier7.TabIndex = 5;
+            this.lblPopulation_Tier7.AutoSize = true;
+            this.lblPopulation_Tier7.Location = new System.Drawing.Point(429, 627);
+            this.lblPopulation_Tier7.Name = "lblPopulation_Tier7";
+            this.lblPopulation_Tier7.Size = new System.Drawing.Size(97, 13);
+            this.lblPopulation_Tier7.TabIndex = 5;
+            this.lblPopulation_Tier7.Text = "lblPopulation_Tier7";
             // 
-            // Gold_Tier7
+            // lblGoldPrice_Tier7
             // 
-            this.Gold_Tier7.AutoSize = true;
-            this.Gold_Tier7.Location = new System.Drawing.Point(429, 592);
-            this.Gold_Tier7.Name = "Gold_Tier7";
-            this.Gold_Tier7.Size = new System.Drawing.Size(0, 13);
-            this.Gold_Tier7.TabIndex = 5;
+            this.lblGoldPrice_Tier7.AutoSize = true;
+            this.lblGoldPrice_Tier7.Location = new System.Drawing.Point(429, 597);
+            this.lblGoldPrice_Tier7.Name = "lblGoldPrice_Tier7";
+            this.lblGoldPrice_Tier7.Size = new System.Drawing.Size(93, 13);
+            this.lblGoldPrice_Tier7.TabIndex = 5;
+            this.lblGoldPrice_Tier7.Text = "lblGoldPrice_Tier7";
             // 
             // lblGoldCost_Tier1
             // 
@@ -879,6 +893,7 @@
             // 
             // GoldIco_Tier7
             // 
+            this.GoldIco_Tier7.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier7.Image")));
             this.GoldIco_Tier7.Location = new System.Drawing.Point(406, 596);
             this.GoldIco_Tier7.Name = "GoldIco_Tier7";
             this.GoldIco_Tier7.Size = new System.Drawing.Size(16, 15);
@@ -888,6 +903,7 @@
             // 
             // GoldIco_Tier6
             // 
+            this.GoldIco_Tier6.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier6.Image")));
             this.GoldIco_Tier6.Location = new System.Drawing.Point(406, 512);
             this.GoldIco_Tier6.Name = "GoldIco_Tier6";
             this.GoldIco_Tier6.Size = new System.Drawing.Size(16, 15);
@@ -897,6 +913,7 @@
             // 
             // GoldIco_Tier5
             // 
+            this.GoldIco_Tier5.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier5.Image")));
             this.GoldIco_Tier5.Location = new System.Drawing.Point(406, 437);
             this.GoldIco_Tier5.Name = "GoldIco_Tier5";
             this.GoldIco_Tier5.Size = new System.Drawing.Size(16, 15);
@@ -906,6 +923,7 @@
             // 
             // GoldIco_Tier4
             // 
+            this.GoldIco_Tier4.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier4.Image")));
             this.GoldIco_Tier4.Location = new System.Drawing.Point(406, 358);
             this.GoldIco_Tier4.Name = "GoldIco_Tier4";
             this.GoldIco_Tier4.Size = new System.Drawing.Size(16, 15);
@@ -915,6 +933,7 @@
             // 
             // GoldIco_Tier3
             // 
+            this.GoldIco_Tier3.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier3.Image")));
             this.GoldIco_Tier3.Location = new System.Drawing.Point(406, 280);
             this.GoldIco_Tier3.Name = "GoldIco_Tier3";
             this.GoldIco_Tier3.Size = new System.Drawing.Size(16, 15);
@@ -924,6 +943,7 @@
             // 
             // GoldIco_Tier2
             // 
+            this.GoldIco_Tier2.Image = ((System.Drawing.Image)(resources.GetObject("GoldIco_Tier2.Image")));
             this.GoldIco_Tier2.Location = new System.Drawing.Point(406, 201);
             this.GoldIco_Tier2.Name = "GoldIco_Tier2";
             this.GoldIco_Tier2.Size = new System.Drawing.Size(16, 15);
@@ -933,6 +953,7 @@
             // 
             // GoldIco_Tier1
             // 
+            this.GoldIco_Tier1.Image = global::Heroes5_ArmyCalc.Properties.Resources.Gold;
             this.GoldIco_Tier1.Location = new System.Drawing.Point(406, 123);
             this.GoldIco_Tier1.Name = "GoldIco_Tier1";
             this.GoldIco_Tier1.Size = new System.Drawing.Size(16, 15);
@@ -1281,27 +1302,27 @@
             this.Controls.Add(this.lblGoldCost_Tier2);
             this.Controls.Add(this.lblCreatures_Tier1);
             this.Controls.Add(this.lblGoldCost_Tier1);
-            this.Controls.Add(this.Gold_Tier7);
-            this.Controls.Add(this.Gold_Tier6);
-            this.Controls.Add(this.Gold_Tier5);
-            this.Controls.Add(this.Gold_Tier4);
-            this.Controls.Add(this.Gold_Tier3);
-            this.Controls.Add(this.Gold_Tier2);
-            this.Controls.Add(this.Gold_Tier1);
-            this.Controls.Add(this.Pop_Tier7);
-            this.Controls.Add(this.Pop_Tier6);
-            this.Controls.Add(this.Pop_Tier5);
-            this.Controls.Add(this.Pop_Tier4);
-            this.Controls.Add(this.Pop_Tier3);
-            this.Controls.Add(this.Pop_Tier2);
-            this.Controls.Add(this.Pop_Tier1);
-            this.Controls.Add(this.Total_Tier7);
-            this.Controls.Add(this.Total_Tier6);
-            this.Controls.Add(this.Total_Tier5);
-            this.Controls.Add(this.Total_Tier4);
-            this.Controls.Add(this.Total_Tier3);
-            this.Controls.Add(this.Total_Tier2);
-            this.Controls.Add(this.Total_Tier1);
+            this.Controls.Add(this.lblGoldPrice_Tier7);
+            this.Controls.Add(this.lblGoldPrice_Tier6);
+            this.Controls.Add(this.lblGoldPrice_Tier5);
+            this.Controls.Add(this.lblGoldPrice_Tier4);
+            this.Controls.Add(this.lblGoldPrice_Tier3);
+            this.Controls.Add(this.lblGoldPrice_Tier2);
+            this.Controls.Add(this.lblGoldPrice_Tier1);
+            this.Controls.Add(this.lblPopulation_Tier7);
+            this.Controls.Add(this.lblPopulation_Tier6);
+            this.Controls.Add(this.lblPopulation_Tier5);
+            this.Controls.Add(this.lblPopulation_Tier4);
+            this.Controls.Add(this.lblPopulation_Tier3);
+            this.Controls.Add(this.lblPopulation_Tier2);
+            this.Controls.Add(this.lblPopulation_Tier1);
+            this.Controls.Add(this.lblTotal_Tier7);
+            this.Controls.Add(this.lblTotal_Tier6);
+            this.Controls.Add(this.lblTotal_Tier5);
+            this.Controls.Add(this.lblTotal_Tier4);
+            this.Controls.Add(this.lblTotal_Tier3);
+            this.Controls.Add(this.lblTotal_Tier2);
+            this.Controls.Add(this.lblTotal_Tier1);
             this.Controls.Add(this.PopIco_Tier7);
             this.Controls.Add(this.PopIco_Tier6);
             this.Controls.Add(this.PopIco_Tier5);
@@ -1316,13 +1337,13 @@
             this.Controls.Add(this.GoldIco_Tier3);
             this.Controls.Add(this.GoldIco_Tier2);
             this.Controls.Add(this.GoldIco_Tier1);
-            this.Controls.Add(this.UpDown_Tier7);
-            this.Controls.Add(this.UpDown_Tier6);
-            this.Controls.Add(this.UpDown_Tier5);
-            this.Controls.Add(this.UpDown_Tier4);
-            this.Controls.Add(this.UpDown_Tier3);
-            this.Controls.Add(this.UpDown_Tier2);
-            this.Controls.Add(this.UpDown_Tier1);
+            this.Controls.Add(this.udTier7);
+            this.Controls.Add(this.udTier6);
+            this.Controls.Add(this.udTier5);
+            this.Controls.Add(this.udTier4);
+            this.Controls.Add(this.udTier3);
+            this.Controls.Add(this.udTier2);
+            this.Controls.Add(this.udTier1);
             this.Controls.Add(this.pbTier7_01);
             this.Controls.Add(this.pbTier6_01);
             this.Controls.Add(this.pbTier3_01);
@@ -1354,13 +1375,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormMain";
             this.Text = "Heroes of Might and Magic V - Army Calculator";
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpDown_Tier7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTier7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLimitPopulation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLimitGold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrameTier7)).EndInit();
@@ -1435,48 +1456,48 @@
         private System.Windows.Forms.PictureBox pbTier7_02;
         private System.Windows.Forms.PictureBox pbTier7_03;
         private System.Windows.Forms.PictureBox pbTier7_01;
-        private System.Windows.Forms.NumericUpDown UpDown_Tier1;
+        private System.Windows.Forms.NumericUpDown udTier1;
         private System.Windows.Forms.PictureBox GoldIco_Tier1;
         private System.Windows.Forms.PictureBox PopIco_Tier1;
-        private System.Windows.Forms.Label Total_Tier1;
-        private System.Windows.Forms.Label Pop_Tier1;
-        private System.Windows.Forms.Label Gold_Tier1;
-        private System.Windows.Forms.NumericUpDown UpDown_Tier2;
+        private System.Windows.Forms.Label lblTotal_Tier1;
+        private System.Windows.Forms.Label lblPopulation_Tier1;
+        private System.Windows.Forms.Label lblGoldPrice_Tier1;
+        private System.Windows.Forms.NumericUpDown udTier2;
         private System.Windows.Forms.PictureBox GoldIco_Tier2;
         private System.Windows.Forms.PictureBox PopIco_Tier2;
-        private System.Windows.Forms.Label Total_Tier2;
-        private System.Windows.Forms.Label Pop_Tier2;
-        private System.Windows.Forms.Label Gold_Tier2;
-        private System.Windows.Forms.NumericUpDown UpDown_Tier3;
+        private System.Windows.Forms.Label lblTotal_Tier2;
+        private System.Windows.Forms.Label lblPopulation_Tier2;
+        private System.Windows.Forms.Label lblGoldPrice_Tier2;
+        private System.Windows.Forms.NumericUpDown udTier3;
         private System.Windows.Forms.PictureBox GoldIco_Tier3;
         private System.Windows.Forms.PictureBox PopIco_Tier3;
-        private System.Windows.Forms.Label Total_Tier3;
-        private System.Windows.Forms.Label Pop_Tier3;
-        private System.Windows.Forms.Label Gold_Tier3;
-        private System.Windows.Forms.NumericUpDown UpDown_Tier4;
+        private System.Windows.Forms.Label lblTotal_Tier3;
+        private System.Windows.Forms.Label lblPopulation_Tier3;
+        private System.Windows.Forms.Label lblGoldPrice_Tier3;
+        private System.Windows.Forms.NumericUpDown udTier4;
         private System.Windows.Forms.PictureBox GoldIco_Tier4;
         private System.Windows.Forms.PictureBox PopIco_Tier4;
-        private System.Windows.Forms.Label Total_Tier4;
-        private System.Windows.Forms.Label Pop_Tier4;
-        private System.Windows.Forms.Label Gold_Tier4;
-        private System.Windows.Forms.NumericUpDown UpDown_Tier5;
+        private System.Windows.Forms.Label lblTotal_Tier4;
+        private System.Windows.Forms.Label lblPopulation_Tier4;
+        private System.Windows.Forms.Label lblGoldPrice_Tier4;
+        private System.Windows.Forms.NumericUpDown udTier5;
         private System.Windows.Forms.PictureBox GoldIco_Tier5;
         private System.Windows.Forms.PictureBox PopIco_Tier5;
-        private System.Windows.Forms.Label Total_Tier5;
-        private System.Windows.Forms.Label Pop_Tier5;
-        private System.Windows.Forms.Label Gold_Tier5;
-        private System.Windows.Forms.NumericUpDown UpDown_Tier6;
+        private System.Windows.Forms.Label lblTotal_Tier5;
+        private System.Windows.Forms.Label lblPopulation_Tier5;
+        private System.Windows.Forms.Label lblGoldPrice_Tier5;
+        private System.Windows.Forms.NumericUpDown udTier6;
         private System.Windows.Forms.PictureBox GoldIco_Tier6;
         private System.Windows.Forms.PictureBox PopIco_Tier6;
-        private System.Windows.Forms.Label Total_Tier6;
-        private System.Windows.Forms.Label Pop_Tier6;
-        private System.Windows.Forms.Label Gold_Tier6;
-        private System.Windows.Forms.NumericUpDown UpDown_Tier7;
+        private System.Windows.Forms.Label lblTotal_Tier6;
+        private System.Windows.Forms.Label lblPopulation_Tier6;
+        private System.Windows.Forms.Label lblGoldPrice_Tier6;
+        private System.Windows.Forms.NumericUpDown udTier7;
         private System.Windows.Forms.PictureBox GoldIco_Tier7;
         private System.Windows.Forms.PictureBox PopIco_Tier7;
-        private System.Windows.Forms.Label Total_Tier7;
-        private System.Windows.Forms.Label Pop_Tier7;
-        private System.Windows.Forms.Label Gold_Tier7;
+        private System.Windows.Forms.Label lblTotal_Tier7;
+        private System.Windows.Forms.Label lblPopulation_Tier7;
+        private System.Windows.Forms.Label lblGoldPrice_Tier7;
         private System.Windows.Forms.Label lblGoldCost_Tier1;
         private System.Windows.Forms.Label lblCreatures_Tier1;
         private System.Windows.Forms.Label lblGoldCost_Tier2;
