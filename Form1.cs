@@ -59,13 +59,40 @@ namespace Heroes5_ArmyCalc
         /// Holds all the data about the gold cost and population of each faction's units.
         /// </summary>
         DataTable Data = new DataTable();
+        /// <summary>
+        /// Column for the faction names.
+        /// </summary>
         DataColumn Faction = new DataColumn("Faction", typeof(string));
+        /// <summary>
+        /// Column for the creature tier.
+        /// </summary>
         DataColumn Tier = new DataColumn("Tier", typeof(int));
-        DataColumn CostBase = new DataColumn("CostBase", typeof(string));
-        DataColumn CostUpg = new DataColumn("CostUpg", typeof(string));
-        DataColumn Population = new DataColumn("Population", typeof(string));
+        /// <summary>
+        /// Column for the gold cost of the base creature for the given tier.
+        /// </summary>
+        DataColumn CostBase = new DataColumn("CostBase", typeof(int));
+        /// <summary>
+        /// Column for the gold cost of the creature's upgraded variants for the given tier.
+        /// </summary>
+        DataColumn CostUpg = new DataColumn("CostUpg", typeof(int));
+        /// <summary>
+        /// Column for the weekly population growth for a creature of the given tier.
+        /// </summary>
+        DataColumn Population = new DataColumn("Population", typeof(int));
+        /// <summary>
+        /// A dictionary containing references to lists of data for the gold costs
+        /// for each base creature of each tier for each faction.
+        /// </summary>
         Dictionary<string, List<int>> CostBaseDictionary;
+        /// <summary>
+        /// A dictionary containing references to lists of data for the gold costs
+        /// for each upgraded creature of each tier for each faction.
+        /// </summary>
         Dictionary<string, List<int>> CostUpgDictionary;
+        /// <summary>
+        /// A dictionary containing references to lists of data for the population
+        /// for each creature of each tier for each faction.
+        /// </summary>
         Dictionary<string, List<int>> PopulationDictionary;
 
         public FormMain()
@@ -73,44 +100,7 @@ namespace Heroes5_ArmyCalc
             InitializeComponent();
             LoadHardcodedData();
             AssignArrays();
-            #region to be deleted
-            //We assign data for all the factions to the array we will be working with.
-            ////for (int i = 0; i < 8; i++)
-            //{
-            //    Town_Tier_Base_Gold[0, i] = Academy_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[0, i] = Academy_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[0, i] = Academy_lblPopulation_Tier[i];
-
-            //    Town_Tier_Base_Gold[1, i] = Dungeon_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[1, i] = Dungeon_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[1, i] = Dungeon_lblPopulation_Tier[i];
-
-            //    Town_Tier_Base_Gold[2, i] = Fortress_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[2, i] = Fortress_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[2, i] = Fortress_lblPopulation_Tier[i];
-
-            //    Town_Tier_Base_Gold[3, i] = Haven_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[3, i] = Haven_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[3, i] = Haven_lblPopulation_Tier[i];
-
-            //    Town_Tier_Base_Gold[4, i] = Inferno_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[4, i] = Inferno_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[4, i] = Inferno_lblPopulation_Tier[i];
-
-            //    Town_Tier_Base_Gold[5, i] = Necropolis_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[5, i] = Necropolis_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[5, i] = Necropolis_lblPopulation_Tier[i];
-
-            //    Town_Tier_Base_Gold[6, i] = Stronghold_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[6, i] = Stronghold_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[6, i] = Stronghold_lblPopulation_Tier[i];
-
-            //    Town_Tier_Base_Gold[7, i] = Sylvan_Base_Gold_Tier[i];
-            //    Town_Tier_Upg_Gold[7, i] = Sylvan_Upg_Gold_Tier[i];
-            //    Town_Tier_Pop[7, i] = Sylvan_lblPopulation_Tier[i];
-            //}
-            #endregion to be deleted
-            cbFactionsList.SelectedItem = "Academy";
+            cbFaction.SelectedItem = "Academy";
             UI_Update();
         }
 
@@ -231,14 +221,17 @@ namespace Heroes5_ArmyCalc
         }
 
         /// <summary>
-        /// Updates the UI to the appropriate faction's.
+        /// Updates the images and values to the appropriate faction's.
         /// </summary>
         public void UI_Update()
         {
-            //Since the "Dungeon" faction has a set of specific controls we check if that is the selected faction
-            //and if the corresponding checkbox is checked. If one of these conditions is not satisfied
-            //the controls are not visible.
-            if (Convert.ToString(cbFactionsList.SelectedItem) == "Dungeon" && chkDwelling1.Checked == true)
+            string FactionName = (string)cbFaction.SelectedItem;
+            int Gold_Total = 0;
+
+            // Since the "Dungeon" faction has a set of specific controls we check if that is the selected faction
+            // and if the corresponding checkbox is checked. If one of these conditions is not satisfied
+            // the controls are not visible.
+            if (FactionName == "Dungeon" && chkDwelling1.Checked == true)
             {
                 udExtraBloodMaiden.Visible = true;
                 udExtraMinotaur.Visible = true;
@@ -253,44 +246,30 @@ namespace Heroes5_ArmyCalc
                 lblExtraMinotaur.Visible = false;
             }
 
-            //Sets label texts and images to the currently selected faction
-            //================================================================================
-            //First determine which faction is selected and from that access the appropriate index/values in the data array
-
-            string FactionName = (string)cbFactionsList.SelectedItem;
-            int Gold_Total = 0;
-
-            //This loop sets the labels for Creature Gold cost, Creature Population,
-            //Cost of selected creatures and Total Gold.
+            // Sets the labels for Creature Gold cost, Creature Population,
+            // Cost of selected creatures and Total Gold.
             for (int i = 1; i <= 7; i++)
             {
-                //Whenever the image of an upgraded creature is clicked, the boolean variable "Upg" is set to "true"
-                //this "if" checkes whether "Upg" is true and changes the gold cost of the creature appropriately
-                if (IsUpgraded[i] == true)
-                {
+                // Whenever the image of an upgraded creature is clicked, the boolean variable "Upg"
+                // for that tier is set to "true". This "if" checkes whether "Upg" is true and
+                // changes the gold cost of the creature appropriately.
+                if (IsUpgraded[i])
                     LabelsGold[i].Text = CostUpgDictionary[FactionName][i].ToString();
-                }
                 else
-                {
                     LabelsGold[i].Text = CostBaseDictionary[FactionName][i].ToString();
-                }
 
-                //This "if" sets the creature populations and UpDown controls' maximums in accordance
-                //to a checked Castle or Citadel
-				if (chkCastle.Checked == true)
+                // Sets the labels for creature population in accordance with a checked Castle or Citadel.
+                if (chkCastle.Checked)
 				{
-					LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * 2);
+					LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value * 2);
+				}
+				else if (chkCitadel.Checked)
+				{
+					LabelsPopulation[i].Text = Convert.ToString((int)(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * 1.5));
 				}
 				else
 				{
-					if (chkCitadel.Checked == true)
-					{
-						LabelsPopulation[i].Text = Convert.ToString(Math.Truncate(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * (decimal)1.5));
-					}
-					else
-					{
-						LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value);
-					}
+					LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value);
 				}
 
                 //The following two lines set the label text for the total Gold cost of every creature tier and

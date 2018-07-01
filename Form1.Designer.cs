@@ -75,7 +75,7 @@
             this.Label_GoldTotal = new System.Windows.Forms.Label();
             this.chkCitadel = new System.Windows.Forms.CheckBox();
             this.chkCastle = new System.Windows.Forms.CheckBox();
-            this.cbFactionsList = new System.Windows.Forms.ComboBox();
+            this.cbFaction = new System.Windows.Forms.ComboBox();
             this.chkLimitPopulation = new System.Windows.Forms.CheckBox();
             this.udLimitPopulation = new System.Windows.Forms.NumericUpDown();
             this.lblLimitPopulation = new System.Windows.Forms.Label();
@@ -639,13 +639,13 @@
             this.chkCastle.UseVisualStyleBackColor = true;
             this.chkCastle.CheckedChanged += new System.EventHandler(this.Castle_Check_Change);
             // 
-            // cbFactionsList
+            // cbFaction
             // 
-            this.cbFactionsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFactionsList.DropDownWidth = 80;
-            this.cbFactionsList.FormattingEnabled = true;
-            this.cbFactionsList.IntegralHeight = false;
-            this.cbFactionsList.Items.AddRange(new object[] {
+            this.cbFaction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFaction.DropDownWidth = 80;
+            this.cbFaction.FormattingEnabled = true;
+            this.cbFaction.IntegralHeight = false;
+            this.cbFaction.Items.AddRange(new object[] {
             "Academy",
             "Dungeon",
             "Fortress",
@@ -654,11 +654,11 @@
             "Necropolis",
             "Stronghold",
             "Sylvan"});
-            this.cbFactionsList.Location = new System.Drawing.Point(12, 9);
-            this.cbFactionsList.Name = "cbFactionsList";
-            this.cbFactionsList.Size = new System.Drawing.Size(113, 21);
-            this.cbFactionsList.TabIndex = 10;
-            this.cbFactionsList.SelectedIndexChanged += new System.EventHandler(this.Factions_SelectedIndexChanged);
+            this.cbFaction.Location = new System.Drawing.Point(12, 9);
+            this.cbFaction.Name = "cbFaction";
+            this.cbFaction.Size = new System.Drawing.Size(113, 21);
+            this.cbFaction.TabIndex = 10;
+            this.cbFaction.SelectedIndexChanged += new System.EventHandler(this.Factions_SelectedIndexChanged);
             // 
             // chkLimitPopulation
             // 
@@ -1283,7 +1283,7 @@
             this.Controls.Add(this.udLimitPopulation);
             this.Controls.Add(this.chkLimitGold);
             this.Controls.Add(this.chkLimitPopulation);
-            this.Controls.Add(this.cbFactionsList);
+            this.Controls.Add(this.cbFaction);
             this.Controls.Add(this.chkCastle);
             this.Controls.Add(this.chkCitadel);
             this.Controls.Add(this.Label_GoldTotal);
@@ -1516,7 +1516,7 @@
         private System.Windows.Forms.Label Label_GoldTotal;
         private System.Windows.Forms.CheckBox chkCitadel;
         private System.Windows.Forms.CheckBox chkCastle;
-        private System.Windows.Forms.ComboBox cbFactionsList;
+        private System.Windows.Forms.ComboBox cbFaction;
         private System.Windows.Forms.PictureBox pbFrameTier1;
         private System.Windows.Forms.PictureBox pbFrameTier2;
         private System.Windows.Forms.PictureBox pbFrameTier3;
