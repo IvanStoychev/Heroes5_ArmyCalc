@@ -31,22 +31,22 @@ namespace Heroes5_ArmyCalc
         /// Array holding references to all the 'creature gold cost' labels of the form.
         /// Padded with an empty zero index for ease of use.
         /// </summary>
-        public Label[] LabelsGold = new Label[8];
+        public Label[] LabelsGoldArray = new Label[8];
         /// <summary>
         /// Array holding references to all the 'creature population' labels of the form.
         /// Padded with an empty zero index for ease of use.
         /// </summary>
-        public Label[] LabelsPopulation = new Label[8];
+        public Label[] LabelsPopulationArray = new Label[8];
         /// <summary>
         /// Array holding references to all the 'creature total gold cost' labels of the form.
         /// Padded with an empty zero index for ease of use.
         /// </summary>
-        public Label[] LabelsTotal = new Label[8];
+        public Label[] LabelsTotalArray = new Label[8];
         /// <summary>
         /// Array holding references to all the form's NumericUpDowns.
         /// Padded with an empty zero index for ease of use.
         /// </summary>
-        public NumericUpDown[] NumericUpDowns = new NumericUpDown[8];
+        public NumericUpDown[] NumericUpDownsArray = new NumericUpDown[8];
         /// <summary>
         /// Array of booleans that designate if an upgraded variant is selected or not for each creature tier
         /// </summary>
@@ -207,16 +207,16 @@ namespace Heroes5_ArmyCalc
         /// </summary>
         void AssignArrays()
         {
-            LabelsPopulation[0] = null;
-            LabelsGold[0] = null;
-            LabelsTotal[0] = null;
-            NumericUpDowns[0] = null;
+            LabelsPopulationArray[0] = null;
+            LabelsGoldArray[0] = null;
+            LabelsTotalArray[0] = null;
+            NumericUpDownsArray[0] = null;
             for (int i = 1; i < 8; i++)
             {
-                LabelsPopulation[i] = (Label)Controls.Find("lblPopulation_Tier" + i, true).FirstOrDefault();
-                LabelsGold[i] = (Label)Controls.Find("lblGoldPrice_Tier" + i, true).FirstOrDefault();
-                LabelsTotal[i] = (Label)Controls.Find("lblTotal_Tier" + i, true).FirstOrDefault();
-                NumericUpDowns[i] = (NumericUpDown)Controls.Find("udTier" + i, true).FirstOrDefault();
+                LabelsPopulationArray[i] = (Label)Controls.Find("lblPopulation_Tier" + i, true).FirstOrDefault();
+                LabelsGoldArray[i] = (Label)Controls.Find("lblGoldPrice_Tier" + i, true).FirstOrDefault();
+                LabelsTotalArray[i] = (Label)Controls.Find("lblTotal_Tier" + i, true).FirstOrDefault();
+                NumericUpDownsArray[i] = (NumericUpDown)Controls.Find("udTier" + i, true).FirstOrDefault();
             }
         }
 
@@ -254,29 +254,33 @@ namespace Heroes5_ArmyCalc
                 // for that tier is set to "true". This "if" checkes whether "Upg" is true and
                 // changes the gold cost of the creature appropriately.
                 if (IsUpgraded[i])
-                    LabelsGold[i].Text = CostUpgDictionary[FactionName][i].ToString();
+                    LabelsGoldArray[i].Text = CostUpgDictionary[FactionName][i].ToString();
                 else
-                    LabelsGold[i].Text = CostBaseDictionary[FactionName][i].ToString();
+                    LabelsGoldArray[i].Text = CostBaseDictionary[FactionName][i].ToString();
 
                 // Sets the labels for creature population in accordance with a checked Castle or Citadel.
                 if (chkCastle.Checked)
 				{
-					LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value * 2);
+					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value * 2);
 				}
 				else if (chkCitadel.Checked)
 				{
-					LabelsPopulation[i].Text = Convert.ToString((int)(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * 1.5));
+					LabelsPopulationArray[i].Text = Convert.ToString((int)(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * 1.5));
 				}
 				else
 				{
-					LabelsPopulation[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value);
+					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value);
 				}
 
-                //The following two lines set the label text for the total Gold cost of every creature tier and
-                //the Total Gold amount stored in the "Gold_Total" variable
-                LabelsTotal[i].Text = Convert.ToString(Convert.ToInt32(LabelsGold[i].Text) * NumericUpDowns[i].Value);
-                Gold_Total = Gold_Total + Convert.ToInt32(LabelsTotal[i].Text);
-                if (chkLimitPopulation.Checked == true) NumericUpDowns[i].Maximum = Convert.ToInt32(LabelsPopulation[i].Text);
+                // If the "Limit Population" CheckBox is checked each creature's
+                // NumericUpDown's maximum is set to the weeks limit.
+                if (chkLimitPopulation.Checked) NumericUpDownsArray[i].Maximum = Convert.ToInt32(LabelsPopulationArray[i].Text);
+
+                // Each creature's total gold cost is calculated and the Label's text set.
+                LabelsTotalArray[i].Text = Convert.ToString(Convert.ToInt32(LabelsGoldArray[i].Text) * NumericUpDownsArray[i].Value);
+
+                // Each tier's total cost is summed into the gost cost of all creatures.
+                Gold_Total += Convert.ToInt32(LabelsTotalArray[i].Text);
             }
 
 
