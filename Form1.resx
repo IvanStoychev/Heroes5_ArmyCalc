@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pbFrameTier7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbFrame_Tier7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZAAAAAAB/+EFFkV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQCAAAABAQADAAAAAQCAAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -273,7 +273,7 @@
         JJSkkkklKSSSSUpJJJJSkkkklKSSSSUpJJJJT//Z
 </value>
   </data>
-  <data name="pbFrameTier4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbFrame_Tier4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZAAAAAAB/+EFFkV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQCAAAABAQADAAAAAQCAAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -428,7 +428,7 @@
         JJSkkkklKSSSSUpJJJJSkkkklKSSSSUpJJJJT//Z
 </value>
   </data>
-  <data name="pbFrameTier5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbFrame_Tier5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZAAAAAAB/+EFFkV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQCAAAABAQADAAAAAQCAAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -583,7 +583,7 @@
         JJSkkkklKSSSSUpJJJJSkkkklKSSSSUpJJJJT//Z
 </value>
   </data>
-  <data name="pbFrameTier6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbFrame_Tier6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZAAAAAAB/+EFFkV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQCAAAABAQADAAAAAQCAAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -738,7 +738,7 @@
         JJSkkkklKSSSSUpJJJJSkkkklKSSSSUpJJJJT//Z
 </value>
   </data>
-  <data name="pbFrameTier2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbFrame_Tier2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZAAAAAAB/+EFFkV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQCAAAABAQADAAAAAQCAAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -893,7 +893,7 @@
         JJSkkkklKSSSSUpJJJJSkkkklKSSSSUpJJJJT//Z
 </value>
   </data>
-  <data name="pbFrameTier3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbFrame_Tier3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZAAAAAAB/+EFFkV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQCAAAABAQADAAAAAQCAAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -1048,7 +1048,7 @@
         JJSkkkklKSSSSUpJJJJSkkkklKSSSSUpJJJJT//Z
 </value>
   </data>
-  <data name="pbFrameTier1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbFrame_Tier1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/7gAOQWRvYmUAZAAAAAAB/+EFFkV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQCAAAABAQADAAAAAQCAAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -1203,7 +1203,7 @@
         JJSkkkklKSSSSUpJJJJSkkkklKSSSSUpJJJJT//Z
 </value>
   </data>
-  <data name="PopIco_Tier7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbPopulationIcon_Tier7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALNSURBVDhPnZPrS9NRGMd/v7kbU7eJlzWd1rys0pnO
@@ -1221,7 +1221,7 @@
         JMaJ5qMi+WMkXn0w6x+Jx6JpPYOmRRRFUb8B6Av+05tZiesAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="PopIco_Tier6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbPopulationIcon_Tier6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALNSURBVDhPnZPrS9NRGMd/v7kbU7eJlzWd1rys0pnO
@@ -1239,7 +1239,7 @@
         JMaJ5qMi+WMkXn0w6x+Jx6JpPYOmRRRFUb8B6Av+05tZiesAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="PopIco_Tier5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbPopulationIcon_Tier5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALNSURBVDhPnZPrS9NRGMd/v7kbU7eJlzWd1rys0pnO
@@ -1257,7 +1257,7 @@
         JMaJ5qMi+WMkXn0w6x+Jx6JpPYOmRRRFUb8B6Av+05tZiesAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="PopIco_Tier4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbPopulationIcon_Tier4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALNSURBVDhPnZPrS9NRGMd/v7kbU7eJlzWd1rys0pnO
@@ -1275,7 +1275,7 @@
         JMaJ5qMi+WMkXn0w6x+Jx6JpPYOmRRRFUb8B6Av+05tZiesAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="PopIco_Tier3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbPopulationIcon_Tier3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALNSURBVDhPnZPrS9NRGMd/v7kbU7eJlzWd1rys0pnO
@@ -1293,7 +1293,7 @@
         JMaJ5qMi+WMkXn0w6x+Jx6JpPYOmRRRFUb8B6Av+05tZiesAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="PopIco_Tier2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbPopulationIcon_Tier2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALNSURBVDhPnZPrS9NRGMd/v7kbU7eJlzWd1rys0pnO
@@ -1311,7 +1311,7 @@
         JMaJ5qMi+WMkXn0w6x+Jx6JpPYOmRRRFUb8B6Av+05tZiesAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="PopIco_Tier1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbPopulationIcon_Tier1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALNSURBVDhPnZPrS9NRGMd/v7kbU7eJlzWd1rys0pnO
@@ -1329,7 +1329,7 @@
         JMaJ5qMi+WMkXn0w6x+Jx6JpPYOmRRRFUb8B6Av+05tZiesAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="GoldIco_Tier7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbGoldIcon_Tier7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAA/dEVYdEdlbmVyYXRlZCBieQBHZW5lcmF0ZWQgYnkgdGhlIERldmVsb3BlcidzIEltYWdlIExp
@@ -1350,7 +1350,7 @@
         fQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="GoldIco_Tier6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbGoldIcon_Tier6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAA/dEVYdEdlbmVyYXRlZCBieQBHZW5lcmF0ZWQgYnkgdGhlIERldmVsb3BlcidzIEltYWdlIExp
@@ -1371,7 +1371,7 @@
         fQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="GoldIco_Tier5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbGoldIcon_Tier5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAA/dEVYdEdlbmVyYXRlZCBieQBHZW5lcmF0ZWQgYnkgdGhlIERldmVsb3BlcidzIEltYWdlIExp
@@ -1392,7 +1392,7 @@
         fQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="GoldIco_Tier4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbGoldIcon_Tier4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAA/dEVYdEdlbmVyYXRlZCBieQBHZW5lcmF0ZWQgYnkgdGhlIERldmVsb3BlcidzIEltYWdlIExp
@@ -1413,7 +1413,7 @@
         fQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="GoldIco_Tier3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbGoldIcon_Tier3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAA/dEVYdEdlbmVyYXRlZCBieQBHZW5lcmF0ZWQgYnkgdGhlIERldmVsb3BlcidzIEltYWdlIExp
@@ -1434,7 +1434,7 @@
         fQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="GoldIco_Tier2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbGoldIcon_Tier2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAA/dEVYdEdlbmVyYXRlZCBieQBHZW5lcmF0ZWQgYnkgdGhlIERldmVsb3BlcidzIEltYWdlIExp
