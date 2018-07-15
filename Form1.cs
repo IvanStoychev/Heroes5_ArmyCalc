@@ -116,7 +116,7 @@ namespace Heroes5_ArmyCalc
             Data.Columns.Add(CostBase);
             Data.Columns.Add(CostUpg);
             Data.Columns.Add(Population);
-
+            
             // All these lists are padded with a zero as a first item for ease of use.
             // That way the population of an Academy tier 4 creature would be the 4th item of AcademyPopulation.
             List<int> AcademyCostBase = new List<int>(){ 0, 22, 45, 90, 250, 480, 1400, 3500 };
@@ -163,6 +163,7 @@ namespace Heroes5_ArmyCalc
                 { "Stronghold", StrongholdCostBase },
                 { "Sylvan", SylvanCostBase }
             };
+            
             CostUpgDictionary = new Dictionary<string, List<int>>()
             {
                 { "Academy", AcademyCostUpg },
@@ -174,6 +175,7 @@ namespace Heroes5_ArmyCalc
                 { "Stronghold", StrongholdCostUpg },
                 { "Sylvan", SylvanCostUpg }
             };
+
             PopulationDictionary = new Dictionary<string, List<int>>()
             {
                 { "Academy", AcademyPopulation },
@@ -186,7 +188,8 @@ namespace Heroes5_ArmyCalc
                 { "Sylvan", SylvanPopulation }
             };
 
-            // Load the hardcoded values.
+            // Load the hardcoded values into the DataTable.
+            // This will be refactored once SQLite is integrated. [ToDo]
             foreach (var faction in FactionList)
             {
                 for (int i = 1; i <= 7; i++)
@@ -203,7 +206,7 @@ namespace Heroes5_ArmyCalc
         }
 
         /// <summary>
-        /// Assigns form controls to members of arrays for ease of access.
+        /// Assigns form controls to elements of arrays for ease of access.
         /// </summary>
         void AssignArrays()
         {
