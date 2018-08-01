@@ -12,8 +12,7 @@ namespace Heroes5_ArmyCalc
 {
     public partial class FormMain : Form
     {
-        /*
-         * Introduction:
+        /* Introduction:
          * =============
          * In the game, for which this calculator is made - "Heroes of Might and Magic 5", there are a number of factions,
          * each capable of buying different creatures. The creatures of each faction are unique, but they all share the
@@ -214,7 +213,7 @@ namespace Heroes5_ArmyCalc
             LabelsGoldArray[0] = null;
             LabelsTotalArray[0] = null;
             NumericUpDownsArray[0] = null;
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 LabelsPopulationArray[i] = (Label)Controls.Find("lblPopulation_Tier" + i, true).FirstOrDefault();
                 LabelsGoldArray[i] = (Label)Controls.Find("lblGoldPrice_Tier" + i, true).FirstOrDefault();
@@ -231,26 +230,15 @@ namespace Heroes5_ArmyCalc
             string FactionName = (string)cbFaction.SelectedItem;
             int Gold_Total = 0;
 
-            // Since the "Dungeon" faction has a set of specific controls we check if that is the selected faction
-            // and if the corresponding checkbox is checked. If one of these conditions is not satisfied
-            // the controls are not visible.
-            if (FactionName == "Dungeon" && chkDwelling1.Checked == true)
-            {
-                udExtraBloodMaiden.Visible = true;
-                udExtraMinotaur.Visible = true;
-                lblExtraBloodMaiden.Visible = true;
-                lblExtraMinotaur.Visible = true;
-            }
-            else
-            {
-                udExtraBloodMaiden.Visible = false;
-                udExtraMinotaur.Visible = false;
-                lblExtraBloodMaiden.Visible = false;
-                lblExtraMinotaur.Visible = false;
-            }
+            // The "Dungeon" faction has a set of specific controls that are only visible if it is the
+            // selected faction and the corresponding checkbox is checked.
+            udExtraBloodMaiden.Visible = FactionName == "Dungeon" && chkDwelling1.Checked;
+            udExtraMinotaur.Visible = FactionName == "Dungeon" && chkDwelling1.Checked;
+            lblExtraBloodMaiden.Visible = FactionName == "Dungeon" && chkDwelling1.Checked;
+            lblExtraMinotaur.Visible = FactionName == "Dungeon" && chkDwelling1.Checked;
 
-            // Sets the labels for Creature Gold cost, Creature Population,
-            // Cost of selected creatures and Total Gold.
+            // Sets the displayed text for each tier's gold cost, population,
+            // cost of selected creatures and total gold cost.
             for (int i = 1; i <= 7; i++)
             {
                 // Whenever the image of an upgraded creature is clicked, the boolean variable "Upg"

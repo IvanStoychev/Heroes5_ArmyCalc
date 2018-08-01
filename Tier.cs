@@ -15,14 +15,19 @@ namespace Heroes5_ArmyCalc
         /// <summary>
         /// The gold cost for an unupgraded creature of this tier.
         /// </summary>
-        public int BaseGoldCost;
+        public int GoldCost_Base;
         /// <summary>
         /// The gold cost for an upgraded creature of this tier.
         /// </summary>
-        public int UpgradedGoldCost;
+        public int GoldCost_Upgraded;
         /// <summary>
-        /// This tier's weekly growth.
+        /// This tier's base weekly growth.
         /// </summary>
-        public int WeeklyPopulation;
+        public int WeeklyPopulation_Base;
+        /// <summary>
+        /// This tier's bonus weekly growth.
+        /// Gained from skills, town or neutral dwellings.
+        /// </summary>
+        public int WeeklyPopulation_Bonus;
     }
 }
