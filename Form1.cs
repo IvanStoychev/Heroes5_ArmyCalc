@@ -94,6 +94,10 @@ namespace Heroes5_ArmyCalc
         /// for each creature of each tier for each faction.
         /// </summary>
         Dictionary<string, List<int>> PopulationDictionary;
+        /// <summary>
+        /// A List with information about all faction units in the game.
+        /// </summary>
+        List<Unit> Units = new List<Unit>();
 
         public FormMain()
         {
@@ -188,19 +192,20 @@ namespace Heroes5_ArmyCalc
                 { "Sylvan", SylvanPopulation }
             };
 
-            // Load the hardcoded values into the DataTable.
+            // Load the hardcoded values into the Units List.
             // This will be refactored once SQLite is integrated. [ToDo]
             foreach (var faction in FactionList)
             {
                 for (int i = 1; i <= 7; i++)
                 {
-                    DataRow dr = Data.NewRow();
-                    dr[Faction] = faction;
-                    dr[Tier] = i;
-                    dr[CostBase] = CostBaseDictionary[faction][i];
-                    dr[CostUpg] = CostUpgDictionary[faction][i];
-                    dr[Population] = PopulationDictionary[faction][i];
-                    Data.Rows.Add(dr);
+                    Unit unit = new Unit();
+                    unit.Faction = faction;
+                    unit.Tier = i;
+                    unit.GoldCostBase = CostBaseDictionary[faction][i];
+                    unit.GoldCostUpg = CostUpgDictionary[faction][i];
+                    unit.PopulationBase = PopulationDictionary[faction][i];
+
+                    Units.Add(unit);
                 }
             }
         }
