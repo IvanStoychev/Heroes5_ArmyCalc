@@ -1197,9 +1197,9 @@
             this.chkDwelling1.AutoSize = true;
             this.chkDwelling1.Location = new System.Drawing.Point(12, 64);
             this.chkDwelling1.Name = "chkDwelling1";
-            this.chkDwelling1.Size = new System.Drawing.Size(80, 17);
+            this.chkDwelling1.Size = new System.Drawing.Size(90, 17);
             this.chkDwelling1.TabIndex = 16;
-            this.chkDwelling1.Text = "checkBox1";
+            this.chkDwelling1.Text = "chkDwelling1";
             this.chkDwelling1.UseVisualStyleBackColor = true;
             this.chkDwelling1.Visible = false;
             this.chkDwelling1.CheckedChanged += new System.EventHandler(this.UpDown);
@@ -1209,9 +1209,9 @@
             this.chkDwelling2.AutoSize = true;
             this.chkDwelling2.Location = new System.Drawing.Point(12, 86);
             this.chkDwelling2.Name = "chkDwelling2";
-            this.chkDwelling2.Size = new System.Drawing.Size(80, 17);
+            this.chkDwelling2.Size = new System.Drawing.Size(90, 17);
             this.chkDwelling2.TabIndex = 16;
-            this.chkDwelling2.Text = "checkBox2";
+            this.chkDwelling2.Text = "chkDwelling2";
             this.chkDwelling2.UseVisualStyleBackColor = true;
             this.chkDwelling2.Visible = false;
             this.chkDwelling2.CheckedChanged += new System.EventHandler(this.UpDown);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace Heroes5_ArmyCalc
 {
@@ -241,9 +242,9 @@ namespace Heroes5_ArmyCalc
             // cost of selected creatures and total gold cost.
             for (int i = 1; i <= 7; i++)
             {
-                // Whenever the image of an upgraded creature is clicked, the boolean variable "Upg"
-                // for that tier is set to "true". This "if" checkes whether "Upg" is true and
-                // changes the gold cost of the creature appropriately.
+                // Whenever the image of an upgraded creature is clicked, the boolean variable "IsUpgraded"
+                // for that tier is set to "true". Here a check is made whether "IsUpgraded" is true and
+                // the gold cost of the creature is changed appropriately.
                 if (IsUpgraded[i])
                     LabelsGoldArray[i].Text = CostUpgDictionary[FactionName][i].ToString();
                 else
@@ -270,10 +271,9 @@ namespace Heroes5_ArmyCalc
                 // Each creature's total gold cost is calculated and the Label's text set.
                 LabelsTotalArray[i].Text = Convert.ToString(Convert.ToInt32(LabelsGoldArray[i].Text) * NumericUpDownsArray[i].Value);
 
-                // Each tier's total cost is summed into the gost cost of all creatures.
+                // Each tier's total cost is added to the gost cost of all creatures.
                 Gold_Total += Convert.ToInt32(LabelsTotalArray[i].Text);
             }
-
 
             //Dwelling_Checked();
             //if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) lblPopulation_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(lblPopulation_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)udCreatures_WeekLimit.Value));
