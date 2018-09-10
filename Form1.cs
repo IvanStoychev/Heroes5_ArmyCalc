@@ -251,9 +251,9 @@ namespace Heroes5_ArmyCalc
                 // for that tier is set to "true". Here a check is made whether "IsUpgraded" is true and
                 // the gold cost of the creature is changed appropriately.
                 if (IsUpgraded[i])
-                    LabelsGoldArray[i].Text = CostUpgDictionary[FactionName][i].ToString();
+                    LabelsGoldArray[i].Text = GetUnit(FactionName, i).GoldCostUpg.ToString();
                 else
-                    LabelsGoldArray[i].Text = CostBaseDictionary[FactionName][i].ToString();
+                    LabelsGoldArray[i].Text = GetUnit(FactionName, i).GoldCostBase.ToString();
 
                 // Sets the labels for creature population in accordance with a checked Castle or Citadel.
                 if (chkCastle.Checked)
@@ -589,6 +589,18 @@ namespace Heroes5_ArmyCalc
         }
         #endregion
 
+        /// <summary>
+        /// Returns a unit in the given faction and tier or
+        /// null if none are found.
+        /// </summary>
+        /// <param name="faction">The faction of the unit.</param>
+        /// <param name="tier">The unit's tier.</param>
+        /// <returns>A Unit object of the given tier and faction or null.</returns>
+        Unit GetUnit(string faction, int tier)
+        {
+            return Units.Where(u => u.Faction == faction && u.Tier == tier).FirstOrDefault();
+        }
+
         private void UpDown(object sender, EventArgs e)
         {
             UI_Update();
@@ -675,31 +687,24 @@ namespace Heroes5_ArmyCalc
         {
             Gold_Maximum();
         }
-        
-        //The following methods move the "frame" image to the image control that raised the event
-        //and set the "Upg" boolean to true or false, depending on which image was clicked.
-        //This could be achieved with a separate method for each PictureBox (unprofessional) a more practical
-        //variant would be to have two methods: one for setting the boolean to "true", another for "false"
-        //but I have chosen to completely automate and optimize the process.
+
+        /// <summary>
+        /// Fires when a PictureBox control is clicked. Moves the frame
+        /// to its position and sets the "IsUpgraded" variable appropriately.
+        /// </summary>
         private void Picture_Click(object sender, EventArgs e)
         {
-            //We first assign the clicked control and get its name.
-            Control Clicked = (Control)sender;
-            string Control_Name = Clicked.Name;
-
-            //We locate the string index of the word "Tier" in order to get the number of its tier and order,
-            //since all PictureBoxes are named in the fashion "pbCreature_TierX_0Y", where X is the corresponding
-            //creature's tier and Y is the order of that PictureBox, either 1, 2 or 3, with 2 and 3 being
-            //upgraded versions of 1.
-            int String_Tier_Index = Control_Name.IndexOf("Tier") + 4;
-            int Control_Tier = Convert.ToInt32(Control_Name.Substring(String_Tier_Index, 1));
-            int Control_Order = Convert.ToInt32(Control_Name.Substring(String_Tier_Index + 3, 1));
+            Control clicked = (Control)sender;
+            string controlName = clicked.Name;
+            int tierStringIndex = controlName.IndexOf("Tier") + 4;
+            int Control_Tier = Convert.ToInt32(controlName.Substring(tierStringIndex, 1));
+            int result = controlName.Substring(controlName.Length - 1);
 
             //We find the Frame of the clicked PictureBox's row, which corresponds to the clicked PictureBox
             //tier number.
             string Frame_Name = "Frame" + Control_Tier;
             PictureBox Frame = (PictureBox)Controls.Find(Frame_Name, true).FirstOrDefault();
-            Frame.Location = new Point(Clicked.Left - 3, Clicked.Top - 3);
+            Frame.Location = new Point(clicked.Left - 3, clicked.Top - 3);
 
             //We set the "Upg" boolean of the corresponding tier to "false" if it is the first (leftmost) picture
             //or "true" if not.
