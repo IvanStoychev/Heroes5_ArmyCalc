@@ -694,28 +694,20 @@ namespace Heroes5_ArmyCalc
         /// </summary>
         private void Picture_Click(object sender, EventArgs e)
         {
+            // Get the clicked PictureBox, from its name find which tier it belongs to
+            // and whether it is the first, second or third in that tier. With that
+            // information get the frame picture for that tier, move it to the clicked
+            // PictureBox and set the IsUpgraded variable appropriately.
             Control clicked = (Control)sender;
             string controlName = clicked.Name;
             int tierStringIndex = controlName.IndexOf("Tier") + 4;
-            int Control_Tier = Convert.ToInt32(controlName.Substring(tierStringIndex, 1));
-            int result = controlName.Substring(controlName.Length - 1);
+            int controlTier = Convert.ToInt32(controlName.Substring(tierStringIndex, 1));
+            int pictureIndex = Convert.ToInt32(controlName.Substring(controlName.Length - 1));
+            string frameName = "pbFrame_Tier" + controlTier;
+            PictureBox frame = (PictureBox)Controls.Find(frameName, true).FirstOrDefault();
+            frame.Location = new Point(clicked.Left - 3, clicked.Top - 3);
 
-            //We find the Frame of the clicked PictureBox's row, which corresponds to the clicked PictureBox
-            //tier number.
-            string Frame_Name = "Frame" + Control_Tier;
-            PictureBox Frame = (PictureBox)Controls.Find(Frame_Name, true).FirstOrDefault();
-            Frame.Location = new Point(clicked.Left - 3, clicked.Top - 3);
-
-            //We set the "Upg" boolean of the corresponding tier to "false" if it is the first (leftmost) picture
-            //or "true" if not.
-            if (Control_Order == 1)
-            {
-                IsUpgraded[Control_Tier] = false;
-            }
-            else
-            {
-                IsUpgraded[Control_Tier] = true;
-            }
+            IsUpgraded[controlTier] = pictureIndex > 1 ? true : false;
 
             UI_Update();
         }
