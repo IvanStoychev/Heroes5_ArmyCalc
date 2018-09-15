@@ -607,22 +607,21 @@ namespace Heroes5_ArmyCalc
         }
         private void Citadel_Check_Change(object sender, EventArgs e)
         {
-            if (chkCastle.Checked == true && chkCitadel.Checked == false)
-            {
-                chkCastle.Checked = false;
-            }
+            // [???] Potentially make this method call UI_Update() and move this logic there.
+            chkCastle.Checked = (chkCastle.Checked && !chkCitadel.Checked);
+
             UI_Update();
         }
         private void Castle_Check_Change(object sender, EventArgs e)
         {
-            if (chkCastle.Checked == true && chkCitadel.Checked == false)
-            {
-                chkCitadel.Checked = true;
-            }
+            // [???] Potentially make this method call UI_Update() and move this logic there.
+            chkCitadel.Checked = (chkCastle.Checked && !chkCitadel.Checked);
+
             UI_Update();
         }
         private void Factions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // [???] Refactor
             UI_Update();
             ComboBox Clicked = (ComboBox)sender;
             chkDwelling1.Checked = false;
@@ -659,29 +658,18 @@ namespace Heroes5_ArmyCalc
         }
         private void Check_WeekLimit_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkLimitPopulation.Checked == true)
-            {
-                udLimitPopulation.Enabled = true;
-            }
-            else
-            {
-                udLimitPopulation.Enabled = false;
-                udLimitPopulation.Value = 1;
-            }
+            // [???] Potentially make this method call UI_Update() and move this logic there.
+            udLimitPopulation.Enabled = chkLimitPopulation.Checked;
+            if (!chkLimitPopulation.Checked) udLimitPopulation.Value = 1;
+
             UI_Update();
         }
         private void Check_GoldLimit_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkLimitGold.Checked == true)
-            {
-                udLimitGold.Enabled = true;
-                Gold_Maximum();
-            }
-            else
-            {
-                udLimitGold.Enabled = false;
-                lblLimitGoldExceeded.Visible = false;
-            }
+            // [???] Potentially make this method call UI_Update() and move this logic there.
+            udLimitGold.Enabled = chkLimitGold.Checked;
+            lblLimitGoldExceeded.Visible = chkLimitGold.Checked;
+            if (chkLimitGold.Checked) Gold_Maximum();
         }
         private void udCreatures_GoldLimit_ValueChanged(object sender, EventArgs e)
         {
