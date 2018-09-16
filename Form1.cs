@@ -607,16 +607,22 @@ namespace Heroes5_ArmyCalc
         }
         private void Citadel_Check_Change(object sender, EventArgs e)
         {
-            // [???] Potentially make this method call UI_Update() and move this logic there.
-            chkCastle.Checked = (chkCastle.Checked && !chkCitadel.Checked);
-
+            // If the user unchecked the "Citadel" CheckBox
+            // also uncheck the "Castle" one.
+            if (chkCastle.Checked == true && chkCitadel.Checked == false)
+            {
+                chkCastle.Checked = false;
+            }
             UI_Update();
         }
         private void Castle_Check_Change(object sender, EventArgs e)
         {
-            // [???] Potentially make this method call UI_Update() and move this logic there.
-            chkCitadel.Checked = (chkCastle.Checked && !chkCitadel.Checked);
-
+            // If the user checked the "Castle" CheckBox but the
+            // "Citadel" one isn't checked - check it.
+            if (chkCastle.Checked == true && chkCitadel.Checked == false)
+            {
+                chkCitadel.Checked = true;
+            }
             UI_Update();
         }
         private void Factions_SelectedIndexChanged(object sender, EventArgs e)
