@@ -348,17 +348,12 @@ namespace Heroes5_ArmyCalc
         //    }
         //}
 
-        //This method checks whether the set maximum of gold has been exceeded.
+        /// <summary>
+        /// Updates the visibility of lblLimitGoldExceeded.
+        /// </summary>
         public void Gold_Maximum()
         {
-            if ((Convert.ToInt32(lblGoldTotal.Text) > udLimitGold.Value) && (chkLimitGold.Checked == true))
-            {
-                lblLimitGoldExceeded.Visible = true;
-            }
-            else
-            {
-                lblLimitGoldExceeded.Visible = false;
-            }
+            lblLimitGoldExceeded.Visible = (chkLimitGold.Checked && Convert.ToInt32(lblGoldTotal.Text) > udLimitGold.Value);
         }
 
         #region Current_Methods
