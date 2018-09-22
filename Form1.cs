@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SQLite;
 
 namespace Heroes5_ArmyCalc
 {
@@ -105,7 +101,7 @@ namespace Heroes5_ArmyCalc
             LoadHardcodedData();
             AssignArrays();
             cbFaction.SelectedItem = "Academy";
-            UI_Update();
+            LabelsUpdate();
         }
 
         /// <summary>
@@ -229,10 +225,10 @@ namespace Heroes5_ArmyCalc
         }
 
         /// <summary>
-        /// Updates the faction dwellings and every tier's images, cost, population
-        /// and cost of selected creatures.
+        /// Updates the faction dwellings and every tier's cost, population
+        /// and cost of selected creatures labels.
         /// </summary>
-        public void UI_Update()
+        public void LabelsUpdate()
         {
             string FactionName = (string)cbFaction.SelectedItem;
             int Gold_Total = 0;
@@ -286,6 +282,8 @@ namespace Heroes5_ArmyCalc
 			Gold_Maximum();
             BonusDwellingTier1 = 0;
             BonusDwellingTier2 = 0;
+
+            SetUpDownMaximums();
         }
 
         //This method sets which creature tiers should benefit from extra population, should the bonus dwelling be checked
@@ -595,7 +593,7 @@ namespace Heroes5_ArmyCalc
 
         private void UpDown(object sender, EventArgs e)
         {
-            UI_Update();
+            LabelsUpdate();
         }
         private void Citadel_Check_Change(object sender, EventArgs e)
         {
@@ -605,7 +603,7 @@ namespace Heroes5_ArmyCalc
             {
                 chkCastle.Checked = false;
             }
-            UI_Update();
+            LabelsUpdate();
         }
         private void Castle_Check_Change(object sender, EventArgs e)
         {
@@ -615,12 +613,11 @@ namespace Heroes5_ArmyCalc
             {
                 chkCitadel.Checked = true;
             }
-            UI_Update();
+            LabelsUpdate();
         }
-        private void Factions_SelectedIndexChanged(object sender, EventArgs e)
+        private void Factions_SelectedIndexChanged(object sender, EventArgs e) // [???] Refactor
         {
-            // [???] Refactor
-            UI_Update();
+            LabelsUpdate();
             ComboBox Clicked = (ComboBox)sender;
             chkDwelling1.Checked = false;
             chkDwelling2.Checked = false;
@@ -659,33 +656,20 @@ namespace Heroes5_ArmyCalc
             udWeeksLimit.Enabled = chkLimitPopulation.Checked;
             if (!chkLimitPopulation.Checked) udWeeksLimit.Value = 1;
 
-            for (int i = 0; i <= 7; i++)
-            {
-                int tierPopulation = Convert.ToInt32(LabelsPopulationArray[i].Text);
-                NumericUpDownsArray[i].Maximum = tierPopulation + (99999 * Convert.ToInt32(chkLimitPopulation.Checked));
-            }
-
-            UI_Update();
+            LabelsUpdate();
         }
         private void Check_GoldLimit_CheckedChanged(object sender, EventArgs e)
         {
-            // [???] Potentially make this method call UI_Update() and move this logic there.
             udLimitGold.Enabled = chkLimitGold.Checked;
-            lblLimitGoldExceeded.Visible = chkLimitGold.Checked;
             if (chkLimitGold.Checked) Gold_Maximum();
         }
         private void udCreatures_GoldLimit_ValueChanged(object sender, EventArgs e)
         {
             Gold_Maximum();
         }
-
-        /// <summary>
-        /// Fires when a PictureBox control is clicked. Moves the frame
-        /// to its position and sets the "IsUpgraded" variable appropriately.
-        /// </summary>
         private void Picture_Click(object sender, EventArgs e)
         {
-            // Get the clicked PictureBox, from its name find which tier it belongs to
+            // Get the clicked PictureBox. From its name find which tier it belongs to
             // and whether it is the first, second or third in that tier. With that
             // information get the frame picture for that tier, move it to the clicked
             // PictureBox and set the IsUpgraded variable appropriately.
@@ -700,7 +684,20 @@ namespace Heroes5_ArmyCalc
 
             IsUpgraded[controlTier] = pictureIndex > 1 ? true : false;
 
-            UI_Update();
+            LabelsUpdate();
+        }
+
+        /// <summary>
+        /// Sets the maximum value for each tier's
+        /// NumericUpDown control.
+        /// </summary>
+        private void SetUpDownMaximums()
+        {
+            for (int i = 1; i <= 7; i++)
+            {
+                int tierPopulation = Convert.ToInt32(LabelsPopulationArray[i].Text);
+                NumericUpDownsArray[i].Maximum = tierPopulation + (99999 * Convert.ToInt32(!chkLimitPopulation.Checked));
+            }
         }
     }
 }

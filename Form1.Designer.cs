@@ -1202,7 +1202,6 @@
             this.chkDwelling1.Text = "chkDwelling1";
             this.chkDwelling1.UseVisualStyleBackColor = true;
             this.chkDwelling1.Visible = false;
-            this.chkDwelling1.CheckedChanged += new System.EventHandler(this.UpDown);
             // 
             // chkDwelling2
             // 
@@ -1214,7 +1213,6 @@
             this.chkDwelling2.Text = "chkDwelling2";
             this.chkDwelling2.UseVisualStyleBackColor = true;
             this.chkDwelling2.Visible = false;
-            this.chkDwelling2.CheckedChanged += new System.EventHandler(this.UpDown);
             // 
             // udExtraMinotaur
             // 
