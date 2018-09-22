@@ -286,63 +286,6 @@ namespace Heroes5_ArmyCalc
             SetUpDownMaximums();
         }
 
-        //This method sets which creature tiers should benefit from extra population, should the bonus dwelling be checked
-        //public void Dwelling_Checked()
-        //{
-        //    switch (Convert.ToString(Factions.SelectedItem))
-        //    {
-        //        case "Academy":
-        //            Dwelling_Tier_A = 5;
-        //            Dwelling_Tier_B = 0;
-        //            Faction = 1;
-        //            break;
-        //        case "Dungeon":
-        //            Dwelling_Tier_A = 2;
-        //            Dwelling_Tier_B = 3;
-        //            Faction = 2;
-        //            if (Dwelling_CheckBox1.Checked == false)
-        //            {
-        //                Dungeon_Ritual_UpDown1.Value = 0;
-        //                Dungeon_Ritual_UpDown2.Value = 0;
-        //            }
-        //            Dwelling[Faction, 0] = (int)Dungeon_Ritual_UpDown1.Value;
-        //            Dwelling[Faction, 1] = (int)Dungeon_Ritual_UpDown2.Value;
-        //            break;
-        //        case "Fortress":
-        //            Dwelling_Tier_A = 4;
-        //            Dwelling_Tier_B = 5;
-        //            Faction = 3;
-        //            break;
-        //        case "Haven":
-        //            Dwelling_Tier_A = 1;
-        //            Dwelling_Tier_B = 0;
-        //            Faction = 4;
-        //            break;
-        //        case "Inferno":
-        //            Dwelling_Tier_A = 2;
-        //            Dwelling_Tier_B = 5;
-        //            Faction = 5;
-        //            break;
-        //        case "Necropolis":
-        //            Dwelling_Tier_A = 1;
-        //            Dwelling_Tier_B = 7;
-        //            Faction = 6;
-        //            break;
-        //        case "Stronghold":
-        //            Dwelling_Tier_A = 1;
-        //            Dwelling_Tier_B = 0;
-        //            Faction = 7;
-        //            break;
-        //        case "Sylvan":
-        //            Dwelling_Tier_A = 1;
-        //            Dwelling_Tier_B = 6;
-        //            Faction = 8;
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-
         /// <summary>
         /// Updates the visibility of lblLimitGoldExceeded.
         /// </summary>
@@ -618,10 +561,10 @@ namespace Heroes5_ArmyCalc
         private void Factions_SelectedIndexChanged(object sender, EventArgs e) // [???] Refactor
         {
             LabelsUpdate();
-            ComboBox Clicked = (ComboBox)sender;
+            ComboBox _sender = (ComboBox)sender;
             chkDwelling1.Checked = false;
             chkDwelling2.Checked = false;
-            switch (Convert.ToString(Clicked.SelectedItem))
+            switch (Convert.ToString(_sender.SelectedItem))
             {
                 case "Haven":
                     Current_Haven();
@@ -673,14 +616,14 @@ namespace Heroes5_ArmyCalc
             // and whether it is the first, second or third in that tier. With that
             // information get the frame picture for that tier, move it to the clicked
             // PictureBox and set the IsUpgraded variable appropriately.
-            Control clicked = (Control)sender;
-            string controlName = clicked.Name;
+            Control _sender = (Control)sender;
+            string controlName = _sender.Name;
             int tierStringIndex = controlName.IndexOf("Tier") + 4;
             int controlTier = Convert.ToInt32(controlName.Substring(tierStringIndex, 1));
             int pictureIndex = Convert.ToInt32(controlName.Substring(controlName.Length - 1));
             string frameName = "pbFrame_Tier" + controlTier;
             PictureBox frame = (PictureBox)Controls.Find(frameName, true).FirstOrDefault();
-            frame.Location = new Point(clicked.Left - 3, clicked.Top - 3);
+            frame.Location = new Point(_sender.Left - 3, _sender.Top - 3);
 
             IsUpgraded[controlTier] = pictureIndex > 1 ? true : false;
 
