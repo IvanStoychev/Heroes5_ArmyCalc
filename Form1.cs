@@ -43,7 +43,7 @@ namespace Heroes5_ArmyCalc
         /// </summary>
         public Label[] LabelsTotalArray = new Label[8];
         /// <summary>
-        /// Array holding references to all the form's NumericUpDowns.
+        /// Array holding references to all the creature tiers' NumericUpDowns.
         /// Padded with an empty zero index for ease of use.
         /// </summary>
         public NumericUpDown[] NumericUpDownsArray = new NumericUpDown[8];
@@ -229,7 +229,8 @@ namespace Heroes5_ArmyCalc
         }
 
         /// <summary>
-        /// Updates the images and values to the appropriate faction's.
+        /// Updates the faction dwellings and every tier's images, cost, population
+        /// and cost of selected creatures.
         /// </summary>
         public void UI_Update()
         {
@@ -243,8 +244,8 @@ namespace Heroes5_ArmyCalc
             lblExtraBloodMaiden.Visible = FactionName == "Dungeon" && chkDwelling1.Checked;
             lblExtraMinotaur.Visible = FactionName == "Dungeon" && chkDwelling1.Checked;
 
-            // Sets the displayed text for each tier's gold cost, population,
-            // cost of selected creatures and total gold cost.
+            // Sets the text for each tier's creature gold cost, creature population,
+            // total cost of selected creatures and the gold cost of all chosen creatures.
             for (int i = 1; i <= 7; i++)
             {
                 // Whenever the image of an upgraded creature is clicked, the boolean variable "IsUpgraded"
@@ -258,20 +259,16 @@ namespace Heroes5_ArmyCalc
                 // Sets the labels for creature population in accordance with a checked Castle or Citadel.
                 if (chkCastle.Checked)
 				{
-					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value * 2);
+					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udWeeksLimit.Value * 2);
 				}
 				else if (chkCitadel.Checked)
 				{
-					LabelsPopulationArray[i].Text = Convert.ToString((int)(PopulationDictionary[FactionName][i] * (int)udLimitPopulation.Value * 1.5));
-				}
+					LabelsPopulationArray[i].Text = Convert.ToString((int)(PopulationDictionary[FactionName][i] * (int)udWeeksLimit.Value * 1.5));
+                }
 				else
 				{
-					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udLimitPopulation.Value);
+					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udWeeksLimit.Value);
 				}
-
-                // If the "Limit Population" CheckBox is checked each creature's
-                // NumericUpDown's maximum is set to the weeks limit.
-                if (chkLimitPopulation.Checked) NumericUpDownsArray[i].Maximum = Convert.ToInt32(LabelsPopulationArray[i].Text);
 
                 // Each creature's total gold cost is calculated and the Label's text set.
                 LabelsTotalArray[i].Text = Convert.ToString(Convert.ToInt32(LabelsGoldArray[i].Text) * NumericUpDownsArray[i].Value);
@@ -659,9 +656,14 @@ namespace Heroes5_ArmyCalc
         }
         private void Check_WeekLimit_CheckedChanged(object sender, EventArgs e)
         {
-            // [???] Potentially make this method call UI_Update() and move this logic there.
-            udLimitPopulation.Enabled = chkLimitPopulation.Checked;
-            if (!chkLimitPopulation.Checked) udLimitPopulation.Value = 1;
+            udWeeksLimit.Enabled = chkLimitPopulation.Checked;
+            if (!chkLimitPopulation.Checked) udWeeksLimit.Value = 1;
+
+            for (int i = 0; i <= 7; i++)
+            {
+                int tierPopulation = Convert.ToInt32(LabelsPopulationArray[i].Text);
+                NumericUpDownsArray[i].Maximum = tierPopulation + (99999 * Convert.ToInt32(chkLimitPopulation.Checked));
+            }
 
             UI_Update();
         }

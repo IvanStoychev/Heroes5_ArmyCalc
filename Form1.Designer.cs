@@ -77,7 +77,7 @@
             this.chkCastle = new System.Windows.Forms.CheckBox();
             this.cbFaction = new System.Windows.Forms.ComboBox();
             this.chkLimitPopulation = new System.Windows.Forms.CheckBox();
-            this.udLimitPopulation = new System.Windows.Forms.NumericUpDown();
+            this.udWeeksLimit = new System.Windows.Forms.NumericUpDown();
             this.lblLimitPopulation = new System.Windows.Forms.Label();
             this.chkLimitGold = new System.Windows.Forms.CheckBox();
             this.udLimitGold = new System.Windows.Forms.NumericUpDown();
@@ -138,7 +138,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udCreatureAmount_Tier5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCreatureAmount_Tier6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCreatureAmount_Tier7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udLimitPopulation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udWeeksLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLimitGold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrame_Tier7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrame_Tier4)).BeginInit();
@@ -671,29 +671,29 @@
             this.chkLimitPopulation.UseVisualStyleBackColor = true;
             this.chkLimitPopulation.CheckedChanged += new System.EventHandler(this.Check_WeekLimit_CheckedChanged);
             // 
-            // udLimitPopulation
+            // udWeeksLimit
             // 
-            this.udLimitPopulation.Enabled = false;
-            this.udLimitPopulation.Location = new System.Drawing.Point(395, 42);
-            this.udLimitPopulation.Maximum = new decimal(new int[] {
+            this.udWeeksLimit.Enabled = false;
+            this.udWeeksLimit.Location = new System.Drawing.Point(395, 42);
+            this.udWeeksLimit.Maximum = new decimal(new int[] {
             1661992959,
             1808227885,
             5,
             0});
-            this.udLimitPopulation.Minimum = new decimal(new int[] {
+            this.udWeeksLimit.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.udLimitPopulation.Name = "udLimitPopulation";
-            this.udLimitPopulation.Size = new System.Drawing.Size(44, 20);
-            this.udLimitPopulation.TabIndex = 13;
-            this.udLimitPopulation.Value = new decimal(new int[] {
+            this.udWeeksLimit.Name = "udWeeksLimit";
+            this.udWeeksLimit.Size = new System.Drawing.Size(44, 20);
+            this.udWeeksLimit.TabIndex = 13;
+            this.udWeeksLimit.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.udLimitPopulation.ValueChanged += new System.EventHandler(this.UpDown);
+            this.udWeeksLimit.ValueChanged += new System.EventHandler(this.UpDown);
             // 
             // lblLimitPopulation
             // 
@@ -1280,7 +1280,7 @@
             this.Controls.Add(this.lblLimitGold);
             this.Controls.Add(this.udLimitGold);
             this.Controls.Add(this.lblLimitPopulation);
-            this.Controls.Add(this.udLimitPopulation);
+            this.Controls.Add(this.udWeeksLimit);
             this.Controls.Add(this.chkLimitGold);
             this.Controls.Add(this.chkLimitPopulation);
             this.Controls.Add(this.cbFaction);
@@ -1382,7 +1382,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udCreatureAmount_Tier5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCreatureAmount_Tier6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCreatureAmount_Tier7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udLimitPopulation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udWeeksLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLimitGold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrame_Tier7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrame_Tier4)).EndInit();
@@ -1525,7 +1525,7 @@
         private System.Windows.Forms.PictureBox pbFrame_Tier5;
         private System.Windows.Forms.PictureBox pbFrame_Tier7;
         private System.Windows.Forms.CheckBox chkLimitPopulation;
-        private System.Windows.Forms.NumericUpDown udLimitPopulation;
+        private System.Windows.Forms.NumericUpDown udWeeksLimit;
         private System.Windows.Forms.Label lblLimitPopulation;
         private System.Windows.Forms.CheckBox chkLimitGold;
         private System.Windows.Forms.NumericUpDown udLimitGold;
