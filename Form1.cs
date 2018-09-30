@@ -48,49 +48,6 @@ namespace Heroes5_ArmyCalc
         /// </summary>
         public bool[] IsUpgraded = new bool[8];
         /// <summary>
-        /// A list of the names of all the factions in the game.
-        /// </summary>
-        List<string> FactionList = new List<string> { "Academy", "Dungeon", "Fortress", "Haven", "Inferno", "Necropolis", "Stronghold", "Sylvan" };
-        /// <summary>
-        /// Holds all the data about the gold cost and population of each faction's units.
-        /// </summary>
-        DataTable Data = new DataTable();
-        /// <summary>
-        /// Column for the faction names.
-        /// </summary>
-        DataColumn Faction = new DataColumn("Faction", typeof(string));
-        /// <summary>
-        /// Column for the creature tier.
-        /// </summary>
-        DataColumn Tier = new DataColumn("Tier", typeof(int));
-        /// <summary>
-        /// Column for the gold cost of the base creature for the given tier.
-        /// </summary>
-        DataColumn CostBase = new DataColumn("CostBase", typeof(int));
-        /// <summary>
-        /// Column for the gold cost of the creature's upgraded variants for the given tier.
-        /// </summary>
-        DataColumn CostUpg = new DataColumn("CostUpg", typeof(int));
-        /// <summary>
-        /// Column for the weekly population growth for a creature of the given tier.
-        /// </summary>
-        DataColumn Population = new DataColumn("Population", typeof(int));
-        /// <summary>
-        /// A dictionary containing references to lists of data for the gold costs
-        /// for each base creature of each tier for each faction.
-        /// </summary>
-        Dictionary<string, List<int>> CostBaseDictionary;
-        /// <summary>
-        /// A dictionary containing references to lists of data for the gold costs
-        /// for each upgraded creature of each tier for each faction.
-        /// </summary>
-        Dictionary<string, List<int>> CostUpgDictionary;
-        /// <summary>
-        /// A dictionary containing references to lists of data for the population
-        /// for each creature of each tier for each faction.
-        /// </summary>
-        Dictionary<string, List<int>> PopulationDictionary;
-        /// <summary>
         /// A List with information about all faction units in the game.
         /// </summary>
         List<Unit> Units = new List<Unit>();
@@ -98,132 +55,36 @@ namespace Heroes5_ArmyCalc
         public FormMain()
         {
             InitializeComponent();
-            LoadHardcodedData();
+            LoadUnitData();
             AssignArrays();
             cbFaction.SelectedItem = "Academy";
-            LabelsUpdate();
+            pbCreature_Tier1_01.Image = (Image)Properties.Resources.ResourceManager.GetObject("Sylvan_Tier7_01");
         }
 
         /// <summary>
-        /// Initialises objects with hardcoded data.
-        /// This method is a preparation for the migration to SQLite.
+        /// Loads the unit data from the database.
         /// </summary>
-        void LoadHardcodedData()
+        void LoadUnitData()
         {
             using (ModelEntities db = new ModelEntities())
             {
-                List<Unit> result = (from unit in db.Units
-                                     select new Unit
-                                     {
-                                         ID = unit.ID,
-                                         NameBase = unit.NameBase,
-                                         NameLeft = unit.NameLeft,
-                                         NameRight = unit.NameRight,
-                                         Faction = unit.Faction,
-                                         Tier = unit.Tier,
-                                         Description = unit.Description,
-                                         ImageBase = unit.ImageBase,
-                                         ImageLeft = unit.ImageLeft,
-                                         ImageRight = unit.ImageRight,
-                                         GoldCostBase = unit.GoldCostBase,
-                                         GoldCostUpg = unit.GoldCostUpg,
-                                         PopulationBase = unit.PopulationBase
-                                     }).ToList();
-            }
-
-            // Load all the columns in the DataTable.
-            Data.Columns.Add(Faction);
-            Data.Columns.Add(Tier);
-            Data.Columns.Add(CostBase);
-            Data.Columns.Add(CostUpg);
-            Data.Columns.Add(Population);
-            
-            // All these lists are padded with a zero as a first item for ease of use.
-            // That way the population of an Academy tier 4 creature would be the 4th item of AcademyPopulation.
-            List<int> AcademyCostBase = new List<int>(){ 0, 22, 45, 90, 250, 480, 1400, 3500 };
-            List<int> AcademyCostUpg = new List<int>() { 0, 35, 70, 130, 340, 700, 1770, 4700 };
-            List<int> AcademyPopulation = new List<int>() { 0, 20, 14, 9, 5, 3, 2, 1 };
-
-            List<int> DungeonCostBase = new List<int>(){ 0, 60, 125, 140, 300, 550, 1400, 3000 };
-            List<int> DungeonCostUpg = new List<int>(){ 0, 100, 175, 200, 450, 800, 1700, 3700 };
-            List<int> DungeonPopulation = new List<int>(){ 0, 7, 5, 6, 4, 3, 2, 1 };
-
-            List<int> FortressCostBase = new List<int>(){ 0, 24, 45, 130, 160, 470, 1300, 2700 };
-            List<int> FortressCostUpg = new List<int>(){ 0, 40, 65, 185, 220, 700, 1700, 3400 };
-            List<int> FortressPopulation = new List<int>(){ 0, 18, 14, 7, 6, 3, 2, 1 };
-
-            List<int> HavenCostBase = new List<int>(){ 0, 15, 50, 85, 250, 600, 1300, 2800 };
-            List<int> HavenCostUpg = new List<int>(){ 0, 25, 80, 130, 370, 850, 1700, 3500 };
-            List<int> HavenPopulation = new List<int>(){ 0, 22, 12, 10, 5, 3, 2, 1 };
-
-            List<int> InfernoCostBase = new List<int>(){ 0, 25, 40, 110, 240, 550, 1400, 2666 };
-            List<int> InfernoCostUpg = new List<int>(){ 0, 45, 60, 160, 350, 780, 1666, 3666 };
-            List<int> InfernoPopulation = new List<int>(){ 0, 16, 15, 8, 5, 3, 2, 1 };
-
-            List<int> NecropolisCostBase = new List<int>(){ 0, 19, 40, 100, 250, 620, 1400, 1600 };
-            List<int> NecropolisCostUpg = new List<int>(){ 0, 30, 60, 140, 380, 850, 1700, 1900 };
-            List<int> NecropolisPopulation = new List<int>(){ 0, 20, 15, 9, 5, 3, 2, 1 };
-
-            List<int> StrongholdCostBase = new List<int>(){ 0, 10, 50, 80, 260, 350, 1250, 2900 };
-            List<int> StrongholdCostUpg = new List<int>(){ 0, 20, 70, 120, 360, 500, 1600, 3450 };
-            List<int> StrongholdPopulation = new List<int>(){ 0, 25, 14, 11, 5, 5, 2, 1 };
-
-            List<int> SylvanCostBase = new List<int>(){ 0, 35, 70, 120, 320, 630, 1100, 2500 };
-            List<int> SylvanCostUpg = new List<int>(){ 0, 55, 120, 190, 440, 900, 1400, 3400 };
-            List<int> SylvanPopulation = new List<int>(){ 0, 10, 9, 7, 4, 3, 2, 1 };
-
-            // These Dictionaries allow foreach iteration and loading of data in the subsequent loop.
-            CostBaseDictionary = new Dictionary<string, List<int>>()
-            {
-                { "Academy", AcademyCostBase },
-                { "Dungeon", DungeonCostBase },
-                { "Fortress", FortressCostBase },
-                { "Haven", HavenCostBase },
-                { "Inferno", InfernoCostBase },
-                { "Necropolis", NecropolisCostBase },
-                { "Stronghold", StrongholdCostBase },
-                { "Sylvan", SylvanCostBase }
-            };
-            
-            CostUpgDictionary = new Dictionary<string, List<int>>()
-            {
-                { "Academy", AcademyCostUpg },
-                { "Dungeon", DungeonCostUpg },
-                { "Fortress", FortressCostUpg },
-                { "Haven", HavenCostUpg },
-                { "Inferno", InfernoCostUpg },
-                { "Necropolis", NecropolisCostUpg },
-                { "Stronghold", StrongholdCostUpg },
-                { "Sylvan", SylvanCostUpg }
-            };
-
-            PopulationDictionary = new Dictionary<string, List<int>>()
-            {
-                { "Academy", AcademyPopulation },
-                { "Dungeon", DungeonPopulation },
-                { "Fortress", FortressPopulation },
-                { "Haven", HavenPopulation },
-                { "Inferno", InfernoPopulation },
-                { "Necropolis", NecropolisPopulation },
-                { "Stronghold", StrongholdPopulation },
-                { "Sylvan", SylvanPopulation }
-            };
-
-            // Load the hardcoded values into the Units List.
-            // This will be refactored once SQLite is integrated. [ToDo]
-            foreach (var faction in FactionList)
-            {
-                for (int i = 1; i <= 7; i++)
-                {
-                    Unit unit = new Unit();
-                    unit.Faction = faction;
-                    unit.Tier = i;
-                    unit.GoldCostBase = CostBaseDictionary[faction][i];
-                    unit.GoldCostUpg = CostUpgDictionary[faction][i];
-                    unit.PopulationBase = PopulationDictionary[faction][i];
-
-                    Units.Add(unit);
-                }
+                Units = (from unit in db.Units
+                        select new Unit
+                        {
+                            ID = unit.ID,
+                            NameBase = unit.NameBase,
+                            NameLeft = unit.NameLeft,
+                            NameRight = unit.NameRight,
+                            Faction = unit.Faction,
+                            Tier = unit.Tier,
+                            Description = unit.Description,
+                            ImageBase = unit.ImageBase,
+                            ImageLeft = unit.ImageLeft,
+                            ImageRight = unit.ImageRight,
+                            GoldCostBase = unit.GoldCostBase,
+                            GoldCostUpg = unit.GoldCostUpg,
+                            PopulationBase = unit.PopulationBase
+                        }).ToList();
             }
         }
 
@@ -265,26 +126,27 @@ namespace Heroes5_ArmyCalc
             // total cost of selected creatures and the gold cost of all chosen creatures.
             for (int i = 1; i <= 7; i++)
             {
+                Unit currentUnit = GetUnit(FactionName, i);
                 // Whenever the image of an upgraded creature is clicked, the boolean variable "IsUpgraded"
                 // for that tier is set to "true". Here a check is made whether "IsUpgraded" is true and
                 // the gold cost of the creature is changed appropriately.
                 if (IsUpgraded[i])
-                    LabelsGoldArray[i].Text = GetUnit(FactionName, i).GoldCostUpg.ToString();
+                    LabelsGoldArray[i].Text = currentUnit.GoldCostUpg.ToString();
                 else
-                    LabelsGoldArray[i].Text = GetUnit(FactionName, i).GoldCostBase.ToString();
+                    LabelsGoldArray[i].Text = currentUnit.GoldCostBase.ToString();
 
                 // Sets the labels for creature population in accordance with a checked Castle or Citadel.
                 if (chkCastle.Checked)
 				{
-					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udWeeksLimit.Value * 2);
+					LabelsPopulationArray[i].Text = Convert.ToString(currentUnit.PopulationBase * udWeeksLimit.Value * 2);
 				}
 				else if (chkCitadel.Checked)
 				{
-					LabelsPopulationArray[i].Text = Convert.ToString((int)(PopulationDictionary[FactionName][i] * (int)udWeeksLimit.Value * 1.5));
+					LabelsPopulationArray[i].Text = Convert.ToString(Math.Floor((int)currentUnit.PopulationBase * (int)udWeeksLimit.Value * 1.5));
                 }
 				else
 				{
-					LabelsPopulationArray[i].Text = Convert.ToString(PopulationDictionary[FactionName][i] * udWeeksLimit.Value);
+					LabelsPopulationArray[i].Text = Convert.ToString(currentUnit.PopulationBase * udWeeksLimit.Value);
 				}
 
                 // Each creature's total gold cost is calculated and the Label's text set.
