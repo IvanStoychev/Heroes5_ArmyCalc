@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DataModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=&quot;C:\Users\dam\Documents\Visual Studio 2015\Projects\SQLiteHelp1\SQLiteHelp1\bin\Debug\test.db3&quot;" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dwellings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Tier" Type="integer" />
+          <Property Name="PopBonus" Type="integer" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" Nullable="false" />
+          <Property Name="NameBase" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NameLeft" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NameRight" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Faction" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Tier" Type="integer" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="ImageBase" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="ImageLeft" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="ImageRight" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="GoldCostBase" Type="integer" />
+          <Property Name="GoldCostUpg" Type="integer" />
+          <Property Name="PopulationBase" Type="integer" />
+        </EntityType>
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="Dwellings" EntityType="Self.Dwellings" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dwellings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Tier" Type="Int64" />
+          <Property Name="PopBonus" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="NameBase" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NameLeft" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NameRight" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Faction" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Tier" Type="Int64" />
+          <Property Name="Description" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ImageBase" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ImageLeft" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ImageRight" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="GoldCostBase" Type="Int64" />
+          <Property Name="GoldCostUpg" Type="Int64" />
+          <Property Name="PopulationBase" Type="Int64" />
+        </EntityType>
+        <EntityContainer Name="ModelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dwellings" EntityType="Self.Dwellings" />
+          <EntitySet Name="Units" EntityType="Self.Units" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="ModelEntities">
+          <EntitySetMapping Name="Dwellings">
+            <EntityTypeMapping TypeName="DataModel.Dwellings">
+              <MappingFragment StoreEntitySet="Dwellings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="PopBonus" ColumnName="PopBonus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="DataModel.Units">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameBase" ColumnName="NameBase" />
+                <ScalarProperty Name="NameLeft" ColumnName="NameLeft" />
+                <ScalarProperty Name="NameRight" ColumnName="NameRight" />
+                <ScalarProperty Name="Faction" ColumnName="Faction" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageBase" ColumnName="ImageBase" />
+                <ScalarProperty Name="ImageLeft" ColumnName="ImageLeft" />
+                <ScalarProperty Name="ImageRight" ColumnName="ImageRight" />
+                <ScalarProperty Name="GoldCostBase" ColumnName="GoldCostBase" />
+                <ScalarProperty Name="GoldCostUpg" ColumnName="GoldCostUpg" />
+                <ScalarProperty Name="PopulationBase" ColumnName="PopulationBase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
