@@ -110,6 +110,27 @@ namespace Heroes5_ArmyCalc
         /// </summary>
         void LoadHardcodedData()
         {
+            using (ModelEntities db = new ModelEntities())
+            {
+                List<Unit> result = (from unit in db.Units
+                                     select new Unit
+                                     {
+                                         ID = unit.ID,
+                                         NameBase = unit.NameBase,
+                                         NameLeft = unit.NameLeft,
+                                         NameRight = unit.NameRight,
+                                         Faction = unit.Faction,
+                                         Tier = unit.Tier,
+                                         Description = unit.Description,
+                                         ImageBase = unit.ImageBase,
+                                         ImageLeft = unit.ImageLeft,
+                                         ImageRight = unit.ImageRight,
+                                         GoldCostBase = unit.GoldCostBase,
+                                         GoldCostUpg = unit.GoldCostUpg,
+                                         PopulationBase = unit.PopulationBase
+                                     }).ToList();
+            }
+
             // Load all the columns in the DataTable.
             Data.Columns.Add(Faction);
             Data.Columns.Add(Tier);

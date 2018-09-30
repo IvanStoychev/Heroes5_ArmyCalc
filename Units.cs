@@ -14,18 +14,18 @@ namespace Heroes5_ArmyCalc
     
     public partial class Units
     {
-        public long ID { get; set; }
+        public int ID { get; set; }
         public string NameBase { get; set; }
         public string NameLeft { get; set; }
         public string NameRight { get; set; }
         public string Faction { get; set; }
-        public Nullable<long> Tier { get; set; }
+        public Nullable<int> Tier { get; set; }
         public string Description { get; set; }
         public string ImageBase { get; set; }
         public string ImageLeft { get; set; }
         public string ImageRight { get; set; }
-        public Nullable<long> GoldCostBase { get; set; }
-        public Nullable<long> GoldCostUpg { get; set; }
-        public Nullable<long> PopulationBase { get; set; }
+        public int GoldCostBase { get; set; }
+        public Nullable<int> GoldCostUpg { get; set; }
+        public Nullable<int> PopulationBase { get; set; }
     }
 }

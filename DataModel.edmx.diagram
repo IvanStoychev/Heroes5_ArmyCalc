@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="1ca6c6f21b5f4e7296ca6c2457b748cf" Name="Diagram1">
         <EntityTypeShape EntityType="DataModel.Dwellings" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataModel.Units" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.Units" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
