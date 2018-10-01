@@ -41,7 +41,7 @@ namespace Heroes5_ArmyCalc
         /// <summary>
         /// Array holding references to all the PictureBox controls on the form.
         /// </summary>
-        public PictureBox[,] PictureBoxesArray = new PictureBox[8,3];
+        public PictureBox[,] PictureBoxesArray = new PictureBox[8,4];
         /// <summary>
         /// Array holding references to all the creature tiers' NumericUpDowns.
         /// Padded with an empty zero index for ease of use.
@@ -62,7 +62,6 @@ namespace Heroes5_ArmyCalc
             LoadUnitData();
             AssignArrays();
             cbFaction.SelectedItem = "Academy";
-            pbCreature_Tier1_01.Image = (Image)Properties.Resources.ResourceManager.GetObject("Sylvan_Tier7_01");
         }
 
         /// <summary>
@@ -118,7 +117,7 @@ namespace Heroes5_ArmyCalc
         /// Updates the faction dwellings and every tier's cost, population
         /// and cost of selected creatures labels.
         /// </summary>
-        public void LabelsUpdate()
+        public void UpdateUI()
         {
             string FactionName = (string)cbFaction.SelectedItem;
             int Gold_Total = 0;
@@ -162,12 +161,30 @@ namespace Heroes5_ArmyCalc
 
                 // Each tier's total cost is added to the gost cost of all creatures.
                 Gold_Total += Convert.ToInt32(LabelsTotalArray[i].Text);
+
+                //Set the appropriate images to all PictureBoxes.
+                for (int k = 1; k <= 3; k++)
+                {
+                    Image img = null;
+                    switch (k)
+                    {
+                        //Will never be 0, because we iterate from 1.
+                        case 1:
+                            img = (Image)Properties.Resources.ResourceManager.GetObject(currentUnit.ImageBase);
+                            break;
+                        case 2:
+                            img = (Image)Properties.Resources.ResourceManager.GetObject(currentUnit.ImageLeft);
+                            break;
+                        case 3:
+                            img = (Image)Properties.Resources.ResourceManager.GetObject(currentUnit.ImageRight);
+                            break;
+                        default:
+                            throw new Exception();
+                    }
+                    PictureBoxesArray[i,k].Image = img;
+                }
             }
 
-            //Dwelling_Checked();
-            //if (Dwelling_Tier_A != 0 && Dwelling_CheckBox1.Checked == true) lblPopulation_Tier[Dwelling_Tier_A].Text = Convert.ToString(Convert.ToInt32(lblPopulation_Tier[Dwelling_Tier_A].Text) + (Dwelling[Faction, 0] * (int)udCreatures_WeekLimit.Value));
-            //if (Dwelling_Tier_B != 0 && (Dwelling_CheckBox2.Checked == true || (Convert.ToString(Factions.SelectedItem) == "Dungeon" && Dwelling_CheckBox1.Checked == true))) lblPopulation_Tier[Dwelling_Tier_B].Text = Convert.ToString(Convert.ToInt32(lblPopulation_Tier[Dwelling_Tier_B].Text) + (Dwelling[Faction, 1] * (int)udCreatures_WeekLimit.Value));
-            
             //The Total Gold text label is updated with the appropriate value and the check for the gold constraint is performed
             lblGoldTotal.Text = Convert.ToString(Gold_Total);
 			Gold_Maximum();
@@ -184,234 +201,6 @@ namespace Heroes5_ArmyCalc
         {
             lblLimitGoldExceeded.Visible = (chkLimitGold.Checked && Convert.ToInt32(lblGoldTotal.Text) > udLimitGold.Value);
         }
-
-        #region Current_Methods
-        //These methods change the creature pictures and bonus dwelling text for each faction
-        public void Current_Academy()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Academy_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Academy_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Academy_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Academy_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Academy_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Academy_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Academy_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Academy_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Academy_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Academy_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Academy_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Academy_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Academy_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Academy_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Academy_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Academy_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Academy_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Academy_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Academy_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Academy_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Academy_Tier7_03;
-            chkDwelling1.Text = "Treasure Cave";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "";
-            chkDwelling2.Visible = false;
-        }
-        public void Current_Dungeon()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Dungeon_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Dungeon_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Dungeon_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Dungeon_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Dungeon_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Dungeon_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Dungeon_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Dungeon_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Dungeon_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Dungeon_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Dungeon_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Dungeon_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Dungeon_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Dungeon_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Dungeon_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Dungeon_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Dungeon_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Dungeon_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Dungeon_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Dungeon_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Dungeon_Tier7_03;
-            chkDwelling1.Text = "Ritual Pit";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "";
-            chkDwelling2.Visible = false;
-        }
-        public void Current_Fortress()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Fortress_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Fortress_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Fortress_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Fortress_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Fortress_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Fortress_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Fortress_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Fortress_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Fortress_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Fortress_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Fortress_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Fortress_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Fortress_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Fortress_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Fortress_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Fortress_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Fortress_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Fortress_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Fortress_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Fortress_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Fortress_Tier7_03;
-            chkDwelling1.Text = "Wrestler's Arena";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "Runic Sanctuary";
-            chkDwelling2.Visible = true;
-        }
-        public void Current_Haven()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Haven_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Haven_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Haven_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Haven_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Haven_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Haven_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Haven_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Haven_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Haven_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Haven_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Haven_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Haven_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Haven_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Haven_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Haven_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Haven_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Haven_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Haven_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Haven_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Haven_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Haven_Tier7_03;
-            chkDwelling1.Text = "Farms";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "";
-            chkDwelling2.Visible = false;
-        }
-        public void Current_Inferno()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Inferno_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Inferno_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Inferno_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Inferno_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Inferno_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Inferno_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Inferno_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Inferno_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Inferno_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Inferno_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Inferno_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Inferno_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Inferno_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Inferno_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Inferno_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Inferno_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Inferno_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Inferno_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Inferno_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Inferno_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Inferno_Tier7_03;
-            chkDwelling1.Text = "Spawn of Chaos";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "Halls of Horror";
-            chkDwelling2.Visible = true;
-        }
-        public void Current_Necropolis()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Necropolis_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Necropolis_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Necropolis_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Necropolis_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Necropolis_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Necropolis_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Necropolis_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Necropolis_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Necropolis_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Necropolis_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Necropolis_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Necropolis_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Necropolis_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Necropolis_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Necropolis_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Necropolis_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Necropolis_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Necropolis_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Necropolis_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Necropolis_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Necropolis_Tier7_03;
-            chkDwelling1.Text = "Unearthed Graves";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "Dragon Tombstone";
-            chkDwelling2.Visible = true;
-        }
-        public void Current_Stronghold()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Stronghold_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Stronghold_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Stronghold_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Stronghold_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Stronghold_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Stronghold_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Stronghold_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Stronghold_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Stronghold_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Stronghold_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Stronghold_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Stronghold_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Stronghold_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Stronghold_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Stronghold_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Stronghold_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Stronghold_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Stronghold_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Stronghold_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Stronghold_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Stronghold_Tier7_03;
-            chkDwelling1.Text = "Garbage Pile";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "";
-            chkDwelling2.Visible = false;
-        }
-        public void Current_Sylvan()
-        {
-            pbCreature_Tier1_01.Image = Properties.Resources.Sylvan_Tier1_01;
-            pbCreature_Tier1_02.Image = Properties.Resources.Sylvan_Tier1_02;
-            pbCreature_Tier1_03.Image = Properties.Resources.Sylvan_Tier1_03;
-            pbCreature_Tier2_01.Image = Properties.Resources.Sylvan_Tier2_01;
-            pbCreature_Tier2_02.Image = Properties.Resources.Sylvan_Tier2_02;
-            pbCreature_Tier2_03.Image = Properties.Resources.Sylvan_Tier2_03;
-            pbCreature_Tier3_01.Image = Properties.Resources.Sylvan_Tier3_01;
-            pbCreature_Tier3_02.Image = Properties.Resources.Sylvan_Tier3_02;
-            pbCreature_Tier3_03.Image = Properties.Resources.Sylvan_Tier3_03;
-            pbCreature_Tier4_01.Image = Properties.Resources.Sylvan_Tier4_01;
-            pbCreature_Tier4_02.Image = Properties.Resources.Sylvan_Tier4_02;
-            pbCreature_Tier4_03.Image = Properties.Resources.Sylvan_Tier4_03;
-            pbCreature_Tier5_01.Image = Properties.Resources.Sylvan_Tier5_01;
-            pbCreature_Tier5_02.Image = Properties.Resources.Sylvan_Tier5_02;
-            pbCreature_Tier5_03.Image = Properties.Resources.Sylvan_Tier5_03;
-            pbCreature_Tier6_01.Image = Properties.Resources.Sylvan_Tier6_01;
-            pbCreature_Tier6_02.Image = Properties.Resources.Sylvan_Tier6_02;
-            pbCreature_Tier6_03.Image = Properties.Resources.Sylvan_Tier6_03;
-            pbCreature_Tier7_01.Image = Properties.Resources.Sylvan_Tier7_01;
-            pbCreature_Tier7_02.Image = Properties.Resources.Sylvan_Tier7_02;
-            pbCreature_Tier7_03.Image = Properties.Resources.Sylvan_Tier7_03;
-            chkDwelling1.Text = "Blooming Grove";
-            chkDwelling1.Visible = true;
-            chkDwelling2.Text = "Treant Saplings";
-            chkDwelling2.Visible = true;
-        }
-        #endregion
 
         /// <summary>
         /// Returns a unit in the given faction and tier or
@@ -438,7 +227,7 @@ namespace Heroes5_ArmyCalc
 
         private void UpDown(object sender, EventArgs e)
         {
-            LabelsUpdate();
+            UpdateUI();
         }
         private void Citadel_Check_Change(object sender, EventArgs e)
         {
@@ -448,7 +237,7 @@ namespace Heroes5_ArmyCalc
             {
                 chkCastle.Checked = false;
             }
-            LabelsUpdate();
+            UpdateUI();
         }
         private void Castle_Check_Change(object sender, EventArgs e)
         {
@@ -458,50 +247,20 @@ namespace Heroes5_ArmyCalc
             {
                 chkCitadel.Checked = true;
             }
-            LabelsUpdate();
+            UpdateUI();
         }
         private void Factions_SelectedIndexChanged(object sender, EventArgs e) // [???] Refactor
         {
-            LabelsUpdate();
-            ComboBox _sender = (ComboBox)sender;
+            UpdateUI();
             chkDwelling1.Checked = false;
             chkDwelling2.Checked = false;
-            switch (Convert.ToString(_sender.SelectedItem))
-            {
-                case "Haven":
-                    Current_Haven();
-                    break;
-                case "Necropolis":
-                    Current_Necropolis();
-                    break;
-                case "Sylvan":
-                    Current_Sylvan();
-                    break;
-                case "Stronghold":
-                    Current_Stronghold();
-                    break;
-                case "Fortress":
-                    Current_Fortress();
-                    break;
-                case "Dungeon":
-                    Current_Dungeon();
-                    break;
-                case "Inferno":
-                    Current_Inferno();
-                    break;
-                case "Academy":
-                    Current_Academy();
-                    break;
-                default:
-                    break;
-            }
         }
         private void Check_WeekLimit_CheckedChanged(object sender, EventArgs e)
         {
             udWeeksLimit.Enabled = chkLimitPopulation.Checked;
             if (!chkLimitPopulation.Checked) udWeeksLimit.Value = 1;
 
-            LabelsUpdate();
+            UpdateUI();
         }
         private void Check_GoldLimit_CheckedChanged(object sender, EventArgs e)
         {
@@ -529,7 +288,7 @@ namespace Heroes5_ArmyCalc
 
             IsUpgraded[controlTier] = pictureIndex > 1 ? true : false;
 
-            LabelsUpdate();
+            UpdateUI();
         }
 
         /// <summary>
