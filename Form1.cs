@@ -39,6 +39,10 @@ namespace Heroes5_ArmyCalc
         /// </summary>
         public Label[] LabelsTotalArray = new Label[8];
         /// <summary>
+        /// Array holding references to all the PictureBox controls on the form.
+        /// </summary>
+        public PictureBox[,] PictureBoxesArray = new PictureBox[8,3];
+        /// <summary>
         /// Array holding references to all the creature tiers' NumericUpDowns.
         /// Padded with an empty zero index for ease of use.
         /// </summary>
@@ -99,10 +103,14 @@ namespace Heroes5_ArmyCalc
             NumericUpDownsArray[0] = null;
             for (int i = 1; i <= 7; i++)
             {
-                LabelsPopulationArray[i] = (Label)Controls.Find("lblPopulation_Tier" + i, true).FirstOrDefault();
-                LabelsGoldArray[i] = (Label)Controls.Find("lblGoldPrice_Tier" + i, true).FirstOrDefault();
-                LabelsTotalArray[i] = (Label)Controls.Find("lblTotal_Tier" + i, true).FirstOrDefault();
-                NumericUpDownsArray[i] = (NumericUpDown)Controls.Find("udCreatureAmount_Tier" + i, true).FirstOrDefault();
+                LabelsPopulationArray[i] = (Label)GetControlByName($"lblPopulation_Tier{i}");
+                LabelsGoldArray[i] = (Label)GetControlByName($"lblGoldPrice_Tier{i}");
+                LabelsTotalArray[i] = (Label)GetControlByName($"lblTotal_Tier{i}");
+                NumericUpDownsArray[i] = (NumericUpDown)GetControlByName($"udCreatureAmount_Tier{i}");
+                for (int k = 1; k <= 3; k++)
+                {
+                    PictureBoxesArray[i,k] = (PictureBox)GetControlByName($"pbCreature_Tier{i}_0{k}");
+                }
             }
         }
 
@@ -415,6 +423,17 @@ namespace Heroes5_ArmyCalc
         Unit GetUnit(string faction, int tier)
         {
             return Units.Where(u => u.Faction == faction && u.Tier == tier).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Returns the first control with the given name found
+        /// or null if none are found.
+        /// </summary>
+        /// <param name="name">The name of the control to return.</param>
+        /// <returns>The control with the given name or null.</returns>
+        Control GetControlByName(string name)
+        {
+            return Controls.Find(name, true).FirstOrDefault();
         }
 
         private void UpDown(object sender, EventArgs e)
