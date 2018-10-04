@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes5_ArmyCalc", "Heroes5_ArmyCalc.csproj", "{85CB902C-A065-4FE8-A0A7-CEDC69DA5793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes5Calculator", "..\Heroes5Calculator\Heroes5Calculator.csproj", "{378A6F78-D178-4F27-9C6A-4F2CFFADB103}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes5Calculator", "Heroes5Calculator\Heroes5Calculator.csproj", "{378A6F78-D178-4F27-9C6A-4F2CFFADB103}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
