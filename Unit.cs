@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Heroes5_ArmyCalc
+﻿namespace Heroes5_ArmyCalc
 {
-    class Unit
+    struct Unit
     {
         public int ID;
         public string NameBase;
