@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace Heroes5_ArmyCalculator.Views
 {
     /// <summary>
-    /// Interaction logic for UnitPortraitView.xaml
+    /// Interaction logic for CreaturePortraitView.xaml
     /// </summary>
-    public partial class UnitPortraitView : UserControl
+    public partial class CreaturePortraitView : UserControl
     {
-        public UnitPortraitView()
+        public CreaturePortraitView()
         {
             InitializeComponent();
         }

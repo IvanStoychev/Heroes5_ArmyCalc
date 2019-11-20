@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Heroes5_ArmyCalculator.Views.CreaturePortraitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Heroes5_ArmyCalculator.Views"
+             xmlns:root="clr-namespace:Heroes5_ArmyCalculator"
+             mc:Ignorable="d" d:DesignWidth="444" Height="190"
+             root:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="148"/>
+            <ColumnDefinition Width="148"/>
+            <ColumnDefinition Width="148"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="148"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="imgCreatureUpg0Portrait" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="128" Margin="10,10,10,10" VerticalAlignment="Top" Width="128"/>
+        <Image x:Name="imgCreatureUpg1Portrait" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="128" Margin="10,10,10,10" VerticalAlignment="Top" Width="128"/>
+        <Image x:Name="imgCreatureUpg2Portrait" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" Height="128" Margin="10,10,10,10" VerticalAlignment="Top" Width="128"/>
+        <Label x:Name="lblCreatureUpg0Name" Content="lblCreatureUpg0Name" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"/>
+        <Label x:Name="lblCreatureUpg1Name" Content="lblCreatureUpg1Name" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch"/>
+        <Label x:Name="lblCreatureUpg2Name" Content="lblCreatureUpg2Name" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="5,5,5,5" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch"/>
+    </Grid>
+</UserControl>
